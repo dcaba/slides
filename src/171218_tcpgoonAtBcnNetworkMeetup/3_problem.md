@@ -17,6 +17,10 @@ No...
 
 ![](slip_on_ice_breakdance_moves.gif)
 
+## Back to the basics
+
+![](TCP+backlog+queues.jpg){ width=90% }
+
 ## Points to bear in mind
 
 * **OS** (net.core.somaxconn, ethernet cards queues, devices backlogs...)
@@ -26,7 +30,7 @@ No...
 * **Associated thread pools** / incoming requests **queue** (if applies)
 * Probably you also want pooling-multiplexing against backends
 * Don't forget about other processes using resources
-* And is it there a **load balancer in front of you?** More considerations may apply
+* And is there a **load balancer in front of you?** More considerations may apply
 
 ## 
 
@@ -37,11 +41,11 @@ No...
 Plus it may not manifest soon; you realize when:
 
 * Lots of ELBs in front of you (normally under high load) pre-opening hundreds of connections
-* Or issues with backend components (slow responses?) so in flight connections increase drastically
+* Or issues with backend components (slow responses?) so in-flight connections increase drastically
 
-## Ook, but you are careful, and you review PRs... you are safe
+## Ook, but you are careful, you review PRs, and you do stress tests...
 
-Really?
+... *you are safe*. Really?
 
 ![](againquestion.jpg)
 
@@ -55,4 +59,4 @@ Really?
 ![](Incident1711.jpg)
 
 ## WTF
-![](santabloodthinksmeme.jpg)
+![](santafiringmeme.jpg)

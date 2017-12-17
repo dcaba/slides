@@ -22,17 +22,21 @@
 ## 
 ![](YAMSarch.png)
 
+##
+![](yamsUsage.png)
+
 #
 
-## Where did everything start?
+## So what?
 
-![](originalSanta.jpg)
+![](Santas-got-a-gun.jpg)
 
 ## 2016-06-11 - Incident
 ![](apartment_building_collapses.gif)
 
-## 
-![](whereisthecodeMeme.jpg)
+##
+ 
+![](whereistheNetworkMeme.jpg)
 
 ## Actual root issue
 ![](incidentReport.jpg){ width=75% }

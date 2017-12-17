@@ -3,7 +3,16 @@
 ## Q&As
 
 ## I'd have done the same just with scripting or a fancy tool
-Maybe. But goroutines do work very well in this scenario. Plus some research did not bring something effective in front of this specific scenario.
+Maybe. But goroutines do work very well in this scenario. 
+
+* *You probably don't want to fork a process per connection you 
+want to test*
+
+##
+* `hping` does not work as...
+    * ...it does not complete the three-way handshake
+
+![](threewayhandshake.jpg){ width=60% }
 
 ## Where does the project name come from?
 ```
@@ -24,10 +33,7 @@ a bully or thug, especially a member of an armed or security force.
 ## This is a very dangerous tool
 Probably. Knifes are also dangerous. And you can buy knifes. We cannot prevent bad usage.
 
-Worth to say, when executing the tool, an explicit confirmation from the user is required (non-interactive executions require the flag -y/--asume-yes)
-
-## I've been taking a look, and your code sucks...
-Probably. We do accept PRs :)
+![](santaknife.jpg){ width=70% }
 
 ## How many connections can you open from a single client?
 Depends on how many connections do you support in your client machine :) . 
@@ -48,13 +54,6 @@ Response time stats for 2 established connections min/avg/max/dev = 57.606ms/63.
 0
 ``` 
 
-## What's in your backlog?
-See our public issue list in Github. 
-In addition to Service Discovery integration (now Eureka), one of the expected big changes is implementing extra "modes":
-
-* Incremental mode, and report first failure (stress)
-* Time-restricted execution: a target is defined and execution is successful if it does not time out.
-
 ## Is this now part of YAMS' acceptance tests?
 Not yet. Stress test ELBs is not the objective, so Service Discovery integration is required (& ongoing).
 
@@ -68,13 +67,15 @@ Not yet. Stress test ELBs is not the objective, so Service Discovery integration
 * When assessing post mortems, do not stop until the very last root cause is clear
 * One time solutions suck
 * Golang works well for building low level utilities
-* Code requires continuous testing. Deliverables too.
-* And Golang is easy&fun :)
+* Code requires continuous testing. Deliverables too
 
 ## Special thanks to...
 
 * chadell, also owning the project
 * my wife, who created our gopher
+* other teams in Schibsted, 
+    * creating excellent tools to maintain/run our applications
+    * providing also great and valuable feedback
 
 ## Further questions?
 

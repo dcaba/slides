@@ -6,24 +6,23 @@
 
 ## Continuous testing coverage
 
-> *Obvious*, but...
+*Obvious*, but...
 
-* Its does not mean building a new feature. 
-* Neither building a new service. 
-* It does not reduce the service's cost. 
-* It does not directly help another team
-* It does not increase Infra visibility
-* And the chance we hit again the same issue "is low"
+> **Should application stress tests already cover this?**
 
-##
+![](SantaFireMaker.jpg){ width=70% }
 
-So, of course, no focus...
+## Again, no...
+
+![](Santa-Claus-and-presents.jpg)
+
+## And building something more...
 
 ![](backlog.jpg)
 
-##
+#
 
-> **Let's use personal OKRs for something fun&usable!**
+##
 
 ![](tcpgoonwhite.jpg){ width=35% }
 
@@ -31,8 +30,16 @@ So, of course, no focus...
 
 ## Approach
 
-* **Mission**: We want something we can easily plug to our test suite that **checks a single instance of our service do support an specific number of parallel TCP connections**
-* Given it requires a deployed version of your application (ideally the same you will use for production), **the acceptance test phase is the target place** to plug this check.
+* **Mission**: We want something we can easily plug to our test suite that **checks a single instance of our service do 
+support an specific number of parallel TCP connections**, without entering into standard l7 (http) stress testing
+* Given it requires a deployed version of your application (ideally the same you will use for production), 
+**the acceptance test phase is the target place** to plug this check.
+
+## Acceptance tests
+
+![](spinnakerScreenShoot.png)
+
+![](spinnakerScreenShoot2.png)
 
 ## How does it look like?
 
@@ -73,76 +80,21 @@ Response time stats for 10 established connections min/avg/max/dev = 17.929ms/19
 0
 ```
 
+##
+```bash
+ % tcpgoon -c 5000 -s 0 -y ec2-52-213-210-34.eu-west-1.compute.amazonaws.com 443
+Total: 5000, Dialing: 0, Established: 0, Closed: 0, Error: 0, NotInitiated: 5000
+Total: 5000, Dialing: 0, Established: 1020, Closed: 0, Error: 3980, NotInitiated: 0
+--- ec2-52-213-210-34.eu-west-1.compute.amazonaws.com:443 tcp test statistics ---
+Total: 5000, Dialing: 0, Established: 1020, Closed: 0, Error: 3980, NotInitiated: 0
+Response time stats for 1020 established connections min/avg/max/dev = 116.443ms/313.739ms/549.88ms/111.426ms
+Time to error stats for 3980 failed connections min/avg/max/dev = 105.145ms/145.092ms/316.247ms/39.371ms
+```
+
+
 ## And internally?
 ![](godepgraph.png)
 
-## Let's see some code
-```go
-func TCPConnect(id int, host string, port int, wg *sync.WaitGroup,
-    statusChannel chan<- Connection, closeRequest <-chan bool) error {
-...
-for {
-        select {
-        case <-closeRequest:
-            fmt.Fprintln(debugging.DebugOut, "Connection", id, "is being requested to close")
-            wg.Done()
-            return nil
-        default:
-            const ReadTimeoutAndBetweenPollsInMs = 1000
-            conn.SetReadDeadline(time.Now().Add(time.Duration(ReadTimeoutAndBetweenPollsInMs) * time.Millisecond))
-            str, err := connBuf.ReadString('\n')
-            if terr, ok := err.(net.Error); ok && terr.Timeout() {
-                fmt.Fprintln(debugging.DebugOut, "No info from connection", id, "before timing out. Reading again...")
-            } else if err != nil {
-                fmt.Fprintln(debugging.DebugOut, "Connection", id, "looks closed. Error", reflect.TypeOf(err), "when reading:")
-                fmt.Fprintln(debugging.DebugOut, err)
-                connectionDescription.status = ConnectionClosed
-                reportConnectionStatus(statusChannel, connectionDescription)
-                wg.Done()
-                return err
-            } else if len(str) > 0 {
-                fmt.Fprintln(debugging.DebugOut, "Connection", id, "got", str)
-            }
-        }
-
-    }
-}
-```
-
-##
-```go
-func StartBackgroundClosureTrigger(gc GroupOfConnections) <-chan bool {
-    closureCh := make(chan bool)
-
-    signalsCh := make(chan os.Signal, 1)
-    registerProperSignals(signalsCh)
-
-    go closureMonitor(gc, signalsCh, closureCh)
-    return closureCh
-}
-
-func registerProperSignals(signalsCh chan os.Signal) {
-    signal.Notify(signalsCh, syscall.SIGINT, syscall.SIGTERM)
-}
-
-func closureMonitor(gc GroupOfConnections, signalsCh chan os.Signal,
-    closureCh chan bool) {
-    const pullingPeriodInMs = 500
-    for {
-        select {
-        case signal := <-signalsCh:
-            fmt.Fprintln(debugging.DebugOut, "We captured a closure signal:", signal)
-            close(closureCh)
-            return
-        case <-time.After(pullingPeriodInMs * time.Millisecond):
-            if !gc.PendingConnections() {
-                close(closureCh)
-                return
-            }
-        }
-    }
-}
-```
 ## Baking
 
 Nothing especially interesting (*a docker wrapper does exist so we can run travis logic locally*):
@@ -166,20 +118,6 @@ fi
 ## No, you cannot just move binaries around
 ![](santadisapproves.gif)
 
-## 
-```bash
-function binary_compilation {
-    # mix of:
-    #  traefik build
-    #  http://blog.wrouesnel.com/articles/Totally%20static%20Go%20builds/
-    #  https://www.osso.nl/blog/golang-statically-linked/
-    #  https://github.com/kubernetes/kubernetes/pull/26028/files
-    # see also https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
-    CGO_ENABLED=0 GOOS=linux go build -o out/tcpgoon \
-            -ldflags '-extldflags "-static"' -a -installsuffix nocgo -tags netgo
-}
-
-```
 
 ## Testing...
 
