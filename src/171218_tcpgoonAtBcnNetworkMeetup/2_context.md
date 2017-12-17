@@ -5,7 +5,7 @@
 
 ## What is Schibsted?
 <div id="left">
-![](schisbtedLogo.png)
+![](schisbtedLogo.png){ width=90% }
 </div>
 <div id="right">
 ![](schSpain.jpg)
@@ -14,22 +14,13 @@
 ## And SPT?
 ![](schreboot.jpg)
 
-## And YAMS?
+## 
+![](logo-3nd-round-alt.png){ width=35% }
 
-<div id="left">
-![](logo-3nd-round-alt.png)
-</div>
-<div id="right">
-![](yamsPortal.png)
-</div>
+![](YAMStransformation.png){ width=35% }
 
 ## 
-<div id="left">
-![](YAMStransformation.png)
-</div>
-<div id="right">
 ![](YAMSarch.png)
-</div>
 
 #
 

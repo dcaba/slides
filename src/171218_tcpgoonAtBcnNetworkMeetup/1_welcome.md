@@ -7,7 +7,7 @@
 ## Who are you?
 
 ```go
-dc_profile := map[string]string{
+dcProfile := map[string]string{
   "name": "Daniel Caballero",
   "title": "Devops Engineer",
   "mail": "dani(dot)caba at gmail(dot)com",
