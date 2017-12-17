@@ -10,7 +10,7 @@
 
 > **Should application stress tests already cover this?**
 
-![](SantaFireMaker.jpg){ width=70% }
+![](SantaFireMaker.jpg){ width=60% }
 
 ## Again, no...
 
