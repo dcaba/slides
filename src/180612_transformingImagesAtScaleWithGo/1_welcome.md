@@ -1,11 +1,22 @@
 % YAHHS 
 % Yet Another High Scalability Story
-% daniel.caballero@schibsted.com
+% dani(dot)caba at gmail(dot)com
 % June Xth, 2018 
 
 #
 
-## What's Schibsted?
+## Who are you?
 
-## Why are you here?
+```go
+dcProfile := map[string]string{
+  "name": "Daniel Caballero",
+  "title": "Devops Engineer",
+  "mail": "dani(dot)caba at gmail(dot)com",
+  "company": &SchibstedPT,
+  "previously_at": []company{&NTTEurope, &Semantix, &Oracle},
+  "linkedin": http.Get("https://www.linkedin.com/in/danicaba"),
+  "extra": "Gestión DevOps de Arquitecturas IT@LaSalle",
+}
+```
 
+## What are you bringing here?
