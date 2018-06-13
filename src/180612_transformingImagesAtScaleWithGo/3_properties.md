@@ -2,6 +2,12 @@
 
 ## Infrastructure management
 
+## Code reviews
+
+* Raffle
+* Quality gate
+* Other bots
+
 ## Continuous delivery
 * travis
 * fpm
