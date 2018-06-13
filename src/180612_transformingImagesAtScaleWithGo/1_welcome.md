@@ -42,4 +42,6 @@ dcProfile := map[string]string{
 
 ## And I really don't like to waste it resolving production alerts
 
+>>*I'd say more: I really hate being reactive...*
+
 ![](repair.gif)
