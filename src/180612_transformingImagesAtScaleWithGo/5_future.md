@@ -6,11 +6,21 @@
 
 ## More elasticity to reduce costs
 
+## Extra compression
+Currently jpg-turbo
+
 ## Bringing the service closer to the business
 
-## More adoption
+## More engines
+Also in use by attachments and CVs. PDF conv makes sense. Bench already done
+Video
+
 
 ## Actual transformation pipelines
+
+Include current workflow
+
+## More adoption?
 
 ## Better capacity management
 

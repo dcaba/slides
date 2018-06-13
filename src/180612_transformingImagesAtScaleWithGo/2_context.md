@@ -25,6 +25,14 @@
 ##
 ![](yamsUsage.png)
 
+## Why not offline transformations?
+
+## Why not reusing alternatives?
+imaginarium
+sch media
+
+## Why not CDN/edge transformations?
+
 ## Self service capabilities
 
 ## Why not before?
