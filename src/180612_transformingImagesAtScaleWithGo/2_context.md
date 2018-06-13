@@ -1,13 +1,5 @@
 #
 
-## Why not before?
-
-We were busy. We had a lot of fun... at a high cost
-#
-
-## A little bit of context...
-![](excuse_me_rocks.jpg)
-
 ## What is Schibsted?
 <div id="left">
 ![](schisbtedLogo.png){ width=90% }
@@ -19,7 +11,8 @@ We were busy. We had a lot of fun... at a high cost
 ## And SPT?
 ![](schreboot.jpg)
 
-## 
+## And YAMS?
+
 ![](logo-3nd-round-alt.png){ width=35% }
 
 ![](YAMStransformation.png){ width=35% }
@@ -30,4 +23,6 @@ We were busy. We had a lot of fun... at a high cost
 ##
 ![](yamsUsage.png)
 
-#
+## Why not before?
+
+We were busy. We had a lot of fun... at a high cost

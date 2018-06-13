@@ -1,7 +1,6 @@
-% YAHHS 
+% YAHSS 
 % Yet Another High Scalability Story
 % dani(dot)caba at gmail(dot)com
-% June Xth, 2018 
 
 #
 
@@ -19,4 +18,28 @@ dcProfile := map[string]string{
 }
 ```
 
-## What are you bringing here?
+## So... I work
+
+![](daniWorks.jpg)
+
+## ... I (some kinda) teach
+
+![](daniTeaches.jpg){ width=65% }
+
+## ... I (try to) program...
+
+![](daniPrograms.jpg){ width=70% }
+
+## ... I (would like to) rock...
+
+![](daniRocks.jpg){ width=35% }
+
+## ... and I live
+
+![](daniHasFamily.jpg){ width=70% }
+
+## So... I really value my time
+
+## And I really don't like to waste it resolving production alerts
+
+![](repair.gif)
