@@ -10,8 +10,7 @@
 ![](schSpain.jpg)
 </div>
 
-## Origins - Media houses
-
+## Origin - Media houses
 <div id="left">
 ![](Media Houses.jpeg){ width=90% }
 </div>
@@ -20,7 +19,7 @@
 </div>
 
 ## Marketplaces global expansion
-![](8.jpg)
+![](online-classifieds-leader.jpg)
 
 ## Large group of companies
 ![](schibsted-shaping-the-media-of-tomorrow-today-4-1024.jpg)

@@ -40,7 +40,7 @@ dcProfile := map[string]string{
 
 ## So... I really value my time
 
-## And I really don't like to waste it resolving production alerts
+## And I really don't like to waste it resolving incidents
 
 >*I'd say more: I really hate reactive troubleshooting...*
 
