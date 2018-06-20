@@ -1,10 +1,8 @@
-% YAHSS 
-% Yet Another High Scalability Story
-% dani(dot)caba at gmail(dot)com
-
 #
 
 ## Who are you?
+
+##
 
 ```go
 dcProfile := map[string]string{
@@ -38,10 +36,10 @@ dcProfile := map[string]string{
 
 ![](daniHasFamily.jpg){ width=70% }
 
-## So... I really value my time
+## So... I value my time (a lot)
 
 ## And I really don't like to waste it resolving incidents
 
->*I'd say more: I really hate reactive troubleshooting...*
+>I'd say more: *I really hate reactive troubleshooting*...
 
-![](repair.gif)
+![](Working-under-water3.jpg){ width=50% }

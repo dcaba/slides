@@ -3,7 +3,7 @@
 # default global_opts
 paths_to_process="src/*"
 themes=(moon night simple solarized)
-theme=custom
+theme=custom-black
 format="html5 --template=reveal.js/reveal-template.html"
 output_root="docs/"
 

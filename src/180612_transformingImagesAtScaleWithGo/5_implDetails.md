@@ -30,3 +30,7 @@ And rate limits..
 ## Graceful shutdowns
 
 AWS SDK usage
+
+## Stresstests
+
+* Locust -> Vegeta

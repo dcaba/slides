@@ -2,6 +2,10 @@
 
 ## Infrastructure management
 
+## We are actually devops
+
+No ops/support team
+
 ## Code reviews
 
 * Raffle
