@@ -165,7 +165,8 @@ body {
   line-height: 1.1em;
   overflow: auto;
   max-height: 400px;
-  word-wrap: normal; }
+  word-wrap: normal;
+  background-color: rgb(186, 186, 186); }
 
 .reveal table {
   margin: auto;
@@ -231,7 +232,7 @@ body {
  *********************************************/
 .reveal section img {
   margin: 15px 0px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0);
   border: 2px solid #b4e0fd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 

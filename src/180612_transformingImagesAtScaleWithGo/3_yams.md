@@ -1,7 +1,10 @@
 #
 
 ##
-![](logo-3nd-round-alt.png){ width=40% }
+![](yamsLogo.png){ style="border:0; width:30.0%" }
+
+##
+![](portal_screenshot.png){ width=65% }
 
 ## 
 ![](yams_image_test.jpeg)
@@ -27,16 +30,19 @@
 }
 ```
 
+#
 
-## Brief service history
+## The journey
 
 ## 2+1/2 YEARS AGO
-![](YAMSarch.png)
+![](apiv0Arch.png)
 
 ##
 ![](yamsUsage.png)
 
 ## Firsts onboardings
+
+## Onboarding pipelines
 
 ## Firsts nightmares
 
@@ -44,9 +50,15 @@
 
 ## New Core
 
+## Updated onboarding pipelines
+
+## Current usage
+
 # 
 
 ## Thoughts so far...
+
+## Why building your own service? 
 
 ## Why not offline transformations?
 
