@@ -7,7 +7,7 @@
 ```go
 dcProfile := map[string]string{
   "name": "Daniel Caballero",
-  "title": "Devops Engineer",
+  "title": "Staff Devops Engineer",
   "mail": "dani(dot)caba at gmail(dot)com",
   "company": &SchibstedPT,
   "previously_at": []company{&NTTEurope, &Semantix, &Oracle},
@@ -40,6 +40,5 @@ dcProfile := map[string]string{
 
 ## And I really don't like to waste it resolving incidents
 
->I'd say more: *I really hate reactive troubleshooting*...
+![](Working-under-water-meme.jpg){ width=70% }
 
-![](Working-under-water3.jpg){ width=50% }

@@ -28,6 +28,9 @@ And rate limits..
 ## Datastore access
 
 ## Graceful shutdowns
+Autoscaling
+
+![](autoscaling.png)
 
 AWS SDK usage
 
