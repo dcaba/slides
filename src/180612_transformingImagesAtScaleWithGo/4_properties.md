@@ -40,4 +40,4 @@ And escalations using pagerduty
 
 ## Secrets management
 
-## Penetration testing
+## Vulnerability testing

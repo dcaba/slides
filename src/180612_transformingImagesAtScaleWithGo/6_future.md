@@ -47,8 +47,6 @@ Zuul could be replaced by Krakend
 
 ## Why not Google Cloud?
 
-## Imageflow
-
 ## And Cassandra?
 
 ## And PaaS?

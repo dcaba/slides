@@ -55,13 +55,14 @@
 ## 
 ![](incidentReport.jpg)
 
-#
-
 ## New Architecture
 ![](apiV1Arch.png)
 
 ## New Core
 ![](openCvToVips.png)
+
+## Self service capabilities
+![](selfservice.png){ width=60% }
 
 ## Updated onboarding pipelines
 ![](updatedAdoption.png)
@@ -75,28 +76,83 @@
 
 ## Why building your own service? 
 
-## Why not offline transformations?
+##
+![](pricing.png)
 
-## Why microservices?
+##
+![](availability.png)
 
-## Why not reusing alternatives?
-imaginarium
-sch media
+## 
+<div id="left">
+![](yamssurvey.png)
+</div>
+<div id="right">
+![](yamsstakeholdersreq.jpg){ width=85% }
+</div>
 
-## Why not CDN/edge transformations?
+##
+![](yapolatency.png)
 
-## Self service capabilities
-
-## Not a new story... why not presenting it before?
-
-![](fireman.jpg){ width=60% }
-
-## Why transformations in golang?
-
-* libvips was very worth:
+## But there's already opensource http servers for that, right?
 
 ##
 
-* comparing languages ...
+* [Imbo](https://github.com/imbo/imbo)
+* [imaginary](https://github.com/h2non/imaginary)
 
-Golang was worth!
+## Why not offline transformations?
+
+##
+![](yamscontentsreport.png){ width=80% }
+
+## Why microservices?
+
+## +
+* *Quicker releases*
+* APIGW helps to delegate common functionality
+    * But *business agnostic ones*
+* *Reusability* of individual microservices
+* Each microservice can chose *different techs* 
+    * We will focus in delivery-images, in Golang
+* Easier to scale with the organization/development team
+    * Not taking advantage
+* and... *fun*
+
+## -
+* S2S *communication overhead*
+* Extra *costs*
+* More *tooling* required (logging, tracing...)
+* Reproduce the complete environment becomes tricky
+* Always caring about coupled services...
+    
+##     
+    
+![](sleepDomainDrivenDesign.jpeg)
+
+## Why not CDN/edge transformations?
+
+##
+
+* Resize functionality and format conversion is normally covered...
+    * But not all our functionality (watermarking?)
+* It may mean duplicated processing
+* Not easy to pack something like libvips as lambdas
+* No single & global CDN in Schibsted
+
+## Not a new story... why not presenting it before?
+
+##
+
+![](fireman.jpg)
+
+## Why transformations in golang?
+
+## Transformation library
+* imageflow was not production ready two years ago, with clear gaps on functionalities and bindings
+
+![](libvipsBench.png){ width=60% }
+
+
+## Choosing the programming language 
+![](deliveryImagesLang.jpg)
+
