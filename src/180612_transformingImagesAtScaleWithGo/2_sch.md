@@ -30,3 +30,13 @@
 
 ## And SPT Platform Services?
 It's about a *developer experience*...
+
+<!-- 
+
+## Edge team
+
+## We are actually devops
+    
+No ops/support team 
+    
+-->

@@ -35,6 +35,8 @@ Zuul could be replaced by Krakend
 
 #
 
+## Why not terraform?
+
 ## Why not docker/k8s?
 
 * Portal

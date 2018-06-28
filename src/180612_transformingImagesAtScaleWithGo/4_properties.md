@@ -1,24 +1,60 @@
 #
 
-## Infrastructure management
+## Platform (development) properties
 
-## We are actually devops
+## IaC
 
-No ops/support team
+* Most of the services in AWS...
+* Generating Cloudformations from [python troposphere](https://github.com/cloudtools/troposphere)
+* Managing Cloudformation deployments with [Sceptre](https://github.com/cloudreach/sceptre) 
+* New projects with infrastructure definition in the same repo than the service code
+    * Trying to extend CD to Infrastructure
+* We have assessed [AWS GoFormation](https://github.com/awslabs/goformation)
+    * But still lacks some functionality, like GetAtt or Ref 
 
 ## Code reviews
 
-* Raffle
-* Quality gate
-* Other bots
+* Raffle:
 
-## Continuous delivery
+```yaml
+reviewersRaffle:
+  strategies:
+    - team-with-knowledge-candidates:
+        size: 1
+        type: knowledge
+        participants:
+          teams:
+            - spt-infrastructure/edge-team
+    - team-random-candidates:
+        type: sequential
+        size: 2
+        participants:
+          teams:
+            - spt-infrastructure/edge-team
+  dailyReminder: enabled
+slack:
+  - "#spt-edge-prs"
+```
+
+##
+
+![](revRaffle.png)
+
+## Other bots
+
+![](otherBots.png){ width=50% }
+
+## Continuous integration and delivery
+
 * travis
 * fpm
 * hardened images
 * spinnaker
 
-## Stress testing
+## Acceptance & Stress testing
+
+##
+![](vegetaAggressive.png)
 
 ## Configuration management
 
@@ -40,4 +76,4 @@ And escalations using pagerduty
 
 ## Secrets management
 
-## Vulnerability testing
+## Vulnerability scans

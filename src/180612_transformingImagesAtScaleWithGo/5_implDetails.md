@@ -1,5 +1,7 @@
 #
 
+## delivery-images implementation details
+
 ## HTTP router
 
 ## Services communication

@@ -152,7 +152,6 @@
 
 ![](libvipsBench.png){ width=60% }
 
-
 ## Choosing the programming language 
 ![](deliveryImagesLang.jpg)
 
