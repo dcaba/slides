@@ -4,6 +4,8 @@
 
 ## Are you going to opensource it?
  
+## Are you going to sell it?
+
 ## Price calculator 
 
 * Share price comparison

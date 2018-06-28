@@ -55,6 +55,9 @@
 ## 
 ![](incidentReport.jpg)
 
+## First (quite manual) release process
+![](oldReleaseProcess.png)
+
 ## New Architecture
 ![](apiV1Arch.png)
 
@@ -133,11 +136,12 @@
 
 ##
 
-* Resize functionality and format conversion is normally covered...
-    * But not all our functionality (watermarking?)
+* Some functionality may be covered...
+    * Typically resizing and format conversion
+    * But *not all our functionality* (watermarking?)
 * It may mean duplicated processing
 * Not easy to pack something like libvips as lambdas
-* No single & global CDN in Schibsted
+* *No unique & global CDN* in Schibsted
 
 ## Not a new story... why not presenting it before?
 
