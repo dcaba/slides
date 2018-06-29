@@ -49,7 +49,7 @@ slack:
 language: go
 go:
 - 1.9.3
-...
+
 script:
 - diff -u <(echo -n) <(gofmt -s -d $(find . -type f -name '*.go' -not -path "./vendor/*"))
 - docker login -u="$ARTIFACTORY_USER" -p="$ARTIFACTORY_PASSWORD" containers.schibsted.io
@@ -57,7 +57,6 @@ script:
 - "_script/tests-docker"
 - "_script/compile-docker"
 - "_script/cibuild"
-...
 
 deploy:
   skip_cleanup: true
@@ -137,15 +136,19 @@ Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
 
 ## Monitoring and alerting
 
-* We use *Datadog* 
-    * Importing also Cloudwatch metrics
+* We use *Datadog*
+    * System + Custom application metrics 
+        * Via *statsd*
+    * Importing also *Cloudwatch* metrics
 * Extensive usage of:
     * Dashboards (troubleshooting and also KPIs)
     * Alerting
     
 ##
+![](dddashboard.png)
+
+##
 ```yaml
-...
   pre:
     not_allowed_notify_to:
     - "@webhook-alert-gateway-sev3"
@@ -172,17 +175,79 @@ monitors:
         warning: 0.05
         critical: 0.1
       notify_no_data: false
-...
 ```
-## 
-Dashboards
     
 ## Pagerduty onCall escalations
-
-
-## Real time monitoring
+![](pagerdutyScalations.png)
 
 ## Distributed tracing
+![](zipkintrace.png)
+
+##
+![](zipkinspan.png)
+
+## Integration
+![](zipkinLibraries.png)
+
+##
+![](jaeger.png)
+
+##
+```go
+func InitializeTracer() (opentracing.Tracer, io.Closer) {
+        cfg := GetConfig()
+        if !cfg.Enabled {
+                return nil, nil
+        }
+
+        // Configure HTTP propagation (using zipkin headers)
+        zipkinPropagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
+        injector := jaeger.TracerOptions.Injector(opentracing.HTTPHeaders, zipkinPropagator)
+        extractor := jaeger.TracerOptions.Extractor(opentracing.HTTPHeaders, zipkinPropagator)
+
+        // Zipkin shares span ID between client and server spans; it must be enabled via the following option.
+        zipkinSharedRPCSpan := jaeger.TracerOptions.ZipkinSharedRPCSpan(true)
+
+        // Zipkin Reporter (http transport)
+        transport := NewHTTPTransport(cfg.Host, cfg.Port, HTTPBasicAuth(cfg.ApiId, cfg.ApiKey))
+        reporter := jaeger.NewRemoteReporter(transport)
+
+        // Probabilistic Sampler
+        sampler, _ := jaeger.NewProbabilisticSampler(cfg.Rate)
+
+        // Create tracer
+        tracer, closer := jaeger.NewTracer(
+                "yams-delivery-images",
+                sampler,
+                reporter,
+                injector,
+                extractor,
+                zipkinSharedRPCSpan,
+        )
+
+        opentracing.SetGlobalTracer(tracer)
+        return tracer, closer
+}
+
+```
+
+```go
+if transformedImage.FromCache {
+        b.Logger.WithField("id", requestId).Debug("Found Transformation in cache")
+        tracing.AddLogToSpanInContext(request.Context(), "Got image from cache")
+        b.Monitor.Incr("transformation.cache.hit", tags, 1)
+} else {
+        b.Monitor.Incr("transformation.cache.miss", tags, 1)
+        transformationElapsed := time.Since(transformationStart)
+        transformationElapsedInMillis := float64(transformationElapsed.Nanoseconds()) / 1000.0
+        b.Monitor.TimeInMilliseconds("request.transformation.duration", transformationElapsedInMillis, tags, 1)
+        b.Monitor.Gauge("request.transformation.duration", transformationElapsedInMillis, tags, 1)
+        b.Logger.WithField("id", requestId).Debug("Transformation took: ", transformationElapsed.Seconds(), " secs")
+        tracing.AddLogKvToSpanInContext(request.Context(), "transformation.duration", transformationElapsed.String())
+}
+
+```
+## Real time monitoring
 
 # 
 
@@ -190,4 +255,6 @@ Dashboards
 
 ## Secrets management
 
+<!--
 ## Vulnerability scans
+-->
