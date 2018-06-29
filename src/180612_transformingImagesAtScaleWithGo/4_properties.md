@@ -109,7 +109,6 @@ fpm -s dir \
 #
 
 ## Configuration management
-
 * Using [Netflix Archaius](https://github.com/Netflix/archaius) in all rxJava services
     * Configured with dynamo tables...
     * so dynamic reconfiguration is possible...
@@ -119,16 +118,13 @@ fpm -s dir \
     * We missed [support to "Get with default"](https://github.com/spf13/viper/pull/232)
 
 ## Logs 
-
-*Sumologic*
-
-* Now quite happy... but costs (logging 100G per day)
-* Daemon/sidecar with specific config (files to forward)
+* *Sumologic*
+    * Now quite happy... but costs (logging 100G per day)
+    * Daemon/sidecar with specific config (files to forward)
     
 ![](sumologic.png){ width=80% }   
    
 ##
-
 Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
 
 * Disabling locking
@@ -137,12 +133,58 @@ Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
     * but not concerned about overhead, as...
     * transforming images is quite resource-intensive
 
+#
+
 ## Monitoring and alerting
-And escalations using pagerduty
+
+* We use *Datadog* 
+    * Importing also Cloudwatch metrics
+* Extensive usage of:
+    * Dashboards (troubleshooting and also KPIs)
+    * Alerting
+    
+##
+```yaml
+...
+  pre:
+    not_allowed_notify_to:
+    - "@webhook-alert-gateway-sev3"
+    - "@webhook-alert-gateway-sev2"
+    - "@pagerduty"
+    healthy_host_count_critical: 0.0
+    healthy_host_count_warning: 0.5
+  pro:
+    not_allowed_notify_to:
+    healthy_host_count_critical: 1.0
+    healthy_host_count_warning: 2.0
+
+monitors:
+  - name: "[ALB] - {{name.name}} in region {{region.name}} - 5xx backend error rate"
+    multi: false
+    tags:
+      - "app:yams"
+    type: "metric alert"
+    options:
+      notify_audit: false
+      timeout_h: 0
+      require_full_window: false
+      thresholds:
+        warning: 0.05
+        critical: 0.1
+      notify_no_data: false
+...
+```
+## 
+Dashboards
+    
+## Pagerduty onCall escalations
+
 
 ## Real time monitoring
 
 ## Distributed tracing
+
+# 
 
 ## S2S resiliency
 
