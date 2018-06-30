@@ -20,6 +20,8 @@
 
 ## And prometheus?
 
+We may. And it may be a good moment to consider [opencensus](https://github.com/census-instrumentation/opencensus-go)
+
 #
 
 ## Actual future

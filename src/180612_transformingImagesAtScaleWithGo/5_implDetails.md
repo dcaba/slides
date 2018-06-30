@@ -1,21 +1,12 @@
 #
 
-## delivery-images implementation details
+## Other specific delivery-images implementation details
 
-## HTTP router
-
-## Services communication
-
-* fargo
-* eureka
-* load balancing
-* hystrix
 
 ## bi-image + libvips
 
 ## Caching
 
-## Zipkin
 
 ## Custom metrics
 

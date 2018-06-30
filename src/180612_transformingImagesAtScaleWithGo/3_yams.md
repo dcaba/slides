@@ -102,6 +102,7 @@
 
 * [Imbo](https://github.com/imbo/imbo)
 * [imaginary](https://github.com/h2non/imaginary)
+* [picfit](https://github.com/thoas/picfit)
 
 ## Why not offline transformations?
 

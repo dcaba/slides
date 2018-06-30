@@ -114,10 +114,13 @@ fpm -s dir \
     * and quite useful when dealing with outages :)
 * ... but [Viper](https://github.com/spf13/viper) in delivery-images
     * No support of DynamoDB to store configurations (etcd, consul)
-    * We missed [support to "Get with default"](https://github.com/spf13/viper/pull/232)
+    * We missed [support of "Get with default"](https://github.com/spf13/viper/pull/232) functions
+
+##
+![](karyonadmin.png)
 
 ## Logs 
-* *Sumologic*
+* Using *Sumologic* to aggregate them into a central location
     * Now quite happy... but costs (logging 100G per day)
     * Daemon/sidecar with specific config (files to forward)
     
@@ -138,38 +141,31 @@ Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
 
 * We use *Datadog*
     * System + Custom application metrics 
-        * Via *statsd*
+        * Via *statsd*, sidecar model (again)
     * Importing also *Cloudwatch* metrics
 * Extensive usage of:
     * Dashboards (troubleshooting and also KPIs)
     * Alerting
     
 ##
-![](dddashboard.png)
+![](dddashboard.png){ width=100% }
 
 ##
 ```yaml
   pre:
     not_allowed_notify_to:
-    - "@webhook-alert-gateway-sev3"
     - "@webhook-alert-gateway-sev2"
     - "@pagerduty"
     healthy_host_count_critical: 0.0
-    healthy_host_count_warning: 0.5
   pro:
-    not_allowed_notify_to:
     healthy_host_count_critical: 1.0
-    healthy_host_count_warning: 2.0
 
 monitors:
   - name: "[ALB] - {{name.name}} in region {{region.name}} - 5xx backend error rate"
-    multi: false
     tags:
       - "app:yams"
     type: "metric alert"
     options:
-      notify_audit: false
-      timeout_h: 0
       require_full_window: false
       thresholds:
         warning: 0.05
@@ -177,8 +173,10 @@ monitors:
       notify_no_data: false
 ```
     
+<!--
 ## Pagerduty onCall escalations
 ![](pagerdutyScalations.png)
+-->
 
 ## Distributed tracing
 ![](zipkintrace.png)
@@ -192,45 +190,32 @@ monitors:
 ##
 ![](jaeger.png)
 
+## Where?
+
+* httserver, as a middleware 
+    * so incoming requests' headers are considered
+* all functions where you want to add instrumentation
+* client factory
+    * to propagate spans to outgoing requests
+
 ##
 ```go
-func InitializeTracer() (opentracing.Tracer, io.Closer) {
-        cfg := GetConfig()
-        if !cfg.Enabled {
-                return nil, nil
-        }
+	n := negroni.New(recovery)
 
-        // Configure HTTP propagation (using zipkin headers)
-        zipkinPropagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
-        injector := jaeger.TracerOptions.Injector(opentracing.HTTPHeaders, zipkinPropagator)
-        extractor := jaeger.TracerOptions.Extractor(opentracing.HTTPHeaders, zipkinPropagator)
+	n.Use(NewRequestIdHandler())
+	n.Use(tracing.NewTracingHandler())
+	n.Use(negroni.NewStatic(http.Dir(serverConfig.schemaDir)))
 
-        // Zipkin shares span ID between client and server spans; it must be enabled via the following option.
-        zipkinSharedRPCSpan := jaeger.TracerOptions.ZipkinSharedRPCSpan(true)
+	loggingMiddleware := negronilogrus.NewMiddlewareFromLogger(serverConfig.log, "bumblebee")
+	loggingMiddleware.SetLogStarting(false)
+	n.Use(loggingMiddleware)
 
-        // Zipkin Reporter (http transport)
-        transport := NewHTTPTransport(cfg.Host, cfg.Port, HTTPBasicAuth(cfg.ApiId, cfg.ApiKey))
-        reporter := jaeger.NewRemoteReporter(transport)
-
-        // Probabilistic Sampler
-        sampler, _ := jaeger.NewProbabilisticSampler(cfg.Rate)
-
-        // Create tracer
-        tracer, closer := jaeger.NewTracer(
-                "yams-delivery-images",
-                sampler,
-                reporter,
-                injector,
-                extractor,
-                zipkinSharedRPCSpan,
-        )
-
-        opentracing.SetGlobalTracer(tracer)
-        return tracer, closer
-}
-
+	n.Use(statsMiddleware)
+	n.UseHandler(httpRouter)
+	return n
 ```
 
+##
 ```go
 if transformedImage.FromCache {
         b.Logger.WithField("id", requestId).Debug("Found Transformation in cache")
@@ -247,13 +232,20 @@ if transformedImage.FromCache {
 }
 
 ```
-## Real time monitoring
-
 # 
 
 ## S2S resiliency
 
+* fargo
+* eureka
+* load balancing
+* hystrix
+
+## Real time monitoring
+
+<!--
 ## Secrets management
+-->
 
 <!--
 ## Vulnerability scans
