@@ -3,36 +3,47 @@
 ## Before closing...
 
 ## Are you going to opensource it?
+
+* Schibsted do support contribution to opensource project
+* As well as releasing internal code
+    * See [Github Schibsted organization](https://github.com/schibsted))
+* Problem: Not following a "contribute first policy"
  
-## Are you going to sell it?
-
-## Price calculator 
-
-* Share price comparison
+## Are you going to offer this as a SaaS product?
 
 #
 
-## Other projects
+## Other related projects
 
+## Price calculator 
+   
+   * Share price comparison
+   
+##
 ![](tcpgoonwhite.jpg){ width=35% }
 
 ![](coollogo.png){ width=35% }
 
 ##
-
 ![](TCP+backlog+queues.jpg)
 
 ## Choosing the right regions
 
 ## Classifier end to end tests
 
+# Potential related speaches
+
+## How much magic, and how much DIY?
+
+## Where is the production ready line?
+
 #
 
 ## Corollary
 
-## Keep Rx in the code...
+## Be Rx in the code...
 
-##
+## But not in real life
 
 ![](ninjasJapan.jpg)
 
@@ -48,6 +59,5 @@
 <br>
 ![](schCollab.png)
 </div>
-
 
 ## Other Qs?

@@ -308,6 +308,14 @@ func httpServer(serverConfig deliveryImagesServer) *negroni.Negroni {
 	httpRouter.GET("/hystrix.stream", hystrixStream(hystrixStreamHandler))
 ```
 
+## Graceful shutdowns
+We strongly rely on autoscaling:
+![](autoscaling.png)
+
+Deregistering instances makes scale-downs cleaner
+
+* [See Scaling Lifecycle Hooks](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html)
+
 ## And there's still more...
 ![](strongbox-logo.png){ style="border:0" }
 
