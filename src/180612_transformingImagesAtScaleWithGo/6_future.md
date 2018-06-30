@@ -12,7 +12,7 @@
 
 ## gRPC?
 
-## Why not Service Meshes?
+## Why not a Service Mesh?
 
 ## Why not Google Cloud?
 
@@ -20,7 +20,7 @@
 
 ## And PaaS?
 
-## And prometheus?
+## And Prometheus?
 
 We may. And it may be a good moment to consider [opencensus](https://github.com/census-instrumentation/opencensus-go)
 
