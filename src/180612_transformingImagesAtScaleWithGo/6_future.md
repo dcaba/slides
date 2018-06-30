@@ -1,5 +1,7 @@
 #
 
+## Nice solution... but
+
 ## Why not terraform?
 
 ## Why not docker/k8s?
@@ -47,6 +49,7 @@ Include current workflow
 ## More adoption?
 
 ## Better capacity management
+Changes in transformation rules means massive eviction 
 Incoming queue and reusing cache if no capacity
 Better degradation but efficient ASG triggers
 

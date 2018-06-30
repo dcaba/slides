@@ -133,7 +133,7 @@ Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
 * Time/Date formatting equivalent to the logs in Java
 * [Zap](https://github.com/uber-go/zap) could be used... 
     * but not concerned about overhead, as...
-    * transforming images is quite resource-intensive
+    * fetching and transforming images are massive ops in comparison
 
 #
 
@@ -200,35 +200,35 @@ monitors:
 
 ##
 ```go
-	n := negroni.New(recovery)
+n := negroni.New(recovery)
 
-	n.Use(NewRequestIdHandler())
-	n.Use(tracing.NewTracingHandler())
-	n.Use(negroni.NewStatic(http.Dir(serverConfig.schemaDir)))
+n.Use(NewRequestIdHandler())
+n.Use(tracing.NewTracingHandler())
+n.Use(negroni.NewStatic(http.Dir(serverConfig.schemaDir)))
 
-	loggingMiddleware := negronilogrus.NewMiddlewareFromLogger(serverConfig.log, "bumblebee")
-	loggingMiddleware.SetLogStarting(false)
-	n.Use(loggingMiddleware)
+loggingMiddleware := negronilogrus.NewMiddlewareFromLogger(serverConfig.log, "bumblebee")
+loggingMiddleware.SetLogStarting(false)
+n.Use(loggingMiddleware)
 
-	n.Use(statsMiddleware)
-	n.UseHandler(httpRouter)
-	return n
+n.Use(statsMiddleware)
+n.UseHandler(httpRouter)
+return n
 ```
 
 ##
 ```go
 if transformedImage.FromCache {
-        b.Logger.WithField("id", requestId).Debug("Found Transformation in cache")
-        tracing.AddLogToSpanInContext(request.Context(), "Got image from cache")
-        b.Monitor.Incr("transformation.cache.hit", tags, 1)
+    b.Logger.WithField("id", requestId).Debug("Found Transformation in cache")
+    tracing.AddLogToSpanInContext(request.Context(), "Got image from cache")
+    b.Monitor.Incr("transformation.cache.hit", tags, 1)
 } else {
-        b.Monitor.Incr("transformation.cache.miss", tags, 1)
-        transformationElapsed := time.Since(transformationStart)
-        transformationElapsedInMillis := float64(transformationElapsed.Nanoseconds()) / 1000.0
-        b.Monitor.TimeInMilliseconds("request.transformation.duration", transformationElapsedInMillis, tags, 1)
-        b.Monitor.Gauge("request.transformation.duration", transformationElapsedInMillis, tags, 1)
-        b.Logger.WithField("id", requestId).Debug("Transformation took: ", transformationElapsed.Seconds(), " secs")
-        tracing.AddLogKvToSpanInContext(request.Context(), "transformation.duration", transformationElapsed.String())
+    b.Monitor.Incr("transformation.cache.miss", tags, 1)
+    transformationElapsed := time.Since(transformationStart)
+    transformationElapsedInMillis := float64(transformationElapsed.Nanoseconds()) / 1000.0
+    b.Monitor.TimeInMilliseconds("request.transformation.duration", transformationElapsedInMillis, tags, 1)
+    b.Monitor.Gauge("request.transformation.duration", transformationElapsedInMillis, tags, 1)
+    b.Logger.WithField("id", requestId).Debug("Transformation took: ", transformationElapsed.Seconds(), " secs")
+    tracing.AddLogKvToSpanInContext(request.Context(), "transformation.duration", transformationElapsed.String())
 }
 ```
 # 
@@ -247,46 +247,46 @@ if transformedImage.FromCache {
 ## Implementation detail
 ```go
 viper.SetDefault("eureka.datacenter", amazonDatacenterInfo)
-		datacenter := viper.GetString("eureka.datacenter")
-		if datacenter == k8DatacenterInfo {
-			var err error
-			appInstance, err = sdeureka.NewK8SFargoInstance(eurekaConfig)
-			if err != nil {
-				return nil, nil, err
-			}
-		} else if datacenter == amazonDatacenterInfo {
-			awsSession, err := session.NewSession()
-			if err != nil {
-				log.Info("registerEureka", "error creating an AWS session", "message", err)
-				return nil, nil, err
-			}
+datacenter := viper.GetString("eureka.datacenter")
+if datacenter == k8DatacenterInfo {
+    var err error
+    appInstance, err = sdeureka.NewK8SFargoInstance(eurekaConfig)
+    if err != nil {
+        return nil, nil, err
+    }
+} else if datacenter == amazonDatacenterInfo {
+    awsSession, err := session.NewSession()
+    if err != nil {
+        log.Info("registerEureka", "error creating an AWS session", "message", err)
+        return nil, nil, err
+    }
 
-			instanceMeta := ec2metadata.New(awsSession)
-			appInstance, err = sdeureka.NewAwsFargoInstance(log, eurekaConfig, instanceMeta)
-			if err != nil {
-				return nil, nil, err
-			}
-		} else if datacenter == localDatacenterInfo {
-			var err error
-			appInstance, err = sdeureka.NewLocalFargoInstance(eurekaConfig)
-			if err != nil {
-				return nil, nil, err
-			}
+    instanceMeta := ec2metadata.New(awsSession)
+    appInstance, err = sdeureka.NewAwsFargoInstance(log, eurekaConfig, instanceMeta)
+    if err != nil {
+        return nil, nil, err
+    }
+} else if datacenter == localDatacenterInfo {
+    var err error
+    appInstance, err = sdeureka.NewLocalFargoInstance(eurekaConfig)
+    if err != nil {
+        return nil, nil, err
+    }
 ```
 
 ##
 ```go
-	hystrix.ConfigureCommand("DeliveryImages#GetWatermarkFromLogicManager", hystrix.CommandConfig{
-		Timeout:               viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.timeout"),
-		MaxConcurrentRequests: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.maxConcurrentRequests"),
-		ErrorPercentThreshold: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.errorPercentThreshold"),
-	})
+hystrix.ConfigureCommand("DeliveryImages#GetWatermarkFromLogicManager", hystrix.CommandConfig{
+    Timeout:               viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.timeout"),
+    MaxConcurrentRequests: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.maxConcurrentRequests"),
+    ErrorPercentThreshold: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.errorPercentThreshold"),
+})
 
-	hystrix.ConfigureCommand("DeliveryImages#GetResourceByAliasFromTranslator", hystrix.CommandConfig{
-		Timeout:               viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.timeout"),
-		MaxConcurrentRequests: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.maxConcurrentRequests"),
-		ErrorPercentThreshold: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.errorPercentThreshold"),
-	})
+hystrix.ConfigureCommand("DeliveryImages#GetResourceByAliasFromTranslator", hystrix.CommandConfig{
+    Timeout:               viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.timeout"),
+    MaxConcurrentRequests: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.maxConcurrentRequests"),
+    ErrorPercentThreshold: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.errorPercentThreshold"),
+})
 ```
 
 ## Real time monitoring

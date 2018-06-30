@@ -6,30 +6,27 @@
 ```go
 imageType := bimg.DetermineImageType(imageToTransform.Buffer())
 
-	tracing.AddLogToSpanInContext(transformationRequest.Context, "Imagetype: "+bimg.ImageTypeName(imageType))
+tracing.AddLogToSpanInContext(transformationRequest.Context, "Imagetype: "+bimg.ImageTypeName(imageType))
 
-	autoRotate := getAutoRotateFromRule(rule)
+autoRotate := getAutoRotateFromRule(rule)
+if autoRotate {
+    err = imageToTransform.AutoRotate()
+    if err != nil {
+        t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply autorotation. Error: %v", err)
+        return TransformedImage{}, err
+    }
+}
 
-	if autoRotate {
-		err = imageToTransform.AutoRotate()
+imageToTransform, err = t.applyBlurring(imageToTransform, transformationRequest)
+if err != nil {
+    t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply blurring. Error: %v", err)
+    return TransformedImage{}, err
+}
 
-		if err != nil {
-			t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply autorotation. Error: %v", err)
-			return TransformedImage{}, err
-		}
-	}
-
-	imageToTransform, err = t.applyBlurring(imageToTransform, transformationRequest)
-
-	if err != nil {
-		t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply blurring. Error: %v", err)
-		return TransformedImage{}, err
-	}
-
-	if err = t.applyPixelation(imageToTransform, transformationRequest); err != nil {
-		t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply pixelation. Error: %v", err)
-		return TransformedImage{}, err
-	}
+if err = t.applyPixelation(imageToTransform, transformationRequest); err != nil {
+    t.Log.WithField("id", transformationRequest.RequestId).Errorf("Failed to apply pixelation. Error: %v", err)
+    return TransformedImage{}, err
+}
 ```
 
 ## 
@@ -64,13 +61,13 @@ func (t *VipsTransformer) applyPixelation(imageToTransform *bimg.SchImage, trans
 
 ![](cacheAllThings.jpg)
 
-## What we are using
+## What we are caching
 * *External HTTP responses*, thanks to the CDN
 * Local in-memory caches to avoid *s2s calls*
-* Watermarks cache
-* *Transformation cache* (in S3)
+* *Watermarks* cache (also in memory) 
+* *Transformations* (in S3)
 
-## What we are NOT using
+## What we are NOT caching
 * Some controversy in the team in front of [DynamoDB Accelerator/DAX](https://aws.amazon.com/dynamodb/dax/)
 * We decided to keep investing in s2s cache rather caching as a (transparent) storage proxy
     * You probably don't want to share a caching cluster between all your microservices
@@ -80,22 +77,35 @@ func (t *VipsTransformer) applyPixelation(imageToTransform *bimg.SchImage, trans
     * But we implemented our own for some other entities
 * Can manage retention for us, but not very smart, specially compared to
 [com.google.common.cache](https://google.github.io/guava/releases/17.0/api/docs/com/google/common/cache/package-summary.html):
-    * No background refreshing 
-    * Randomized TTLs, so we avoid all instances expiring contents at the same time
+    * No background refreshing
+    * No locking; one key expiring may mean thousands of backend requests 
+* Randomized TTLs, so we avoid all instances expiring contents at the same time
 
-## GIFs and heavy-load transformations..
-Media (newspapers) use cases are quite different from marketplaces
-* we've seen attempts of:
-    * transforming gifs with hundreds of frames (actual short video clips)
-    * And >50Mpx images
+## GIFs and heavy-load transformations
+* Media (newspapers) use cases are quite different from marketplaces
+    * they use completely dynamic transformations (using JWT)
+    * we've seen attempts of:
+        * transforming gifs with hundreds of frames (actual short video clips)
+        * And also a 21.603x14.400px image (that's 300Mpx)
 
-Caching does help
+## 
+> Caching does help
+
 * we don't cancel ongoing transformations, so everything eventually gets transformed
-* We implemented a best effort rate limiting for GIFs..
-    * Using DynamoDB tables
-    * You want to transform frames in parallel...
-    * But keeping resources for other type of transformations
+* We implemented a "best effort" rate limiting for GIFs..
+    * Using DynamoDB tables to prevent doing duplicated work
+    * And we protect individual nodes
+        * You want to transform frames in parallel...
+        * But keeping resources for other type of transformations
 
-## Integration tests execution
+## Transformations cache
+![](latencyTransfAfterCache.png)
+![](cpuUsageAfterCache.png)
+
+##
+![](transformedCacheStats.png)
 
 ## Datastore access
+> Mind VPC S3 endpoints!!
+
+![](vpcS3EndpointActivation.png)
