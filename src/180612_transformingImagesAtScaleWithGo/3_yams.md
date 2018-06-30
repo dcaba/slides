@@ -77,7 +77,7 @@
 
 ## (Your?) thoughts so far...
 
-## Why building your own service? 
+## Why maintaining your own service? 
 
 ##
 ![](pricing.png)
@@ -116,15 +116,16 @@
 * APIGW helps to delegate common functionality
     * But *business agnostic ones*
 * *Reusability* of individual microservices
-* Each microservice can chose *different techs* 
+* Each microservice can choose *different techs* 
     * We will focus in delivery-images, in Golang
 * Easier to scale with the organization/development team
     * Not taking advantage
+* More granular scalability
 * and... *fun*
 
 ## -
 * S2S *communication overhead*
-* Extra *costs*
+* It can imply extra *costs*
 * More *tooling* required (logging, tracing...)
 * Reproduce the complete environment becomes tricky
 * Always caring about coupled services...

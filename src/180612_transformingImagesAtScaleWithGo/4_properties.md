@@ -230,18 +230,89 @@ if transformedImage.FromCache {
         b.Logger.WithField("id", requestId).Debug("Transformation took: ", transformationElapsed.Seconds(), " secs")
         tracing.AddLogKvToSpanInContext(request.Context(), "transformation.duration", transformationElapsed.String())
 }
-
 ```
 # 
 
 ## S2S resiliency
 
-* fargo
-* eureka
-* load balancing
-* hystrix
+![](eurekaInNetflixOSS.png)
+
+## Actors in delivery-images
+
+* *eureka*
+* [fargo](https://github.com/hudl/fargo) (!)
+* [gokit load balancing](github.com/go-kit/kit/sd/lb)
+* [go-hystrix](https://github.com/afex/hystrix-go)
+
+## Implementation detail
+```go
+viper.SetDefault("eureka.datacenter", amazonDatacenterInfo)
+		datacenter := viper.GetString("eureka.datacenter")
+		if datacenter == k8DatacenterInfo {
+			var err error
+			appInstance, err = sdeureka.NewK8SFargoInstance(eurekaConfig)
+			if err != nil {
+				return nil, nil, err
+			}
+		} else if datacenter == amazonDatacenterInfo {
+			awsSession, err := session.NewSession()
+			if err != nil {
+				log.Info("registerEureka", "error creating an AWS session", "message", err)
+				return nil, nil, err
+			}
+
+			instanceMeta := ec2metadata.New(awsSession)
+			appInstance, err = sdeureka.NewAwsFargoInstance(log, eurekaConfig, instanceMeta)
+			if err != nil {
+				return nil, nil, err
+			}
+		} else if datacenter == localDatacenterInfo {
+			var err error
+			appInstance, err = sdeureka.NewLocalFargoInstance(eurekaConfig)
+			if err != nil {
+				return nil, nil, err
+			}
+```
+
+##
+```go
+	hystrix.ConfigureCommand("DeliveryImages#GetWatermarkFromLogicManager", hystrix.CommandConfig{
+		Timeout:               viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.timeout"),
+		MaxConcurrentRequests: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.maxConcurrentRequests"),
+		ErrorPercentThreshold: viper.GetInt("hystrix.command.DeliveryImagesGetWatermarkFromLogicManager.errorPercentThreshold"),
+	})
+
+	hystrix.ConfigureCommand("DeliveryImages#GetResourceByAliasFromTranslator", hystrix.CommandConfig{
+		Timeout:               viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.timeout"),
+		MaxConcurrentRequests: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.maxConcurrentRequests"),
+		ErrorPercentThreshold: viper.GetInt("hystrix.command.GetResourceByAliasFromTranslator.errorPercentThreshold"),
+	})
+```
 
 ## Real time monitoring
+
+![](hystrixDashboardTurbine_quick.gif){ width=70% }
+
+## Almost for free
+```go
+func httpServer(serverConfig deliveryImagesServer) *negroni.Negroni {
+
+	httpRouter := httprouter.New()
+	httpRouter.GET("/tenants/:tenant_id/domains/:domain_id/buckets/:bucket_id/images/*image_id", serverConfig.bumblebeeController.Handler)
+	httpRouter.HEAD("/tenants/:tenant_id/domains/:domain_id/buckets/:bucket_id/images/*image_id", serverConfig.bumblebeeController.Handler)
+	httpRouter.POST("/schema/validate", serverConfig.schemaController.Handler)
+	httpRouter.GET("/healthcheck", serverConfig.healtcheckHandler)
+
+	hystrixStreamHandler := hystrix.NewStreamHandler()
+	hystrixStreamHandler.Start()
+	httpRouter.GET("/hystrix.stream", hystrixStream(hystrixStreamHandler))
+```
+
+## And there's still more...
+![](strongbox-logo.png){ style="border:0" }
+
+![](vulcan-logo.png){ style="border:0; width:40.0%" }
+
 
 <!--
 ## Secrets management
