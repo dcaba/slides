@@ -1,6 +1,6 @@
 #
 
-## Other specific delivery-images implementation details
+## Some delivery-images-specific details
 
 ## bi-image + libvips
 ```go

@@ -27,15 +27,21 @@
 ##
 ![](TCP+backlog+queues.jpg)
 
-## Choosing the right regions
+## latencyMAP
+
+Choosing the right regions
 
 ## Classifier end to end tests
+
+Again, gobench
+
+It almost includes an SDK
 
 # Potential related speaches
 
 ## How much magic, and how much DIY?
 
-## Where is the production ready line?
+## Where is the production-ready line?
 
 #
 
@@ -59,5 +65,7 @@
 <br>
 ![](schCollab.png)
 </div>
+
+<!-- poner foto del equipo -->
 
 ## Other Qs?
