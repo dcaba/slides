@@ -2,7 +2,11 @@
 
 ## Nice solution... but
 
+![](precious.gif)
+
+<!--
 ## Why not terraform?
+-->
 
 ## Why not docker/k8s?
 
@@ -10,7 +14,9 @@
 * YAMS Portal/Frontend already there
 * Migration exercise
 
+<!--
 ## And PaaS?
+-->
 
 ## gRPC?
 
@@ -18,41 +24,50 @@
 
 ## Why not Google Cloud?
 
+<!--
 ## And Cassandra?
+-->
 
 ## And Prometheus?
 
 We may. 
 
-And it may be a good moment to consider [opencensus](https://github.com/census-instrumentation/opencensus-go)
+And it may be a good moment to consider [opencensus](https://github.com/census-instrumentation/opencensus-go).
 
 #
 
-## Actual future
+## Actual (& not so far) future
 
 ## Multiregion
 
-* Buckets are already replicated in two regions per continent
+* *Buckets already replicated* in two regions per continent
 * v0 was running in Oregon and Ireland
-* v1 still in Virginia, and now also in us-east-1
+* *v1 in Ireland*, and now also being deployed in *Virginia*
     * We may also deploy in Paris of Frankfurt
-* Still open discussions in regards to DynamoDB usage
+* Still open discussions in regards to *DynamoDB usage*
 
 ## Smoke tests
 
-* We had some satellites in v0 calling the API constantly
+* We had some *satellites* in v0 calling the API constantly
+* Interesting as:
+    * Closer to user experience
+    * Avoid delays between Cloudwatch and Datadog
+* Javascript/client alerting not an option (yet)
 
 ## More elasticity to reduce costs
 
-* Changes in transformation rules means massive eviction 
-    * So a bit overscaled... 
-* Incoming queue and reusing cache if no capacity
-* Better degradation but efficient ASG triggers
+* Changes in transformation rules means *massive eviction* 
+    * So we are a bit *overscaled*... 
+* *Better degradation* and more *efficient ASG triggers*
+    * Reusing cache if no capacity
+    * Automatic ASG parameters adjustments
+    * Minimize parallelization in the transformation pipe 
+    * Incoming queue 
 
 ## Extra compression
 
-* Currently libjpg-turbo
-* Good for performance, pretty decent results... 
+* Currently *libjpg-turbo*
+* Good for performance, pretty decent results, but... 
 * [MozJPEG](https://github.com/mozilla/mozjpeg), api-compatible with libjpg
 * [guetzli](https://github.com/google/guetzli), from Google
 
@@ -65,15 +80,37 @@ And it may be a good moment to consider [opencensus](https://github.com/census-i
     * Nudity detector
     * Car plate pixelation
 
-## More engines
+## More transformation engines
 
-* PDF conv makes sense for attachments (CVs). 
-    * Benchmark already done
+* PDF conv makes sense for attachments (CVs)
+
+```bash
+go test -bench . -benchtime 30s -timeout 30m
+goos: linux
+goarch: amd64
+pkg: github.schibsted.io/daniel-caballero/documentsConversionTests
+BenchmarkConvertAllFiles/localUnoconv/CV-Templates-Curriculum-Vitae.doc-4                     30        1335211165 ns/op
+BenchmarkConvertAllFiles/directLibreOffice/CV-Templates-Curriculum-Vitae.doc-4                50         812129343 ns/op
+BenchmarkConvertAllFiles/justCopy/CV-Templates-Curriculum-Vitae.doc-4                      20000           2100841 ns/op
+BenchmarkConvertAllFiles/localUnoconv/CV-Templates-Curriculum-Vitae_with_Large_Pic.doc-4                       5        7936095889 ns/op
+BenchmarkConvertAllFiles/directLibreOffice/CV-Templates-Curriculum-Vitae_with_Large_Pic.doc-4                  5        7033935000 ns/op
+BenchmarkConvertAllFiles/justCopy/CV-Templates-Curriculum-Vitae_with_Large_Pic.doc-4                        2000          29097488 ns/op
+BenchmarkConvertAllFiles/localUnoconv/CV-Templates-Curriculum-Vitae_with_Small_Pic.doc-4                      30        1273404605 ns/op
+BenchmarkConvertAllFiles/directLibreOffice/CV-Templates-Curriculum-Vitae_with_Small_Pic.doc-4                100         673872470 ns/op
+BenchmarkConvertAllFiles/justCopy/CV-Templates-Curriculum-Vitae_with_Small_Pic.doc-4                       30000           1455526 ns/op
+BenchmarkConvertAllFiles/localUnoconv/CVTemplate.odt-4                                                        20        1698359980 ns/op
+BenchmarkConvertAllFiles/directLibreOffice/CVTemplate.odt-4                                                   50        1057170276 ns/op
+BenchmarkConvertAllFiles/justCopy/CVTemplate.odt-4                                                         30000           1560396 ns/op
+BenchmarkConvertAllFiles/localUnoconv/CVTemplate_with_Large_Pic.odt-4                                          5        7347933754 ns/op
+BenchmarkConvertAllFiles/directLibreOffice/CVTemplate_with_Large_Pic.odt-4                                    10        6864524329 ns/op
+BenchmarkConvertAllFiles/justCopy/CVTemplate_with_Large_Pic.odt-4                                           2000          30033113 ns/op
+BenchmarkConvertAllFiles/localUnoconv/CVTemplate_with_Small_Pic.odt-4                                         20        1669373873 ns/op
+```
 
 * Video...
 
 ## Actual transformation pipelines
-Include current workflow
+![](fixed-pipeline.svg)
 
 ## More adoption?
 
@@ -81,10 +118,11 @@ Still some major Marketplaces are not using the service
 
 ## ApiGW replacement?
 
-Zuul could be replaced by Krakend
+Zuul could be replaced by [Krakend](https://github.com/devopsfaith/krakend)
+
+![](krakend.png)
 
 ## Simulating dependencies failures
 
-Similar in concept than the Simian Army from Netflix...
-
-[https://github.com/SpectoLabs/hoverfly](Hoverfly)
+[Hoverfly](https://github.com/SpectoLabs/hoverfly): similar in concept to the Simian Army from Netflix, 
+but especiallized in API degradations

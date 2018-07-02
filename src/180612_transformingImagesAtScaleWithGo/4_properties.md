@@ -4,13 +4,16 @@
 
 ## IaC
 
-* Most of the services in AWS...
+* Most of the services in *AWS*...
 * Generating Cloudformations from [python troposphere](https://github.com/cloudtools/troposphere)
 * Managing Cloudformation deployments with [Sceptre](https://github.com/cloudreach/sceptre) 
 * New projects with infrastructure definition in the same repo than the service code
-    * Trying to extend CD to Infrastructure
+    * Trying to extend *CD to Infrastructure*
 * We have assessed [AWS GoFormation](https://github.com/awslabs/goformation)
     * But still lacks some functionality, like GetAtt or Ref 
+
+## Devel bots
+![](otherBots.png){ width=60% }
 
 ## Code reviews
 
@@ -36,9 +39,6 @@ slack:
 
 ##
 ![](revRaffle.png)
-
-## Other bots
-![](otherBots.png){ width=60% }
 
 #
 
@@ -105,8 +105,6 @@ fpm -s dir \
 ##
 ![](vegetaAggressive.png)
 
-#
-
 ## Configuration management
 * Using [Netflix Archaius](https://github.com/Netflix/archaius) in all rxJava services
     * Configured with dynamo tables...
@@ -118,6 +116,10 @@ fpm -s dir \
 
 ##
 ![](karyonadmin.png)
+
+#
+
+## Observability
 
 ## Logs 
 * Using *Sumologic* to aggregate them into a central location
@@ -134,8 +136,6 @@ Using [logrus](https://github.com/sirupsen/logrus) in delivery-images
 * [Zap](https://github.com/uber-go/zap) could be used... 
     * but not concerned about overhead, as...
     * fetching and transforming images are massive ops in comparison
-
-#
 
 ## Monitoring and alerting
 
@@ -192,11 +192,11 @@ monitors:
 
 ## Where?
 
-* httserver, as a middleware 
-    * so incoming requests' headers are considered
-* all functions where you want to add instrumentation
-* client factory
-    * to propagate spans to outgoing requests
+* *httserver*, as a middleware 
+    * so *incoming requests*' headers are considered
+* all functions *where you want to add instrumentation*
+* *client factory*
+    * to *propagate spans to outgoing requests*
 
 ##
 ```go

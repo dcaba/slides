@@ -79,24 +79,33 @@ func (t *VipsTransformer) applyPixelation(imageToTransform *bimg.SchImage, trans
 [com.google.common.cache](https://google.github.io/guava/releases/17.0/api/docs/com/google/common/cache/package-summary.html):
     * No background refreshing
     * No locking; one key expiring may mean thousands of backend requests 
-* Randomized TTLs, so we avoid all instances expiring contents at the same time
+* *Randomized TTLs*, so we avoid all instances expiring contents at the same time
+
+## Is that enough?
+
+![](runOver.gif)
 
 ## GIFs and heavy-load transformations
 * Media (newspapers) use cases are quite different from marketplaces
-    * they use completely dynamic transformations (using JWT)
+    * they use *completely dynamic transformations*
+        * we accept them in the JWT payload
     * we've seen attempts of:
-        * transforming gifs with hundreds of frames (actual short video clips)
-        * And also a 21.603x14.400px image (that's 300Mpx)
+        * *transforming gifs with hundreds of frames* (actual short video clips)
+        * And also *a 21.603x14.400px image* (that's *300Mpx*)
 
 ## 
 > Caching does help
 
-* we don't cancel ongoing transformations, so everything eventually gets transformed
-* We implemented a "best effort" rate limiting for GIFs..
-    * Using DynamoDB tables to prevent doing duplicated work
-    * And we protect individual nodes
+* *We don't cancel ongoing transformations*
+    * so everything eventually gets transformed
+* We implemented a *"best effort" rate limiting for GIFs*..
+    * We protect individual nodes (max concurrency)
         * You want to transform frames in parallel...
-        * But keeping resources for other type of transformations
+        * But keeping resources for other transformations
+    * And, between nodes...
+        * Registering ongoing work in tables 
+            * to prevent duplicated work
+* We introduced some *limits* on the size of the output
 
 ## Transformations cache
 ![](latencyTransfAfterCache.png)
@@ -106,6 +115,6 @@ func (t *VipsTransformer) applyPixelation(imageToTransform *bimg.SchImage, trans
 ![](transformedCacheStats.png)
 
 ## Datastore access
-> Mind VPC S3 endpoints!!
+> Mind S3 *VPC endpoints*!!
 
 ![](vpcS3EndpointActivation.png)

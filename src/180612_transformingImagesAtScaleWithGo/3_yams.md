@@ -47,13 +47,13 @@
 ![](oldOnboardingPipeline.png)
 
 ## Firsts nightmares
+![](incidentReport.jpg){ width=80% }
+
+##
 ![](firstsSpikes.png)
 
 ##
 ![](fastlyIncident.png)
-
-## 
-![](incidentReport.jpg)
 
 ## First (quite manual) release process
 ![](oldReleaseProcess.png)
@@ -147,6 +147,8 @@
 
 ## Not a new story... why not presenting it before?
 
+![](imageservice_2.jpg)
+
 ##
 
 ![](fireman.jpg)
@@ -157,6 +159,9 @@
 * imageflow was not production ready two years ago, with clear gaps on functionalities and bindings
 
 ![](libvipsBench.png){ width=60% }
+
+##
+![](myring.gif)
 
 ## Choosing the programming language 
 ![](deliveryImagesLang.jpg)
