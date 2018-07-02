@@ -45,7 +45,7 @@ Choosing the right regions
 
 ## Classifier end to end tests
 
-Again, gobench:
+Again, *go benchmark*:
 ```bash
 % ./_script/run_benchmark
 goos: linux

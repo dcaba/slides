@@ -35,10 +35,12 @@
 
 ## Great thanks...
 Sch*
-![](schCollab.png)
+
+![](schCollab.png){ width=50% }
 
 ## And especially...
 *Edge colleagues*
+
 ![](edgeColleagues.jpg){ width=50% }
 
 ## Other Qs?
