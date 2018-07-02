@@ -161,7 +161,7 @@
 ![](libvipsBench.png){ width=60% }
 
 ##
-![](myring.gif)
+![](myring.gif){ style="border:0" }
 
 ## Choosing the programming language 
 ![](deliveryImagesLang.jpg)

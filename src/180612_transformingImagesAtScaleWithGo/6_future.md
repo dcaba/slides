@@ -114,7 +114,7 @@ BenchmarkConvertAllFiles/localUnoconv/CVTemplate_with_Small_Pic.odt-4           
 ![](notlisten.gif)
 
 ## Actual transformation pipelines
-![](fixed-pipeline.svg)
+![](fixed-pipeline.svg){ style="border:0" }
 
 ## More adoption?
 
@@ -131,4 +131,4 @@ Zuul could be replaced by [Krakend](https://github.com/devopsfaith/krakend)
 ## Simulating dependencies failures
 
 [Hoverfly](https://github.com/SpectoLabs/hoverfly): similar in concept to the Simian Army from Netflix, 
-but especiallized in API degradations
+but specialized in API degradations
