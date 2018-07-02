@@ -114,7 +114,9 @@ BenchmarkConvertAllFiles/localUnoconv/CVTemplate_with_Small_Pic.odt-4           
 
 ## More adoption?
 
-Still some major Marketplaces are not using the service
+Some major Marketplaces are not using the service, yet
+
+![](dontlike.gif)
 
 ## ApiGW replacement?
 
