@@ -28,10 +28,10 @@
 ## And SPT?
 ![](schreboot.jpg)
 
+<!-- 
+
 ## And SPT Platform Services?
 It's about a *developer experience*...
-
-<!-- 
 
 ## Edge team
 

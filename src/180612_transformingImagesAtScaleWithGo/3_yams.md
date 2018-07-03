@@ -49,6 +49,7 @@
 ## Firsts nightmares
 ![](incidentReport.jpg){ width=80% }
 
+<!--
 ##
 ![](firstsSpikes.png)
 
@@ -57,7 +58,7 @@
 
 ## First (quite manual) release process
 ![](oldReleaseProcess.png)
-
+-->
 ## New Architecture
 ![](apiV1Arch.png)
 
@@ -165,4 +166,3 @@
 
 ## Choosing the programming language 
 ![](deliveryImagesLang.jpg)
-

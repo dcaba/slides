@@ -22,9 +22,9 @@
 
 ## Why not a Service Mesh?
 
+<!--
 ## Why not Google Cloud?
 
-<!--
 ## And Cassandra?
 -->
 
@@ -85,7 +85,7 @@ And it may be a good moment to consider [opencensus](https://github.com/census-i
 * PDF conv makes sense for attachments (CVs)
 
 ```bash
-go test -bench . -benchtime 30s -timeout 30m
+% go test -bench . -benchtime 30s -timeout 30m
 goos: linux
 goarch: amd64
 pkg: github.schibsted.io/daniel-caballero/documentsConversionTests
@@ -126,7 +126,7 @@ Some major Marketplaces are not using the service, yet
 
 Zuul could be replaced by [Krakend](https://github.com/devopsfaith/krakend)
 
-![](krakend.png)
+![](krakend.png){ style="border:0" }
 
 ## Simulating dependencies failures
 

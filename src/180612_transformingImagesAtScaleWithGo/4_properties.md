@@ -15,6 +15,7 @@
 ## Devel bots
 ![](otherBots.png){ width=60% }
 
+<!--
 ## Code reviews
 
 ```yaml
@@ -36,8 +37,9 @@ reviewersRaffle:
 slack:
   - "#spt-edge-prs"
 ```
+-->
 
-##
+## Code reviews
 ![](revRaffle.png)
 
 #
