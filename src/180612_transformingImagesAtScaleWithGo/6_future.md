@@ -43,7 +43,7 @@ And it may be a good moment to consider [opencensus](https://github.com/census-i
 * *Buckets already replicated* in two regions per continent
 * v0 was running in Oregon and Ireland
 * *v1 in Ireland*, and now also being deployed in *Virginia*
-    * We may also deploy in Paris of Frankfurt
+    * We may also deploy in Paris or Frankfurt
 * Still open discussions in regards to *DynamoDB usage*
 
 ## Smoke tests
