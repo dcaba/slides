@@ -10,6 +10,7 @@
 ![](schSpain.jpg)
 </div>
 
+<!-- 
 ## Origin - Media houses
 <div id="left">
 ![](Media Houses.jpeg){ width=90% }
@@ -18,6 +19,7 @@
 <br>
 ![](schibsted-at-a-glance-2-638.jpg)
 </div>
+-->
 
 ## Marketplaces global expansion
 ![](online-classifieds-leader.jpg)
