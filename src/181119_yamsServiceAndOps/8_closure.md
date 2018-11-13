@@ -59,3 +59,13 @@ Sch*
 ## Other Qs?
 
 ![](askUs.gif)
+
+*dan . caba at google (dot)com*
+
+## Your opinion is very important to me
+
+* Find my lecture on the schedule in the **eventory app**
+* **Rate and comment** my performance
+
+*Thanks for your feedback, I will know what to improve*
+

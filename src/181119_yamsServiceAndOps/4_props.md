@@ -5,12 +5,18 @@
 ## High usage
 
 ## Does not require high maintenance
-(Almost) No incidents. We would be able to maintain this with a single engineer
 
-But be careful: if you invest 0 efforts, you kill a service
+(Almost) No incidents. We would be able to maintain this with half an engineer
+
+* We dont like to cut people in half, so let's say one engineer
+
+##
+
+> **But be careful: if you stop developing a service, you kill a service**
+
 * Stops being competitive
-* Starts being legacy
-* Starts to disconnect from current needs
+* It quickly becomes legacy (old stack, old libs, old design)
+* Disconnect from current business needs
 
 So we try to convince the company it requires, at least, the focus of two engineers.
 
@@ -21,8 +27,4 @@ So we try to convince the company it requires, at least, the focus of two engine
 ![](availability.png)
 
 ## Low latency
-
-## Not a new story... why not presenting it before?
-
-![](imageservice_2.jpg)
 
