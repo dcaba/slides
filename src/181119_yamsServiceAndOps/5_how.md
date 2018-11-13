@@ -89,7 +89,9 @@ with a good coverage of all API-functionality
 * New error conditions means new tests
 * If tests are green, almost (TM) no space for surprises
 
-## Troubleshooting toolkit
+## Obs+Troubleshooting toolkit
+
+Enables experimentation culture
 
 
 
