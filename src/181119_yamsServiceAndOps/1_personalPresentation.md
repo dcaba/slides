@@ -44,9 +44,10 @@ Part time (Devops) lecturer @ La Salle University
 ## And I really don't like to waste it
 
 * In resolving incidents
+* In reactive work 
 * In repetitive work
 
 <!-- 
-TODO: nice 403 image here
+TODO: nice 403 image here so firefighters not allowed
 -->
 

@@ -31,7 +31,7 @@
 
 #
 
-## Corollary
+## Final reminder
 
 ## Be Rx in the code...
 
@@ -39,7 +39,11 @@
 
 ## But not in real life
 
-![](ninjasJapan.jpg)
+<!-- firefighter image forbidden -->
+
+## Keep the heros in your comics
+
+<!-- comic image -->
 
 #
 

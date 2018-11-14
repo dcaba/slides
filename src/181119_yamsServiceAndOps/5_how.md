@@ -7,8 +7,12 @@
 ## Combination of...
 
 * Team
-* Product management
-* Technical
+* Product 
+* Tech
+
+## Don't you see the similarity?
+
+<!-- diagram: team, individual capacity, coach -->
 
 #
 
@@ -18,6 +22,8 @@
 
 ## Benefiting from other Sch services
 
+Reusability of other colleagues code/components.
+ 
 Big department portfolio:
 
 * AWS bootstrap
