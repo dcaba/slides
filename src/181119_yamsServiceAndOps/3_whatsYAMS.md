@@ -5,7 +5,7 @@
 
 ## 
 
-![](portal_screenshot.png){ width=70% }
+![](portal_screenshot.jpg){ width=70% }
 
 ## 
 ![](yams_image_test.jpeg)

@@ -130,7 +130,7 @@ with a good coverage of all API-functionality
 * Enables experimentation culture
 </div>
 <div id="right">
-![](https://media.giphy.com/media/l0OWiMGpoC6apZFXG/giphy.gif)
+![](failure.gif)
 </div>
 
 ##

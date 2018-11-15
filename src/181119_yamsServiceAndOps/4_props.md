@@ -41,8 +41,8 @@
 ## 
 
 Despite sometimes is not so useful...
-![](whatdoyouwant.gif)
 
+![](whatdoyouwant.gif)
 
 ## Low costs
 ![](pricing.png)
@@ -62,7 +62,6 @@ We would be able to maintain this with *half an engineer*
 > We don't (usually) like to cut people in half, so let's say one engineer
 
 ![](cuthalf.gif)
-
 
 ##
 
