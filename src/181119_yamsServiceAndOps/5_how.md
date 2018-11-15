@@ -2,7 +2,8 @@
 
 ## How did you achieved that?
 
-<!-- TODO: magic potion image -->
+![](magic.gif)
+
 
 ## Combination of...
 
@@ -12,7 +13,7 @@
 
 ## Don't you see the similarity?
 
-<!-- diagram: team, individual capacity, coach -->
+TODO: spots triangle: team, individual skills/technique, coach 
 
 #
 
@@ -52,7 +53,7 @@ Almost no-functionality that is used by a single site or no-one
 
 ## Tech
 
-<!-- TODO: platform image -->
+![](apiV1Arch.png)
 
 
 ## Everything as code 
@@ -69,6 +70,7 @@ No space for "one time" actions.
 * Immutable pattern
 * AWS + Netflix stack + Microservices
 * libvips
+* Non-blocking services
 
 ## Continuous Delivery
 
@@ -78,7 +80,7 @@ And capacity to incorporate everything to the pipeline.
 Small deltas. Iterative deliveries. Low risk deployments.
 
 ## 
-<!-- TODO: pipeline image -->
+TODO: pipeline image
 
 ## 0-error target
 

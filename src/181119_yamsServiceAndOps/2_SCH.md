@@ -12,7 +12,7 @@
 
 ## And SPT?
 
-It's about convergence through global solutions
+It's about *convergence* through global solutions
 
 ![](Convergence.jpg)
 
@@ -25,4 +25,6 @@ Nothing new in the horizon probably for you
 * [first mention in 2006, by Werner Vogels / Amazon](https://queue.acm.org/detail.cfm?id=1142065)
 * Nice elaboration behind the rationale [here](https://www.slideshare.net/ufried/the-truth-about-you-build-it-you-run-it)
 
-**That means there's no ops/support/systems/devops team.** 
+##
+
+**That means there's no ops/support/systems/devops team** 

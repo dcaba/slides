@@ -41,11 +41,19 @@ Part time (Devops) lecturer @ La Salle University
 
 ## So... I value my time (a lot)
 
-## And I really don't like to waste it
+## I really don't like to waste it
 
-* In resolving incidents
-* In reactive work 
-* In repetitive work
+<div id="left">
+<br>
+<br>
+
+* Resolving incidents
+* Reactive work 
+* Repetitive work
+</div>
+<div id="right">
+![](fireman-firefighter-rubble-9-11-70573.jpeg)
+</div>
 
 <!-- 
 TODO: nice 403 image here so firefighters not allowed

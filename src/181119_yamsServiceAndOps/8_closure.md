@@ -39,11 +39,11 @@
 
 ## But not in real life
 
-<!-- firefighter image forbidden -->
+TODO: firefighter image forbidden
 
 ## Keep the heros in your comics
 
-<!-- comic image -->
+TODO: comic image
 
 #
 
