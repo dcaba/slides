@@ -11,8 +11,6 @@
 * YAMS Portal/Frontend already there
 * Migration exercise
 
-## gRPC?
-
 ## Why not a Service Mesh?
 
 ## And Prometheus?
@@ -24,16 +22,6 @@ And it may be a good moment to consider [opencensus](https://github.com/census-i
 #
 
 ## Actual (& not so far) future
-
-## More elasticity to reduce costs
-
-* Changes in transformation rules means *massive eviction* 
-    * So we are a bit *overscaled*... 
-* *Better degradation* and more *efficient ASG triggers*
-    * Reusing cache if no capacity
-    * Automatic ASG parameters adjustments
-    * Minimize parallelization in the transformation pipe 
-    * Incoming queue 
 
 ## Extra compression
 
@@ -73,3 +61,5 @@ Some major Marketplaces are not using the service, yet
 but specialized in API degradations
 
 ## Stress test as part of the pipeline
+
+## GCP as an accelerator of South America?

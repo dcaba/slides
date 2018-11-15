@@ -1,7 +1,7 @@
 #
 
 ##
-![](yamsLogo.png){ style="border:0; width:30.0%" }
+![](yamsLogo.png){ style="border:0; box-shadow:none; width:30.0%" }
 
 ## 
 

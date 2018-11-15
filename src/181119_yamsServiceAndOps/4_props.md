@@ -34,6 +34,16 @@
 ## Low latency
 ![](latencyTransfAfterCache.png)
 
+## We are the owners of the backlog
+
+![](todoList.gif)
+
+## 
+
+Despite sometimes is not so useful...
+![](whatdoyouwant.gif)
+
+
 ## Low costs
 ![](pricing.png)
 
@@ -64,20 +74,11 @@ We would be able to maintain this with *half an engineer*
 
 ## 
 
-So we try to convince the company it requires, at least, the focus of two engineers.
+So we try to convince the company it requires, at least, the focus of two engineers
 
 ## But oncall rotations
 
 ![](oncall.jpeg){ width=60% }
 
 Ok. Let's say 3-4. And we accept an extra project.
-
-## And we are the owners of the backlog
-
-![](todoList.gif)
-
-## 
-
-Despite sometimes is not so useful...
-![](whatdoyouwant.gif)
 
