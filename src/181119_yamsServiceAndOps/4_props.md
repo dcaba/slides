@@ -50,16 +50,16 @@ Despite sometimes is not so useful...
 ## High usage
 ![](usage.jpg)
 
-## Does not require high maintenance
+## Effort-less maintenance
 
-* (Almost) No incidents. 
-* New sites do not require high onboarding efforts.
+* (Almost) No incidents 
+* New sites do not require high onboarding efforts
 
-We would be able to maintain this with *half an engineer*
+Let's say we dedicate *half an engineer*
 
 ##
 
-> We don't (usually) like to cut people in half, so let's say one engineer
+> We don't (usually) cut people in half, so let's say one engineer
 
 ![](cuthalf.gif)
 
@@ -67,9 +67,11 @@ We would be able to maintain this with *half an engineer*
 
 > *But be careful: if you stop developing a service, you kill the service*
 
+<!--
 * Stops being competitive
 * It quickly becomes legacy
 * Disconnects from current business needs
+-->
 
 ## 
 
@@ -78,6 +80,8 @@ So we try to convince the company it requires, at least, the focus of two engine
 ## But oncall rotations
 
 ![](oncall.jpeg){ width=60% }
+
+##
 
 Ok. Let's say 3-4. And we accept an extra project.
 

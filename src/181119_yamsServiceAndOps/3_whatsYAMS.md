@@ -34,9 +34,9 @@
 ## Why not offline transformations?
 
 * *Lots of (user) contents*. Reprocessing hurts
-* *Sites are dynamic* by nature. Some of them do adapt the content to the device.
+* *Sites are dynamic* by nature. Some of them do adapt the content to the device
 
-## This may sound familiar to you...
+## This may sound familiar...
 
 CDNs able to transform contents on the fly:
 

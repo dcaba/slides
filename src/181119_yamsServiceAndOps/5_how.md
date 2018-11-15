@@ -22,35 +22,36 @@
 ## Agile
 
 <div id="left">
-![](pexels-photo-358042.jpeg)
+![](pexels-photo-358042.jpeg){ width=70% }
 </div>
 <div id="right">
-* Open minded: 
-> Experiment. Its about to play. Sometimes you win. Sometimes you learn
-
-* Autonomous
-We have our own providers accounts. Directly in touch with sites/clients
+* *Continuous improvement*
+    * Experiment. Its about to play. Prompt feedback. **Sometimes you win. Sometimes you learn**
+* *Autonomous*
+    * **Transversal team**. We have our own providers accounts. Directly in touch with sites/clients
 </div>
 
 ## Benefiting from other Sch services
 
-Reusability of other colleagues code/components.
- 
-Big department portfolio:
-<div id="left">
-![](devConsole.jpg)
-</div>
-<div id="right">
-</div>
-* AWS bootstrap
-* Vulnerability scans
-* TravisCI, Artifactory, Spinnaker
+Reusability of other colleagues code/components
+
+![](devConsole.jpg){ width=60% }
+
 
 ## Collaboration + transparency mindset
 
-Internal RFCs
-Consumers as contributors
-Internal opensource model (full visibility of Github repos)
+<div id="left">
+<br>
+<br>
+
+
+* Internal RFCs
+* Consumers as contributors
+* Internal opensource model 
+</div>
+<div id="right">
+![](pexels-photo-428318.jpeg)
+</div>
 
 #
 
@@ -58,15 +59,23 @@ Internal opensource model (full visibility of Github repos)
 
 ![](pexels-photo-209722.jpeg){ width=40% }
 
-## Actual need
+## There is an actual need
 
-Project was initiated as several sites realized they had a common problem
+Project was initiated by and for several sites that had a common problem
+
+![](pexels-photo-1040482.jpeg){ width=70% }
 
 ## Limited scope
 
 * API as the point of interaction
 * No business logic. "Dumb" service
-* Almost no-functionality that is used by a single site or no-one
+* Almost no-functionality that is used by a single site, or not used at all
+
+## As-a-service experience
+
+* Self-service
+* Multitenant API
+* Metrics reporting per tenant
 
 #
 
@@ -74,10 +83,25 @@ Project was initiated as several sites realized they had a common problem
 
 ![](basketball-professional-action-player-163423.jpeg){ width=40% }
 
+
+## Good design/tech choices
+
+![](pexels-photo-917503.jpeg)
+
 ##
-
+<div id="left">
 ![](apiV1Arch.png)
+</div>
+<div id="right">
+* Immutable pattern
+* Microservices
+* AWS + Netflix stack
+* libvips
+* Non-blocking services
+</div>
 
+##
+> *But not perfect neither the best, for sure*
 
 ## Everything as code 
 
@@ -85,49 +109,41 @@ No space for "one time" actions.
 
 * Alerting configuration by code
 * Infrastructure  
-* (most of the) Configuration
-
-## Good design/tech choices
-
-(but not perfect / or the best, for sure)
-
-* Immutable pattern
-* AWS + Netflix stack + Microservices
-* libvips
-* Non-blocking services
+* (Most of the) application configuration
 
 ## Continuous Delivery
 
 And capacity to incorporate everything to the pipeline. 
 
-Small deltas. Iterative deliveries. Low risk deployments.
-
-> Look forward, rather than investing lots of time in your rollback strategy
-
+Small deltas. Iterative deliveries. Low risk deployments. And be smart assuming risks
 
 ## 
-TODO: pipeline image
-
-## 0-error target
-
-*Yeah, Google SRE book and error budgets...*
-
-... but helped us to understand, tune, and get the trust from Sch sites, avoiding major disruptions
-when big sites onboarded, and minimizing the chance of "unplanned / reactive" activities
+![](https://docs.google.com/drawings/u/0/d/1ow8G2sYAyLT74FK1W-gsXRtqBkg5Ibsa0LbFTSrJUGM/export/svg?id=1ow8G2sYAyLT74FK1W-gsXRtqBkg5Ibsa0LbFTSrJUGM&pageid=p){ style="border:0; box-shadow:none" }
 
 ##
+> *Look forward, rather than investing lots of time in your rollback strategy*
 
-We also rely in a "good enough" test suite (unit+integration+acceptance) 
-with a good coverage of all API-functionality
+## 0-error target
+![](nbastats.jpg){ width=70% }
 
-* New error conditions means new tests
-* If tests are green, almost (TM) no space for surprises
+##
+![](71TheKvgqML.jpg){ width=40% }
 
-## Obs+Troubleshooting toolkit
+Yeah, Google also states something different by introducing error budgets...
 
+##
+... but helped us:
+ 
+* to *understand & tune* the platform,
+* get *trust* from Sch sites, avoiding major disruptions when big sites onboarded, 
+* and *minimizing unplanned* / reactive activities
+
+## Observability toolkit
 <div id="left">
-* When shit happens, at least, let's minimize pain
-* Enables experimentation culture
+* Shit happens
+    * *let's minimize pain*
+* Unlocks *experimentation culture*
+    * As understanding what happens becomes easier 
 </div>
 <div id="right">
 ![](failure.gif)
@@ -136,4 +152,9 @@ with a good coverage of all API-functionality
 ##
 ![](hystrixDashboardTurbine_quick.gif){ width=80% }
 
+## 
+If we connect this to immutability...
 
+![](pexels-photo-1293265.jpeg){ width=60% }
+
+> *Incident troubleshooting can become a forensics exercise*
