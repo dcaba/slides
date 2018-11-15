@@ -45,10 +45,13 @@ TODO: firefighter image forbidden
 
 TODO: comic image
 
-#
+## As, eventually
 
-## 
-![](golumending.gif)
+A CPU is quicker than you attending interrupts
+
+> Your company will eventually not pay just for hero-style engineers
+
+#
 
 ## Great thanks...
 Sch*
