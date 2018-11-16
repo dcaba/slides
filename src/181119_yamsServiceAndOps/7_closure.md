@@ -13,15 +13,15 @@
 
 ## Given...
 
-a CPU is quicker than you attending interrupts...
+a CPU is quicker than you attending interrupts
 
-> *Your company will eventually not pay just for hero-style engineers*
+> *Your company will eventually not pay for just hero-style engineers*
 
 #
 
 ## Great thanks
 
-![](schCollab.png){ width=60% }
+![](schCollab.png){ width=50% }
 
 ## And especially...
 *Edge colleagues*

@@ -101,7 +101,7 @@ Project was initiated by and for several sites that had a common problem
 </div>
 
 ##
-> *But not perfect neither the best, for sure*
+**But not perfect neither the best, for sure**
 
 ## Everything as code 
 
