@@ -53,6 +53,17 @@ Reusability of other colleagues code/components
 ![](pexels-photo-428318.jpeg)
 </div>
 
+## Proactive mindset
+
+<div id="right">
+![](JCLastSecondb.jpg.pagespeed.ce.arVCh8B_dh.jpg)
+</div>
+<div id="left">
+* Warning: "we will care when needed" culture 
+    * *"Practive vs Risk" balance is hard*
+* Company pays for oncall availability
+</div>
+
 #
 
 ## Product

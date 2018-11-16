@@ -5,9 +5,14 @@ Basic pandoc wrapper to generate slides using markdown, as well as slides the au
 
 * [tcpgoon](https://github.com/dachad/tcpgoon) presentation at [SDN and Network Programmability Meetup in Barcelona](https://www.meetup.com/es-ES/SDN-and-Network-Programmability-Meetup-in-Barcelona/events/245132925/):
 [HIGH VOLUME WEB SERVICES, MAXCONNECTIONS AND TCPGOON](http://dcaba.github.io/slides/171218_tcpgoonAtBcnNetworkMeetup/)
+* [Yet Another Image Transformation Service At High Scale Using Golang](https://dcaba.github.io/slides/180612_transformingImagesAtScaleWithGo/)
+at [Barcelona Golang Meetup](https://www.meetup.com/es-ES/Golang-Barcelona/events/252114527/)
+* [Schibsted YAMS or how to build and maintain a thousands req/s service with minimal dedication](https://dcaba.github.io/slides/181119_yamsServiceAndOps) 
+at [DevOpsDays Warsaw](https://devopsdays.pl/)
 
 ## How can I use it?
 
+* fork()TM
 * create a folder under src/ for your slides
 * create one or multiple markdown file with the contents (ending by .md)
 	* If there's multiple in an specific directory, they will be merged (alphabetical order - you may want to use

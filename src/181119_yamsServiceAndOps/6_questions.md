@@ -12,6 +12,21 @@
 
 ## Why not a Service Mesh?
 
+## How to prevent unplanned still more?
+
+![](pexels-photo-1539678.jpeg)
+
+##
+
+* Canary analysis
+    * See [Spinnaker implementation](https://www.spinnaker.io/guides/user/canary/judge/)
+* Stress tests in the acceptance tests
+    * Specific tcp stress tool released, [tcpgoon](https://github.com/dachad/tcpgoon)
+* Simulate dependencies degradation
+    * similar in concept to the Simian Army from Netflix, but specialized in API, 
+    [Hoverfly](https://github.com/SpectoLabs/hoverfly): 
+
+
 ## Are you going to opensource it?
 
 * Schibsted contributes to opensource projects
