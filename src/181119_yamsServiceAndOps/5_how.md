@@ -35,10 +35,10 @@
 
 Reusability of other colleagues code/components
 
-![](devConsole.jpg){ width=60% }
+![](devConsole.jpg){ width=50% }
 
 
-## Collaboration + transparency mindset
+## Collaboration and transparency
 
 <div id="left">
 <br>
