@@ -28,11 +28,16 @@ a CPU is quicker than you attending interrupts
 
 ![](edgeColleagues.jpg){ width=50% }
 
+## Keep rocking, Poland!
+
+![](e7c32973d90b5890a871c1181bf427ab5bb8100b_hq.gif)
+
 ## Other Qs?
 
 ![](questions.gif)
 
 *dan . caba at google (dot)com*
+
 
 ## Your opinion is very important to me
 

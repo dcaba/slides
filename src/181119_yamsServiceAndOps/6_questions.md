@@ -14,7 +14,7 @@
 
 ## How to prevent unplanned still more?
 
-![](pexels-photo-1539678.jpeg)
+![](pexels-photo-1539678.jpeg){ width=80% }
 
 ##
 
