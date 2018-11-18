@@ -24,7 +24,7 @@
     * Specific tcp stress tool released, [tcpgoon](https://github.com/dachad/tcpgoon)
 * Simulate dependencies degradation
     * similar in concept to the Simian Army from Netflix, but specialized in API, 
-    [Hoverfly](https://github.com/SpectoLabs/hoverfly): 
+    [Hoverfly](https://github.com/SpectoLabs/hoverfly) 
 
 
 ## Are you going to opensource it?

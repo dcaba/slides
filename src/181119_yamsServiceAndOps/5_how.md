@@ -4,6 +4,9 @@
 
 ![](magic.gif)
 
+##
+
+> "For every complex problem there is an answer that is clear, simple, and wrong", H. L. Mencken
 
 ## Combination of...
 
