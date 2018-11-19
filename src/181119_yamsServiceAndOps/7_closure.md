@@ -36,7 +36,7 @@ a CPU is quicker than you attending interrupts
 
 ![](questions.gif)
 
-*dan . caba at google (dot)com*
+*dan . caba at gmail (dot)com*
 
 
 ## Your opinion is very important to me
