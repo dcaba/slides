@@ -53,7 +53,7 @@ body {
   font-size: 2.5em; }
 
 .reveal h2 {
-  color: #b4e0fd;
+  color: #84cbfa;
   font-size: 1.6em; }
 
 .reveal h3 {
@@ -84,7 +84,8 @@ body {
 
 .reveal strong,
 .reveal b {
-  font-weight: bold; }
+  font-weight: bold; 
+  color: #42affa; }
 
 .reveal em {
   font-style: italic;
@@ -166,7 +167,7 @@ body {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
-  background-color: rgb(186, 186, 186); }
+  background-color: rgba(186, 186, 186, 0.3); }
 
 .reveal table {
   margin: auto;
@@ -212,6 +213,7 @@ body {
  * LINKS
  *********************************************/
 .reveal a {
+  font-weight: bold;
   color: #42affa;
   text-decoration: none;
   -webkit-transition: color 0.15s ease;

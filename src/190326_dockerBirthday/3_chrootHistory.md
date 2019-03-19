@@ -1,3 +1,0 @@
-#
-
-## Brief Chrooting history
