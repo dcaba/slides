@@ -20,3 +20,7 @@ Previously working for Schibsted, NTT, Oracle...
 > *I'm sorry. I did NOT write BSD*
 ![Andrey Chernov](AndreyChernovBSD.jpg)
 </div>
+
+##
+
+But I just came to speak about a personal setup...

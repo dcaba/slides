@@ -1,9 +1,13 @@
 # 
 
-## Enjoy plexing!
+## Qs
 
-## Other Qs?
+![](plexFaq.png)
 
-![](questions.gif)
+## Other Qs or feedback?
 
 *dani . caba at gmail (dot)com*
+
+## Happy plex'ing!
+
+![](enjoyPlex.jpg){ style="border:0; box-shadow:none; width:70.0%" }
