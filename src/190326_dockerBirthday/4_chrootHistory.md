@@ -25,7 +25,7 @@
     * OpenVZ
 * namespaces
 * LXC 
-* docker -> libcontainer
+* docker $\rightarrow$ libcontainer
 
 ## Isolating processes in Linux
 
@@ -36,7 +36,7 @@
     * *~~Linux VServer~~*
     * *~~OpenVZ~~*
 * namespaces
-* LXC 
+* LXC
 * docker $\rightarrow$ libcontainer
 
 ## See more

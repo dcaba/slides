@@ -4,11 +4,11 @@
 
 ##
 
-* Plex Cloud is no longer an option...
+* *Plex Cloud* is no longer an option...
 * You can [run plex in a VPS](https://www.effinspiders.com/setting-up-plex-media-server-on-an-ubuntu-linux-vps-with-google-drive/)
 * Or an actual PCs/Mac(mini?)
 * Or buy a NAS/box with support
-  * Some DO support transcoding
+    * Some DO support transcoding
 
 ## And other media servers?
 
