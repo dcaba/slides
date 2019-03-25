@@ -10,19 +10,35 @@
 
 ## Isolating everything (tm)
 
-* While changing default umask and dir permissions should prevent unauthorized accesses from PMS to other filesystem files if the worst happens...
-  
+* While changing default *umask* and dir permissions should prevent unauthorized accesses from PMS to other filesystem files if the worst happens...
 * You may want to isolate your media service software still more
-  * I store personal data living in the same home server
-  * Quite easy to end up with files in your filesystem with o+r
+    * For instance, I also store personal data living in the same home server
+    * Quite easy to end up with files in your filesystem with *o+r*
 
 ## Isolating processes in Linux
 
 * Chroot
-* Vserver
 * SELinux
-* VPS / Linux VServer
 * VMs
+* VPS
+    * Linux VServer
+    * OpenVZ
 * namespaces
 * LXC 
 * docker -> libcontainer
+
+## Isolating processes in Linux
+
+* Chroot
+* SELinux
+* *~~VMs~~*
+* *~~VPS~~*
+    * *~~Linux VServer~~*
+    * *~~OpenVZ~~*
+* namespaces
+* LXC 
+* docker $\rightarrow$ libcontainer
+
+## See more
+
+* [Brief history of containers](https://blog.aquasec.com/a-brief-history-of-containers-from-1970s-chroot-to-docker-2016)
