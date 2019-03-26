@@ -9,6 +9,8 @@ Basic pandoc wrapper to generate slides using markdown, as well as slides the au
 at [Barcelona Golang Meetup](https://www.meetup.com/es-ES/Golang-Barcelona/events/252114527/)
 * [Schibsted YAMS or how to build and maintain a thousands req/s service with minimal dedication](https://dcaba.github.io/slides/181119_yamsServiceAndOps) 
 at [DevOpsDays Warsaw](https://devopsdays.pl/)
+* [CHROOTED MEDIA SERVER MADE EASY](https://dcaba.github.io/slides/190326_dockerBirthday) for 
+[Docker Bday #6](https://events.docker.com/events/details/docker-barcelona-presents-docker-bday-6-how-do-you-docker/)
 
 ## How can I use it?
 
