@@ -1,0 +1,3 @@
+[submodule "vendor/reveal-hugo"]
+	path = vendor/reveal-hugo
+	url = git@github.com:dzello/reveal-hugo.git
