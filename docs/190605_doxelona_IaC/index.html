@@ -10,19 +10,50 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/slides/190605_doxelona_IaC/reveal-js/css/reveal.css"><link rel="stylesheet" href="/slides/190605_doxelona_IaC/solarized-custom.css" id="theme"><link rel="stylesheet" href="/slides/190605_doxelona_IaC/highlight-js/default.min.css">
-    
+    <style>
+  .reveal section.side-by-side h1 {
+    position: absolute;
+  }
+  .reveal section.side-by-side h1:first-of-type {
+    left: 25%;
+  }
+  .reveal section.side-by-side h1:nth-of-type(2) {
+    right: 25%;
+  }
+  </style>
+
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
   
-<section>
 
-<h2 id="infrastructure-as-code-or-infrastructure-as-configuration">Infrastructure as Code or Infrastructure as Configuration?</h2>
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+    data-background="#4d163b"
+    class="title"
+    data-template="title"
+      data-background-image="images/Title.png">
+  
+
+<h1 id="infrastructure-as-code-or-infrastructure-as-configuration">Infrastructure as Code or Infrastructure as Configuration?</h1>
 </section>
 
   
-<section><section data-shortcode-section>
+<section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
 <h2 id="agenda">Agenda</h2>
 
 </section><section>
@@ -36,35 +67,465 @@
 
 <tbody>
 <tr>
-<td>Infrastructure and Cloud</td>
+<td>Welcome</td>
 </tr>
 
 <tr>
-<td>Positioning infra vs applications</td>
+<td>Infra, cloud and applications</td>
 </tr>
 
 <tr>
-<td>The journey: IaC and Cloud platforms</td>
+<td>IaC history</td>
 </tr>
 
 <tr>
-<td>The kubernetes world</td>
+<td>Comparing approaches</td>
 </tr>
 
 <tr>
-<td>Benchmarking</td>
-</tr>
-
-<tr>
-<td>Thoughts</td>
+<td>Closure</td>
 </tr>
 </tbody>
 </table>
 
 </section><section>
 
-<p>Some text
+<h2 id="who-are-you">Who are you?</h2>
+
+</section><section>
+
+<p><a href="https://www.linkedin.com/in/danicaba/">Daniel Caballero</a></p>
+
+<ul>
+<li>Sr SRE Engineer @ <strong>Fastly</strong></li>
+<li>Part time (Devops) lecturer @ <strong>La Salle University</strong></li>
+<li>Previously working @ <strong>Schibsted</strong>, <strong>NTT</strong>, <strong>Oracle</strong>&hellip;</li>
+<li><em>Eventual OSS contributions</em>, mostly fixes
+
+<ul>
+<li>And <a href="https://github.com/dachad/tcpgoon">tcpgoon</a></li>
+</ul></li>
+</ul>
+
+<p><img src="images/publicProfileSmall.jpg" style="width:27%;"></p>
+
 </section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Map.png"></p>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="infra-cloud-and-applications">Infra, cloud and applications</h2>
+
+</section><section>
+
+<p><em>Cloud is about others managing your infra, right? Why should we care?</em></p>
+
+</section><section>
+
+<p><em>And Kubernetes abstracts you from Infra, right?</em></p>
+
+<p><img src=https://docs.google.com/drawings/u/0/d/1_AWWfJ98-Ls_xydeajdQk64ayXkH5tWswT2aYOHxzFA/export/svg?id=1_AWWfJ98-Ls_xydeajdQk64ayXkH5tWswT2aYOHxzFA&pageid=p style="width:40%;"></p>
+
+</section><section>
+
+<h2 id="positioning-infra-vs-applications">Positioning infra vs applications</h2>
+
+<pre><code>                                                    +-----------+ +------------+
+                                                    |Configured | |Provisioned |
+  +-----+  +----------+   +-------+    +---------+  |  Queue    | |   Bucket   |
+  |My   |  |My        |   |       |    |         |  +-----------+ +------------+
+  |DNS  |  |configured|   |  APP  |    |   APP   |        +------------+        
+  |zones|  |LB        |   |       |    |         |        |    SQL     |        
+  +-----+  +----------+   +-------+    +---------+        |  Instance  |        
+                                                          +------------+        
++---------+ +---------+ +-----------+ +-----------+ +--------------------------+
+|         | |         | |           | |           | |        ||       ||       |
+|         | |         | |    K8s    | |           | |        ||       ||       |
+|         | |         | |  clusters | |  My VMs   | |Managed ||Managed||       |
+| Managed | | Managed | |           | | clusters  | |Queues  ||  DBs  ||Object |
+|   DNS   | |   LBs   | +-----------+ |           | |  and   || (SQL  ||Storage|
+|         | |         | |  Managed  | +-----------+ |Streams || noSQL)||       |
+|         | |         | |    K8s    | |    VM     | |        ||       ||       |
+|         | |         | |    API    | | templates | |        ||       ||       |
++---------+ +---------+ +-----------+ +-----------+ +--------------------------+
++---------------------+ +-------------------------+ +--------------------------+
+|                     | |                         | |                          |
+|   Network offering  | |    Compute offering     | |     Storage offering     |
+|                     | |                         | |                          |
++---------------------+ +-------------------------+ +--------------------------+
++------------------------------------------------------------------------------+
+|                                                                              |
+|                    Your cloud (infrastructure) provider                      |
+|                                                                              |
++------------------------------------------------------------------------------+
+</code></pre>
+
+</section><section>
+
+<p><span class='fragment '
+  >
+  <strong>Your app is not very useful in isolation&hellip;</strong>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <strong>So your app depends on a specific infra configuration&hellip;</strong>
+</span>
+<span class='fragment '
+  >
+  <em>including kubernetes</em>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <strong>And you probably want to use IaC</strong>
+</span></p>
+
+</section><section>
+
+<p><img src="https://media.giphy.com/media/aZ3LDBs1ExsE8/giphy.gif" alt="" /></p>
+
+<p><em>Fuck, Infra is everywhere</em></p>
+
+</section>
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle">
+  
+
+<h2 id="iac-history">IaC history</h2>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="the-aws-journey">The AWS journey</h2>
+
+</section><section>
+
+<h2 id="api-calls">API calls</h2>
+
+<pre><code class="language-python">import boto3
+
+s3 = boto3.client('s3')
+bucket_name = 'my-bucket'
+s3.create_bucket(bucket_name)
+filename = 'file.txt'
+s3.upload_file(filename, bucket_name, filename)
+</code></pre>
+
+</section><section>
+
+<h2 id="cloudformation">Cloudformation</h2>
+
+<pre><code class="language-json">{
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: {
+        &quot;S3Bucket&quot;: {
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+        },
+    },
+    &quot;Outputs&quot;: {
+        &quot;S3BucketSecureURL&quot;: {
+            &quot;Value&quot;: {
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;https://&quot;,
+                        {
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;S3Bucket&quot;,
+                                &quot;DomainName&quot;
+                            ]
+                        }
+                    ]
+                ]
+            },
+            &quot;Description&quot;: &quot;Name of S3 bucket&quot;
+        }
+    }
+}
+</code></pre>
+
+</section><section>
+
+<h2 id="troposphere">Troposphere</h2>
+
+<pre><code class="language-python">from troposphere
+import Output, Ref, Template
+from troposphere.s3
+import Bucket, PublicRead
+
+t = Template()
+
+t.add_description(
+  &quot;AWS CloudFormation Sample Template”
+
+s3bucket = t.add_resource(Bucket(&quot;S3Bucket&quot;, AccessControl = PublicRead, ))
+
+t.add_output(Output(
+  &quot;BucketName&quot;,
+  Value = Ref(s3bucket),
+  Description = &quot;Name of S3 bucket to hold website content&quot;
+))
+
+print(t.to_json())
+</code></pre>
+
+</section><section>
+
+<h2 id="sceptre">Sceptre</h2>
+
+<pre><code class="language-bash">$ sceptre create dev/vpc.yaml
+
+dev/vpc - Creating stack dev/vpc
+VirtualPrivateCloud AWS::EC2::VPC CREATE_IN_PROGRESS
+dev/vpc VirtualPrivateCloud AWS::EC2::VPC CREATE_COMPLETE
+dev/vpc sceptre-demo-dev-vpc AWS::CloudFormation::Stack CREATE_COMPLETE
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h1 id="gcp">GCP&hellip;</h1>
+
+</section><section>
+
+<h2 id="google-deployment-manager">Google deployment manager</h2>
+
+<pre><code class="language-yaml">resources:
+- type: storage.v1.bucket
+  name: test-bucket
+  properties:
+    project: my-project
+    name: test-bucket-name
+</code></pre>
+
+</section><section>
+
+<h2 id="google-deployment-manager-from-code">Google deployment manager from code</h2>
+
+<pre><code class="language-python">&quot;&quot;&quot;Creates a KMS key.&quot;&quot;&quot;
+
+def GenerateConfig(context):
+  &quot;&quot;&quot;Generates configuration.&quot;&quot;&quot;
+
+  key_ring = {
+    'name': 'keyRing',
+    'type': 'gcp-types/cloudkms-v1:projects.locations.keyRings',
+    'properties': {
+      'parent': 'projects/' + context.env['project'] + '/locations/' + context.properties['region'],
+      'keyRingId': context.env['deployment'] + '-key-ring'
+    }
+  }
+  resources = [key_ring]
+  return { 'resources': resources }
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="k8s">k8s</h2>
+
+</section><section>
+
+<h2 id="manifest-example">Manifest example</h2>
+
+</section><section>
+
+<p><img src="https://media.giphy.com/media/MnpPCugwALAHsTygpd/giphy-downsized.gif" alt="" /></p>
+
+</section><section>
+
+<h2 id="easily-becomming">Easily becomming</h2>
+
+<p>Bash with heredoc</p>
+
+</section><section>
+
+<h2 id="helm">Helm</h2>
+
+</section><section>
+
+<h2 id="kapitan">Kapitan</h2>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="multicloud">Multicloud</h2>
+
+</section><section>
+
+<h2 id="terraform">Terraform</h2>
+
+<pre><code class="language-hcl">provider &quot;aws&quot; {
+  region = &quot;us-west-2&quot;
+}
+
+resource &quot;aws_s3_bucket&quot; &quot;example&quot; {
+  bucket = &quot;my-test-s3-terraform-bucket&quot;
+  acl = &quot;private&quot;
+  versioning {
+    enabled = true
+  }
+
+  tags {
+    Name = &quot;my-test-s3-terraform-bucket&quot;
+  }
+
+}
+</code></pre>
+
+</section><section>
+
+<h2 id="terrascript-terraform">Terrascript (+Terraform)</h2>
+
+<pre><code class="language-python">from terrascript import Terrascript, provider
+from terrascript.aws.r import aws_instance
+
+ts = Terrascript()
+
+# Add a provider (+= syntax)
+ts += provider('aws', access_key='ACCESS_KEY_HERE',
+               secret_key='SECRET_KEY_HERE', region='us-east-1')
+
+# Add an AWS EC2 instance (add() syntax).
+inst = ts.add(aws_instance('example', ami='ami-2757f631', instance_type='t2.micro'))
+
+# Print the JSON-style configuration to stdout.
+print(ts.dump())
+</code></pre>
+
+</section><section>
+
+<h2 id="pulumi">Pulumi</h2>
+
+<pre><code class="language-go">package main
+import (
+    &quot;github.com/pulumi/pulumi-gcp/sdk/go/gcp/storage&quot;
+    &quot;github.com/pulumi/pulumi/sdk/go/pulumi&quot;
+)
+
+func main() {
+    pulumi.Run(func(ctx *pulumi.Context) error {
+        // NewBucket already adds a random suffix
+        bucket, err := storage.NewBucket(ctx, &quot;pulumi-bucket&quot;, &amp;storage.BucketArgs{
+            Location: &quot;EU&quot;,
+            })
+        if err != nil {
+            return err
+        }
+        ctx.Export(&quot;bucketName&quot;, bucket.ID())
+        ctx.Export(&quot;websiteUrl&quot;, bucket.Url())
+        return nil
+    })
+}
+</code></pre>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="comparing-approaches">Comparing approaches</h2>
+
+</section><section>
+
+<p>How IaC looks like with&hellip;</p>
+
+<p><span class='fragment '
+  >
+  <em>Terraform 0.11 vs Pulumi 0.17</em>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <img src="https://media.giphy.com/media/u4th4weIsJfuE/200w_d.gif" alt="" />
+</span></p>
+
+</section><section>
+
+<h2 id="pulumi-and-docker">Pulumi and Docker</h2>
+
+</section><section>
+
+<h2 id="pulumi-and-k8s">Pulumi and k8s</h2>
+
+</section><section>
+
+<h2 id="but">But&hellip;</h2>
+
+<p><img src="https://media.giphy.com/media/26vUSW6H21dmu2ofK/giphy.gif" alt="" /></p>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="closure">Closure</h2>
+
+</section><section>
+
+<h2 id="final-remarks">Final remarks</h2>
+
+<p><span class='fragment '
+  >
+  <strong>IaC plays an important role in Cloud apps</strong>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <strong>k8s does not free you from IaC</strong>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <strong>There are alternatives to manifests and templating</strong>
+</span></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Thanks.png"></p>
+
+</section>
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
 </section>
 
 </div>
@@ -84,7 +545,7 @@
 </script>
 
 <script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"solarized-custom.css","slide_number":true}</script>
-<script type="application/json" id="reveal-hugo-page-params">null</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"subtitle":{"background":"#f7cbbf","class":"subtitle"},"title":{"background":"#4d163b","class":"title"}}}</script>
 
 <script src="/slides/190605_doxelona_IaC/reveal-js/lib/js/head.min.js"></script>
 <script src="/slides/190605_doxelona_IaC/reveal-js/js/reveal.js"></script>

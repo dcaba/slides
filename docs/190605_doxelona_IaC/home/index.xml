@@ -16,7 +16,52 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap0-intro/</guid>
-      <description>Agenda         Infrastructure and Cloud   Positioning infra vs applications   The journey: IaC and Cloud platforms   The kubernetes world   Benchmarking   Thoughts    Some text  </description>
+      <description>Agenda         Welcome   Infra, cloud and applications   IaC history   Comparing approaches   Closure    Who are you? Daniel Caballero
+ Sr SRE Engineer @ Fastly Part time (Devops) lecturer @ La Salle University Previously working @ Schibsted, NTT, Oracle&amp;hellip; Eventual OSS contributions, mostly fixes  And tcpgoon    </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap1-intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap1-intro/</guid>
+      <description>Infra, cloud and applications Cloud is about others managing your infra, right? Why should we care?
+And Kubernetes abstracts you from Infra, right?
+Positioning infra vs applications  +-----------+ +------------+ |Configured | |Provisioned | +-----+ +----------+ +-------+ +---------+ | Queue | | Bucket | |My | |My | | | | | +-----------+ +------------+ |DNS | |configured| | APP | | APP | +------------+ |zones| |LB | | | | | | SQL | +-----+ +----------+ +-------+ +---------+ | Instance | +------------+ +---------+ +---------+ +-----------+ +-----------+ +--------------------------+ | | | | | | | | | || || | | | | | | K8s | | | | || || | | | | | | clusters | | My VMs | |Managed ||Managed|| | | Managed | | Managed | | | | clusters | |Queues || DBs ||Object | | DNS | | LBs | +-----------+ | | | and || (SQL ||Storage| | | | | | Managed | +-----------+ |Streams || noSQL)|| | | | | | | K8s | | VM | | || || | | | | | | API | | templates | | || || | +---------+ +---------+ +-----------+ +-----------+ +--------------------------+ +---------------------+ +-------------------------+ +--------------------------+ | | | | | | | Network offering | | Compute offering | | Storage offering | | | | | | | +---------------------+ +-------------------------+ +--------------------------+ +------------------------------------------------------------------------------+ | | | Your cloud (infrastructure) provider | | | +------------------------------------------------------------------------------+  Your app is not very useful in isolation&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap2-iachist/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap2-iachist/</guid>
+      <description>IaC history The AWS journey API calls import boto3 s3 = boto3.client(&#39;s3&#39;) bucket_name = &#39;my-bucket&#39; s3.create_bucket(bucket_name) filename = &#39;file.txt&#39; s3.upload_file(filename, bucket_name, filename)  Cloudformation { &amp;quot;AWSTemplateFormatVersion&amp;quot;: &amp;quot;2010-09-09&amp;quot;, &amp;quot;Resources&amp;quot;: { &amp;quot;S3Bucket&amp;quot;: { &amp;quot;Type&amp;quot;: &amp;quot;AWS::S3::Bucket&amp;quot; }, }, &amp;quot;Outputs&amp;quot;: { &amp;quot;S3BucketSecureURL&amp;quot;: { &amp;quot;Value&amp;quot;: { &amp;quot;Fn::Join&amp;quot;: [ &amp;quot;&amp;quot;, [ &amp;quot;https://&amp;quot;, { &amp;quot;Fn::GetAtt&amp;quot;: [ &amp;quot;S3Bucket&amp;quot;, &amp;quot;DomainName&amp;quot; ] } ] ] }, &amp;quot;Description&amp;quot;: &amp;quot;Name of S3 bucket&amp;quot; } } }  Troposphere from troposphere import Output, Ref, Template from troposphere.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap3-comp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap3-comp/</guid>
+      <description>Comparing approaches How IaC looks like with&amp;hellip;
+Terraform 0.11 vs Pulumi 0.17 
+
+Pulumi and Docker Pulumi and k8s But&amp;hellip;  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap4-closure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/190605_doxelona_IaC/home/cap4-closure/</guid>
+      <description>Closure Final remarks IaC plays an important role in Cloud apps 
+k8s does not free you from IaC 
+There are alternatives to manifests and templating 
+ </description>
     </item>
     
   </channel>
