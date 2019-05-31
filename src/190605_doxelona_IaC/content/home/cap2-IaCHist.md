@@ -291,7 +291,6 @@ resource "aws_s3_bucket" "example" {
   tags {
     Name = "my-test-s3-terraform-bucket"
   }
-
 }
 ```
 

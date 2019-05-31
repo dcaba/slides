@@ -17,6 +17,8 @@
 
 {{% fragment %}}**There are alternatives to manifests and templating**{{% /fragment %}}
 
+{{% fragment %}}**But probably no perfect solution (*yet*)**{{% /fragment %}}
+
 ---
 
 {{< slide background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov" background-video-loop="loop" >}}

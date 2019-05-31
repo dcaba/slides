@@ -49,7 +49,7 @@ Positioning infra vs applications  +-----------+ +------------+ |Configured | |P
       <description>Comparing approaches How IaC looks like with&amp;hellip;
 Terraform 0.11 vs Pulumi 0.17 
 
-Pulumi and Docker Pulumi and k8s But&amp;hellip;  </description>
+Ex1: Bucket creation resource &amp;quot;google_storage_bucket&amp;quot; &amp;quot;terraform-bucket&amp;quot; { name = &amp;quot;terraform-bucket-${random_id.suffix.dec}&amp;quot; location = &amp;quot;EU&amp;quot; website { main_page_suffix = &amp;quot;index.html&amp;quot; not_found_page = &amp;quot;404.html&amp;quot; } }  bucket, err := storage.NewBucket(ctx, &amp;quot;pulumi-bucket&amp;quot;, &amp;amp;storage.BucketArgs{ Location: &amp;quot;EU&amp;quot;, Websites: []map[string]string{ map[string]string{ &amp;quot;main_page_suffix&amp;quot;: &amp;quot;index.html&amp;quot;, &amp;quot;not_found_page&amp;quot;: &amp;quot;404.html&amp;quot;, }, }, })  Hardcoding provider specific configs&amp;hellip; resource &amp;quot;google_container_cluster&amp;quot; &amp;quot;stackstorm-cluster&amp;quot; { name = &amp;quot;stackstorm-${var.environment}&amp;quot; zone = &amp;quot;us-central1-a&amp;quot; min_master_version = &amp;quot;${data.</description>
     </item>
     
     <item>
@@ -61,6 +61,7 @@ Pulumi and Docker Pulumi and k8s But&amp;hellip;  </description>
       <description>Closure Final remarks IaC plays an important role in Cloud apps 
 k8s does not free you from IaC 
 There are alternatives to manifests and templating 
+But probably no perfect solution (yet) 
  </description>
     </item>
     
