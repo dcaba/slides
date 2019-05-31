@@ -23,7 +23,7 @@
 
 ---
 
-[Daniel Caballero](https://www.linkedin.com/in/danicaba/)
+[Daniel Caballero Rodríguez](https://www.linkedin.com/in/danicaba/)
 
 * Sr SRE Engineer @ **Fastly**
 * Part time (Devops) lecturer @ **La Salle University**
