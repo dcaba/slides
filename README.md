@@ -11,6 +11,7 @@ at [Barcelona Golang Meetup](https://www.meetup.com/es-ES/Golang-Barcelona/event
 at [DevOpsDays Warsaw](https://devopsdays.pl/)
 * [CHROOTED MEDIA SERVER MADE EASY](https://dcaba.github.io/slides/190326_dockerBirthday) for 
 [Docker Bday #6](https://events.docker.com/events/details/docker-barcelona-presents-docker-bday-6-how-do-you-docker/)
+* [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190605_doxelona_IaC) at [Devops Exchange Barcelona meetup](https://www.meetup.com/es-ES/devops-exchange-barcelona/events/261831097)
 
 ## How can I use it?
 
