@@ -54,6 +54,8 @@
 
 ---
 
+## So...
+
 {{% fragment %}} **Your app is not very useful in isolation...** {{% /fragment %}}
 
 {{% fragment %}} **So your app depends on a specific infra configuration...** {{% /fragment %}}

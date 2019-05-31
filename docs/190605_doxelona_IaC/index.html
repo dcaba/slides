@@ -181,6 +181,8 @@
 
 </section><section>
 
+<h2 id="so">So&hellip;</h2>
+
 <p><span class='fragment '
   >
   <strong>Your app is not very useful in isolation&hellip;</strong>
@@ -357,6 +359,29 @@ def GenerateConfig(context):
 
 <h2 id="manifest-example">Manifest example</h2>
 
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre>
+
 </section><section>
 
 <p><img src="https://media.giphy.com/media/MnpPCugwALAHsTygpd/giphy-downsized.gif" alt="" /></p>
@@ -365,15 +390,82 @@ def GenerateConfig(context):
 
 <h2 id="easily-becomming">Easily becomming</h2>
 
-<p>Bash with heredoc</p>
+<pre><code class="language-bash">APPVERSION=&quot;$(getAppVersionFromSomewhere)&quot;
+kubectl apply -f - &lt;&lt;EOH
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:${APPVERSION}
+        ports:
+        - containerPort: 80
+EOH
+</code></pre>
 
 </section><section>
 
 <h2 id="helm">Helm</h2>
 
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template &quot;alpine.fullname&quot; . }}
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template &quot;alpine.name&quot; . }}
+spec:
+  restartPolicy: {{ .Values.restartPolicy }}
+  containers:
+  - name: waiter
+    image: &quot;{{ .Values.image.repository }}:{{ .Values.image.tag }}&quot;
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command: [&quot;/bin/sleep&quot;, &quot;9000&quot;]
+</code></pre>
+
 </section><section>
 
 <h2 id="kapitan">Kapitan</h2>
+
+<pre><code class="language-json">local kube = import &quot;lib/kube.libjsonnet&quot;;
+local kap = import &quot;lib/kapitan.libjsonnet&quot;;
+local inv = kap.inventory();
+local namespace = inv.parameters.namespace;
+local name      = &quot;cod&quot;;
+local image     = inv.parameters[name].image;
+local replicas  = inv.parameters[name].replicas;
+local args      = inv.parameters[name].args;
+local container = kube.Container(name) {
+  image: image,
+  args: args
+};
+kube.Deployment(name) {
+  spec+: {
+    replicas: replicas,
+    template+: { 
+      spec+: { 
+        containers: [ container ]
+      }
+    }
+  }
+}
+</code></pre>
 
 </section>
 
@@ -518,7 +610,8 @@ func main() {
 </section>
 
 <p><section data-noprocess data-shortcode-slide
-      data-background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov"></p>
+      data-background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov"
+      data-background-video-loop="loop"></p>
 
 </section>
 

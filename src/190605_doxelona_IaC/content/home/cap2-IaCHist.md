@@ -152,6 +152,30 @@ def GenerateConfig(context):
 
 ## Manifest example
 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+```
+
 ---
 
 ![](https://media.giphy.com/media/MnpPCugwALAHsTygpd/giphy-downsized.gif)
@@ -160,15 +184,85 @@ def GenerateConfig(context):
 
 ## Easily becomming
 
-Bash with heredoc
+```bash
+APPVERSION="$(getAppVersionFromSomewhere)"
+kubectl apply -f - <<EOH
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:${APPVERSION}
+        ports:
+        - containerPort: 80
+EOH
+```
 
 ---
 
 ## Helm
 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "alpine.fullname" . }}
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template "alpine.name" . }}
+spec:
+  restartPolicy: {{ .Values.restartPolicy }}
+  containers:
+  - name: waiter
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command: ["/bin/sleep", "9000"]
+```
+
 ---
 
 ## Kapitan
+
+```json
+local kube = import "lib/kube.libjsonnet";
+local kap = import "lib/kapitan.libjsonnet";
+local inv = kap.inventory();
+local namespace = inv.parameters.namespace;
+local name      = "cod";
+local image     = inv.parameters[name].image;
+local replicas  = inv.parameters[name].replicas;
+local args      = inv.parameters[name].args;
+local container = kube.Container(name) {
+  image: image,
+  args: args
+};
+kube.Deployment(name) {
+  spec+: {
+    replicas: replicas,
+    template+: { 
+      spec+: { 
+        containers: [ container ]
+      }
+    }
+  }
+}
+```
 
 {{% /section %}}
 

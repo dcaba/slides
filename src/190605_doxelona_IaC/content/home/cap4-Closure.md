@@ -19,7 +19,7 @@
 
 ---
 
-{{< slide background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov" >}}
+{{< slide background-video="https://media.giphy.com/media/5QSIcVPpTj9r7RXbNb/source.mov" background-video-loop="loop" >}}
 
 ---
 
