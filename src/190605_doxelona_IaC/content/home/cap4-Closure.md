@@ -9,6 +9,14 @@
 
 ---
 
+![](images/declarativememe.jpg)
+
+---
+
+![](images/configFilesMeme.jpg)
+
+---
+
 ## Final remarks
 
 {{% fragment %}}**IaC plays an important role in Cloud apps**{{% /fragment %}}

@@ -182,7 +182,7 @@ spec:
 
 ---
 
-## Easily becomming
+## Easily becoming
 
 ```bash
 APPVERSION="$(getAppVersionFromSomewhere)"
@@ -237,6 +237,32 @@ spec:
 
 ---
 
+## kustomize
+
+`kustomization.yaml`:
+
+```yaml
+   commonLabels:
+    env: production
+   bases:
+   - ../../base
+   patches:
+   - replica_count.yaml
+```
+
+`replica_count.yaml`:
+
+```yaml
+   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: the-deployment
+   spec:
+     replicas: 100
+```
+
+---
+
 ## Kapitan
 
 ```json
@@ -274,7 +300,7 @@ kube.Deployment(name) {
 
 ---
 
-## Terraform
+## Terraform(-v11)
 
 ```hcl
 provider "aws" {
@@ -296,7 +322,7 @@ resource "aws_s3_bucket" "example" {
 
 ---
 
-## Terrascript (+Terraform)
+## Terrascript (+Terraform-v12)
 
 ```python
 from terrascript import Terrascript, provider

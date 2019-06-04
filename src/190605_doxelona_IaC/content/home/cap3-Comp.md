@@ -43,7 +43,6 @@ bucket, err := storage.NewBucket(ctx, "pulumi-bucket", &storage.BucketArgs{
         },
     },
 })
-
 ```
 
 ---
@@ -211,7 +210,7 @@ ingress = Service('ingress',
 ---
 
 * Pulumi is a quite complex piece of software
-  * Core daemon 
+  * Core daemon + cmd gRPC clients
 * ... so extending/contributing may be more challenging
 * Different programming languages
   * In different maturity status
@@ -227,7 +226,7 @@ ingress = Service('ingress',
   * loops
   * json support
   * actual booleans
-* Providers for almost everything!
+* Providers for almost everything
   * Including Fastly!
 
 ---
