@@ -388,7 +388,7 @@ spec:
 
 </section><section>
 
-<h2 id="easily-becomming">Easily becomming</h2>
+<h2 id="easily-becoming">Easily becoming</h2>
 
 <pre><code class="language-bash">APPVERSION=&quot;$(getAppVersionFromSomewhere)&quot;
 kubectl apply -f - &lt;&lt;EOH
@@ -441,6 +441,30 @@ spec:
 
 </section><section>
 
+<h2 id="kustomize">kustomize</h2>
+
+<p><code>kustomization.yaml</code>:</p>
+
+<pre><code class="language-yaml">   commonLabels:
+    env: production
+   bases:
+   - ../../base
+   patches:
+   - replica_count.yaml
+</code></pre>
+
+<p><code>replica_count.yaml</code>:</p>
+
+<pre><code class="language-yaml">   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: the-deployment
+   spec:
+     replicas: 100
+</code></pre>
+
+</section><section>
+
 <h2 id="kapitan">Kapitan</h2>
 
 <pre><code class="language-json">local kube = import &quot;lib/kube.libjsonnet&quot;;
@@ -476,7 +500,7 @@ kube.Deployment(name) {
 
 </section><section>
 
-<h2 id="terraform">Terraform</h2>
+<h2 id="terraform-v11">Terraform(-v11)</h2>
 
 <pre><code class="language-hcl">provider &quot;aws&quot; {
   region = &quot;us-west-2&quot;
@@ -497,7 +521,7 @@ resource &quot;aws_s3_bucket&quot; &quot;example&quot; {
 
 </section><section>
 
-<h2 id="terrascript-terraform">Terrascript (+Terraform)</h2>
+<h2 id="terrascript-terraform-v12">Terrascript (+Terraform-v12)</h2>
 
 <pre><code class="language-python">from terrascript import Terrascript, provider
 from terrascript.aws.r import aws_instance
@@ -591,7 +615,6 @@ func main() {
         },
     },
 })
-
 </code></pre>
 
 </section><section>
@@ -761,7 +784,7 @@ ingress = Service('ingress',
 <li>Pulumi is a quite complex piece of software
 
 <ul>
-<li>Core daemon</li>
+<li>Core daemon + cmd gRPC clients</li>
 </ul></li>
 <li>&hellip; so extending/contributing may be more challenging</li>
 <li>Different programming languages
@@ -786,7 +809,7 @@ ingress = Service('ingress',
 <li>json support</li>
 <li>actual booleans</li>
 </ul></li>
-<li>Providers for almost everything!
+<li>Providers for almost everything
 
 <ul>
 <li>Including Fastly!</li>
@@ -807,6 +830,14 @@ ingress = Service('ingress',
     data-template="subtitle"></p>
 
 <h2 id="closure">Closure</h2>
+
+</section><section>
+
+<p><img src="images/declarativememe.jpg" alt="" /></p>
+
+</section><section>
+
+<p><img src="images/configFilesMeme.jpg" alt="" /></p>
 
 </section><section>
 
