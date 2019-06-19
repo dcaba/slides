@@ -1,0 +1,13 @@
+baseURL = "https://dcaba.github.io/slides/190620_devopsExchange"
+languageCode = "en-us"
+theme = "reveal-hugo"
+publishDir = "../../docs/190620_devopsExchange/"
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
+
+[params.reveal_hugo]
+custom_theme = "solarized-custom.css"
+slide_number = true
