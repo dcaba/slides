@@ -15,7 +15,7 @@
 
 *And Kubernetes abstracts you from Infra, right?*
 
-<img src=https://docs.google.com/drawings/u/0/d/1_AWWfJ98-Ls_xydeajdQk64ayXkH5tWswT2aYOHxzFA/export/svg?id=1_AWWfJ98-Ls_xydeajdQk64ayXkH5tWswT2aYOHxzFA&pageid=p style="width:40%;">
+<img src=images/allYouNeed.jpg style="width:40%;">
 
 ---
 

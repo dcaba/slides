@@ -1,7 +1,7 @@
-baseURL = "https://dcaba.github.io/slides/190620_devopsExchange"
+baseURL = "https://dcaba.github.io/slides/190620_devopsExchange_IaC"
 languageCode = "en-us"
 theme = "reveal-hugo"
-publishDir = "../../docs/190620_devopsExchange/"
+publishDir = "../../docs/190620_devopsExchange_IaC/"
 
 [outputFormats.Reveal]
 baseName = "index"
