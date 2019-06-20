@@ -330,6 +330,70 @@ bucket = s3.Bucket(self,
   <em>troposphere, but multilanguage?</em>
 </span></p>
 
+</section><section>
+
+<p><strong>Summarizing (some) AWS IaC options</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th align="center">Declarative?</th>
+<th align="center">Deployment/Update tool?</th>
+<th align="center">Config-driven</th>
+<th align="center">Programmatic</th>
+<th align="center">Language</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AWS API</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">N/A</td>
+</tr>
+
+<tr>
+<td>Cloudformation</td>
+<td align="center">Y</td>
+<td align="center">More or less</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">JSON/YAML</td>
+</tr>
+
+<tr>
+<td>Troposphere</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">Python</td>
+</tr>
+
+<tr>
+<td>Sceptre</td>
+<td align="center">N/A</td>
+<td align="center">Y</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+
+<tr>
+<td>CDK</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">*</td>
+</tr>
+</tbody>
+</table>
+
 </section>
 
 </section><section>
@@ -587,6 +651,52 @@ func main() {
 }
 </code></pre>
 
+</section><section>
+
+<p><strong>Multicloud IaC options summary</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th align="center">Declarative?</th>
+<th align="center">Deployment/Update tool?</th>
+<th align="center">Config-driven</th>
+<th align="center">Programmatic</th>
+<th align="center">Language</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Terraform</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">HCL, JSON(v12)</td>
+</tr>
+
+<tr>
+<td>Terrascript</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">Python</td>
+</tr>
+
+<tr>
+<td>Pulumi</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">*</td>
+</tr>
+</tbody>
+</table>
+
 </section>
 </section><section data-shortcode-section>
 <p><section data-noprocess data-shortcode-slide
@@ -708,7 +818,10 @@ instance = &quot;${element(aws_instance.example.*.id, count.index)}&quot;
 
 <h2 id="pulumi">Pulumi</h2>
 
-<p><img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;"></p>
+<p><span class='fragment '
+  >
+  <img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;"> <br><em>Control statements like a sir</em>
+</span></p>
 
 </section><section>
 
@@ -783,13 +896,17 @@ ingress = Service('ingress',
 <h2 id="and-there-are-more-advantages-of-using-code">And there are more advantages of using Code!</h2>
 
 <ul>
-<li>Abstraction of elements</li>
-<li>Reusability via standard programming languages capabilites
+<li>Abstraction, re-usability and extensibility via standard programming languages capabilities
 
 <ul>
-<li>Modules, packages&hellip;</li>
+<li><em>Inheritance-mixins, interfaces, closures&hellip;</em></li>
+<li><em>Modules, packages, dep management&hellip;</em></li>
 </ul></li>
-<li>Testing</li>
+<li>Testing
+
+<ul>
+<li><a href="https://blog.pulumi.com/testing-your-infrastructure-as-code-with-pulumi"><em>Pulumi and testing blog post</em></a></li>
+</ul></li>
 <li>Config pre-checks</li>
 <li>Clean code practices</li>
 </ul>
@@ -828,10 +945,10 @@ ingress = Service('ingress',
 
 <ul>
 <li>loops</li>
-<li>json support</li>
+<li>JSON support</li>
 <li>actual booleans</li>
 </ul></li>
-<li>Providers for almost everything
+<li>Providers and modules for almost everything
 
 <ul>
 <li>Including Fastly!</li>

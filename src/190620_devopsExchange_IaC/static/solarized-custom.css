@@ -169,6 +169,7 @@ body {
 
 .reveal table {
   margin: auto;
+  font-size: 0.6em;
   border-collapse: collapse;
   border-spacing: 0; }
 

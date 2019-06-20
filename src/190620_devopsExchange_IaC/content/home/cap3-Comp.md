@@ -117,7 +117,8 @@ instance = "${element(aws_instance.example.*.id, count.index)}"
 
 ## Pulumi
 
-<img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;">
+
+{{% fragment %}}<img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;"> <br>*Control statements like a sir*{{% /fragment %}}
 
 ---
 
@@ -194,10 +195,11 @@ ingress = Service('ingress',
 
 ## And there are more advantages of using Code!
 
-* Abstraction of elements
-* Reusability via standard programming languages capabilites
-  * Modules, packages...
+* Abstraction, re-usability and extensibility via standard programming languages capabilities
+  * *Inheritance-mixins, interfaces, closures...*
+  * *Modules, packages, dep management...*
 * Testing
+  * [*Pulumi and testing blog post*](https://blog.pulumi.com/testing-your-infrastructure-as-code-with-pulumi)
 * Config pre-checks
 * Clean code practices
 
@@ -224,9 +226,9 @@ ingress = Service('ingress',
 * Almost a standard
 * 0.12 comes with lots of presents
   * loops
-  * json support
+  * JSON support
   * actual booleans
-* Providers for almost everything
+* Providers and modules for almost everything
   * Including Fastly!
 
 ---

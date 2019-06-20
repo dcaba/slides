@@ -118,6 +118,17 @@ bucket = s3.Bucket(self,
 
 {{% fragment %}} *troposphere, but multilanguage?* {{% /fragment %}}
 
+---
+
+**Summarizing (some) AWS IaC options**
+
+| Tool           | Declarative? | Deployment/Update tool? | Config-driven | Programmatic | Language  |
+|----------------|:------------:|:-----------------------:|:-------------:|:------------:|:---------:|
+| AWS API        |       N      |            N            |       N       |      Y       |    N/A    |
+| Cloudformation |       Y      |       More or less      |       Y       |      N       | JSON/YAML |
+| Troposphere    |       Y      |            N            |       N       |      Y       |   Python  |
+| Sceptre        |      N/A     |            Y            |      N/A      |     N/A      |    N/A    |
+| CDK            |       Y      |            Y            |       N       |      Y       |     *     |
 {{% /section %}}
 
 ---
@@ -387,5 +398,15 @@ func main() {
     })
 }
 ```
+
+---
+
+**Multicloud IaC options summary**
+
+| Tool        | Declarative? | Deployment/Update tool? | Config-driven | Programmatic |     Language    |
+|-------------|:------------:|:-----------------------:|:-------------:|:------------:|:---------------:|
+| Terraform   |       Y      |            Y            |       Y       |      N       | HCL, JSON(v12)  |
+| Terrascript |       Y      |            N            |       N       |      Y       |      Python     |
+| Pulumi      |       Y      |            Y            |       N       |      Y       |        *        |
 
 {{% /section %}}
