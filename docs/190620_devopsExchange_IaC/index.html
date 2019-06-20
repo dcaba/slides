@@ -725,7 +725,7 @@ func main() {
 <p><section data-noprocess data-shortcode-slide
       class="code-side-by-side"></p>
 
-<h2 id="ex1-bucket-creation">Ex1: Bucket creation</h2>
+<h2 id="bucket-creation-example">Bucket creation example</h2>
 
 <pre><code class="language-hcl">resource &quot;google_storage_bucket&quot; &quot;terraform-bucket&quot; {
  name     = &quot;terraform-bucket-${random_id.suffix.dec}&quot;
@@ -751,7 +751,7 @@ func main() {
 
 </section><section>
 
-<h2 id="hardcoding-provider-specific-configs">Hardcoding provider specific configs&hellip;</h2>
+<h2 id="tf-provider-specific-configs">TF &amp; provider specific configs&hellip;</h2>
 
 <pre><code class="language-hcl">resource &quot;google_container_cluster&quot; &quot;stackstorm-cluster&quot; {
  name               = &quot;stackstorm-${var.environment}&quot;
@@ -775,7 +775,7 @@ func main() {
 
 </section><section>
 
-<h2 id="code-can-use-helpers">Code can use helpers!</h2>
+<h2 id="pulumi-code-can-use-helpers">Pulumi: Code can use helpers!</h2>
 
 <pre><code class="language-pulumi">func getClusterCfg(baseZone string) (*container.ClusterArgs, error) {
     allZonesInSameRegion, err := getAllZonesInSameRegionThan(baseZone)
@@ -793,7 +793,7 @@ func main() {
 
 </section><section>
 
-<h2 id="control-statements">Control statements</h2>
+<h2 id="tf-control-statements">TF: Control statements</h2>
 
 <p>And some data manipulation:</p>
 
@@ -816,7 +816,7 @@ instance = &quot;${element(aws_instance.example.*.id, count.index)}&quot;
 
 </section><section>
 
-<h2 id="pulumi">Pulumi</h2>
+<h2 id="while-with-pulumi">While, with Pulumi&hellip;</h2>
 
 <p><span class='fragment '
   >
@@ -889,7 +889,7 @@ ingress = Service('ingress',
 
 </section><section>
 
-<p><strong>So app delivery is also a possibility with pulumi</strong></p>
+<p><strong>So app delivery is also a possibility with Pulumi</strong></p>
 
 </section><section>
 

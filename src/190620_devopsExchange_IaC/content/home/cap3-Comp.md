@@ -19,7 +19,7 @@ How IaC looks like with...
 
 {{< slide class="code-side-by-side" >}}
 
-## Ex1: Bucket creation
+## Bucket creation example
 
 ```hcl
 resource "google_storage_bucket" "terraform-bucket" {
@@ -47,7 +47,7 @@ bucket, err := storage.NewBucket(ctx, "pulumi-bucket", &storage.BucketArgs{
 
 ---
 
-## Hardcoding provider specific configs...
+## TF & provider specific configs...
 
 ```hcl
 resource "google_container_cluster" "stackstorm-cluster" {
@@ -72,7 +72,7 @@ resource "google_container_cluster" "stackstorm-cluster" {
 
 ---
 
-## Code can use helpers!
+## Pulumi: Code can use helpers!
 
 ```pulumi
 func getClusterCfg(baseZone string) (*container.ClusterArgs, error) {
@@ -91,7 +91,7 @@ func getClusterCfg(baseZone string) (*container.ClusterArgs, error) {
 
 ---
 
-## Control statements
+## TF: Control statements
 
 And some data manipulation:
 
@@ -115,7 +115,7 @@ instance = "${element(aws_instance.example.*.id, count.index)}"
 
 ---
 
-## Pulumi
+## While, with Pulumi...
 
 
 {{% fragment %}}<img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;"> <br>*Control statements like a sir*{{% /fragment %}}
@@ -189,7 +189,7 @@ ingress = Service('ingress',
 
 ---
 
-**So app delivery is also a possibility with pulumi**
+**So app delivery is also a possibility with Pulumi**
 
 ---
 
