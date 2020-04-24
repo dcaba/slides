@@ -23,6 +23,7 @@
 
 * Configuration management systems
 * Vendors CLIs and APIs
+* Virtualization
 * Tons of scripting
 
 ---
@@ -67,7 +68,7 @@ But **apps still require a specific infrastructure configuration**
 
 ---
 
-{{% fragment %}} Allows appling the same patterns than apps code {{% /fragment %}}
+Allows applying the same patterns than apps code
 
 {{% fragment %}} Enhances collaboration and tracking {{% /fragment %}}
 

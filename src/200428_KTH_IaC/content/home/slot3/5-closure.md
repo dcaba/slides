@@ -17,7 +17,7 @@
 
 {{% fragment %}}There are plenty of IaC options{{% /fragment %}}
 
-{{% fragment %}}More abstraction layers to interact with Cloud providers are still being added{{% /fragment %}}
+{{% fragment %}}More abstraction layers to interact with Infra/Compute platforms are still being added{{% /fragment %}}
 
 ---
 
