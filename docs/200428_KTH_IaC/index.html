@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.55.6" />
+    <meta charset="utf-8">
+<title>Cloud Providers and the IaC hell</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/slides/200428_KTH_IaC/reveal-js/css/reveal.css"><link rel="stylesheet" href="/slides/200428_KTH_IaC/solarized-custom.css" id="theme"><link rel="stylesheet" href="/slides/200428_KTH_IaC/highlight-js/default.min.css">
+    <style>
+  .reveal section.side-by-side h1 {
+    position: absolute;
+  }
+  .reveal section.side-by-side h1:first-of-type {
+    left: 25%;
+  }
+  .reveal section.side-by-side h1:nth-of-type(2) {
+    right: 25%;
+  }
+
+  body:after {
+    content: url(images/Fastly_logo_2019_mini.png);
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+  }
+  </style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+    data-background="#4d163b"
+    class="title"
+    data-template="title"
+      data-background-image="images/Title.png">
+  
+
+<h1 id="cloud-providers-and-the-iac-hell">Cloud Providers and the IaC hell</h1>
+</section>
+
+  
+<section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="agenda">Agenda</h2>
+
+</section><section>
+
+<h3 id="iac-and-infrastructure">IaC and Infrastructure</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Welcome</td>
+</tr>
+
+<tr>
+<td>Apps and infrastructure</td>
+</tr>
+
+<tr>
+<td>Dynamic infra and Cloud providers</td>
+</tr>
+</tbody>
+</table>
+
+</section><section>
+
+<h3 id="iac-and-cloud">IaC and Cloud</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>RAW IaC and SDKs</td>
+</tr>
+
+<tr>
+<td>Playing with stacks</td>
+</tr>
+
+<tr>
+<td>Multi-Cloud</td>
+</tr>
+
+<tr>
+<td>Stacks management with code</td>
+</tr>
+</tbody>
+</table>
+
+</section><section>
+
+<h3 id="iac-and-kubernetes">IaC and Kubernetes</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Kubernetes</td>
+</tr>
+
+<tr>
+<td>K8s, Cloud providers and operators</td>
+</tr>
+
+<tr>
+<td>YAMLs&hellip; Where are we going?</td>
+</tr>
+
+<tr>
+<td>Closure</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="who-are-you">Who are you?</h2>
+
+</section><section>
+
+<p><a href="https://www.linkedin.com/in/danicaba/">Daniel Caballero Rodríguez</a></p>
+
+<ul>
+<li>Sr SRE Engineer @ <strong>Fastly</strong></li>
+<li>Part time (Devops) lecturer @ <strong>La Salle University</strong></li>
+<li>Previously working @ <strong>Schibsted</strong>, <strong>NTT</strong>, <strong>Oracle</strong>&hellip;</li>
+<li><em>Eventual OSS contributions</em>
+
+<ul>
+<li>And <a href="https://github.com/dachad/tcpgoon">tcpgoon</a></li>
+</ul></li>
+</ul>
+
+<p><img src="images/publicProfileSmall.jpg" style="width:27%;"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Map.png"></p>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="iac-and-infrastructure">IaC and Infrastructure</h2>
+
+</section><section>
+
+<h2 id="distributed-systems-are-here-to-stay">Distributed systems are here to stay</h2>
+
+<p><img src="images/Datacenter-Diagram_thumb.png" alt="" /></p>
+
+</section><section>
+
+<p><strong>And we don&rsquo;t want to manage them &ldquo;by hand&rdquo;</strong></p>
+
+</section><section>
+
+<p><strong>Dynamic infrastructure</strong> was possible in on-premises platforms thanks to:</p>
+
+<ul>
+<li>Configuration management systems</li>
+<li>Vendors CLIs and APIs</li>
+<li>Tons of scripting</li>
+</ul>
+
+</section><section>
+
+<p><strong>IaC is not a new concept</strong></p>
+
+<blockquote>
+<p>We previously called that infra automation/orchestration</p>
+</blockquote>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Clouds-with-Ladder-Photo-Datrium-Solutions.jpg"></p>
+
+<blockquote>
+<p><strong>But Cloud is about others managing your infra, right? Why should we care?</strong></p>
+</blockquote>
+
+</section><section>
+
+<p><img src="images/multi-region-web-app-diagram.png" alt="" /></p>
+
+</section><section>
+
+<blockquote>
+<p>Cloud brings big services&rsquo; portfolios you can compose to build your Internet-scale platform</p>
+</blockquote>
+
+<p><img src="images/puzzle.jpg" alt="" /></p>
+
+</section><section>
+
+<p><strong>And a plus: consistency across components</strong></p>
+
+<ul>
+<li>Authentication / permissions management (IAM)</li>
+<li>APIs</li>
+<li>SDKs / libs to interact with them</li>
+</ul>
+
+</section><section>
+
+<p>But <strong>apps still require a specific infrastructure configuration</strong></p>
+
+<blockquote>
+<p>Also applies to PaaS</p>
+</blockquote>
+
+</section><section>
+
+<h2 id="and-why-iac-why-is-it-a-devops-pillar">And why IaC? Why is it a Devops pillar?</h2>
+
+</section><section>
+
+<p><span class='fragment '
+  >
+  Allows appling the same patterns than apps code
+</span></p>
+
+<p><span class='fragment '
+  >
+  Enhances collaboration and tracking
+</span></p>
+
+<p><span class='fragment '
+  >
+  Makes infra reproducible
+</span></p>
+
+</section>
+</section><section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="iac-and-cloud">IaC and Cloud</h2>
+
+</section><section>
+
+<h3 id="iac-and-cloud-1">IaC and Cloud</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>RAW IaC and SDKs</td>
+</tr>
+
+<tr>
+<td>Playing with stacks</td>
+</tr>
+
+<tr>
+<td>Stacks management with code</td>
+</tr>
+
+<tr>
+<td>Multi-Cloud</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="raw-iac-and-sdks">RAW IaC and SDKs</h2>
+
+</section><section>
+
+<h2 id="clis-and-scripting">CLIs and scripting</h2>
+
+<pre><code class="language-bash">#!/bin/bash
+
+aws elb create-load-balancer --load-balancer-name MyLoadBalancer \
+  --listeners &quot;Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80&quot; \
+  --availability-zones us-east-1a
+
+for i in `seq 1 2`; do
+  EC2_RUN_RESULT=$(ec2-run-instances --instance-type t2.micro --group default --region us-east-1 --key $EC2_INSTANCE_KEY --user-data-file instance_installs.sh ami-5244a300)
+  INSTANCE_NAME=$(echo ${EC2_RUN_RESULT} | sed 's/RESERVATION.*INSTANCE //' | sed 's/ .*//')$i
+  times=0
+  echo
+  while [ 5 -gt $times ] &amp;&amp; ! ec2-describe-instances $INSTANCE_NAME | grep -q &quot;running&quot;
+  do
+    times=$(( $times + 1 ))
+    echo Attempt $times at verifying $INSTANCE_NAME is running...
+  done
+  if [ 5 -eq $times ]; then
+    echo Instance $INSTANCE_NAME is not running. Exiting...
+    exit
+  fi
+
+  aws elb register-instances-with-load-balancer --load-balancer-name MyLoadBalancer --instances $INSTANCE_NAME
+done
+</code></pre>
+
+</section><section>
+
+<h2 id="api-calls">API calls</h2>
+
+<pre><code class="language-python">import boto3
+
+s3 = boto3.client('s3')
+bucket_name = 'my-bucket'
+s3.create_bucket(bucket_name)
+filename = 'file.txt'
+s3.upload_file(filename, bucket_name, filename)
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="playing-with-stacks">Playing with stacks</h2>
+
+</section><section>
+
+<h2 id="cloudformation">Cloudformation</h2>
+
+<pre><code class="language-json">{
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: {
+        &quot;S3Bucket&quot;: {
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+        },
+    },
+    &quot;Outputs&quot;: {
+        &quot;S3BucketSecureURL&quot;: {
+            &quot;Value&quot;: {
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;https://&quot;,
+                        {
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;S3Bucket&quot;,
+                                &quot;DomainName&quot;
+                            ]
+                        }
+                    ]
+                ]
+            },
+            &quot;Description&quot;: &quot;Name of S3 bucket&quot;
+        }
+    }
+}
+</code></pre>
+
+</section><section>
+
+<h2 id="google-deployment-manager">Google deployment manager</h2>
+
+<pre><code class="language-yaml">resources:
+- type: storage.v1.bucket
+  name: test-bucket
+  properties:
+    project: my-project
+    name: test-bucket-name
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="stacks-management-with-code">Stacks management with code</h2>
+
+</section><section>
+
+<h2 id="troposphere">Troposphere</h2>
+
+<pre><code class="language-python">from troposphere
+import Output, Ref, Template
+from troposphere.s3
+import Bucket, PublicRead
+
+t = Template()
+
+t.add_description(
+  &quot;AWS CloudFormation Sample Template”
+
+s3bucket = t.add_resource(Bucket(&quot;S3Bucket&quot;, AccessControl = PublicRead, ))
+
+t.add_output(Output(
+  &quot;BucketName&quot;,
+  Value = Ref(s3bucket),
+  Description = &quot;Name of S3 bucket to hold website content&quot;
+))
+
+print(t.to_json())
+</code></pre>
+
+</section><section>
+
+<h2 id="aws-cdk">AWS CDK</h2>
+
+<p>Amazon Cloud Development Kit</p>
+
+<pre><code class="language-python">from aws_cdk import (
+    aws_s3 as s3,
+    cdk
+)
+
+bucket = s3.Bucket(self,
+    &quot;MyFirstBucket&quot;,
+    versioned=True,
+    encryption=s3.BucketEncryption.KmsManaged,)
+</code></pre>
+
+<p><span class='fragment '
+  >
+  <em>troposphere, but multi-language plus &ldquo;building blocks&rdquo;</em>
+</span></p>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="multi-cloud">Multi-Cloud</h2>
+
+</section><section>
+
+<h2 id="terraform">Terraform</h2>
+
+<pre><code class="language-hcl">provider &quot;aws&quot; {
+  region = &quot;us-west-2&quot;
+}
+
+resource &quot;aws_s3_bucket&quot; &quot;example&quot; {
+  bucket = &quot;my-test-s3-terraform-bucket&quot;
+  acl = &quot;private&quot;
+  versioning {
+    enabled = true
+  }
+
+  tags {
+    Name = &quot;my-test-s3-terraform-bucket&quot;
+  }
+}
+</code></pre>
+
+</section><section>
+
+<h2 id="pulumi">Pulumi</h2>
+
+<pre><code class="language-go">package main
+import (
+    &quot;github.com/pulumi/pulumi-gcp/sdk/go/gcp/storage&quot;
+    &quot;github.com/pulumi/pulumi/sdk/go/pulumi&quot;
+)
+
+func main() {
+    pulumi.Run(func(ctx *pulumi.Context) error {
+        // NewBucket already adds a random suffix
+        bucket, err := storage.NewBucket(ctx, &quot;pulumi-bucket&quot;, &amp;storage.BucketArgs{
+            Location: &quot;EU&quot;,
+            })
+        if err != nil {
+            return err
+        }
+        ctx.Export(&quot;bucketName&quot;, bucket.ID())
+        ctx.Export(&quot;websiteUrl&quot;, bucket.Url())
+        return nil
+    })
+}
+</code></pre>
+
+</section>
+</section><section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="iac-and-kubernetes">IaC and Kubernetes</h2>
+
+</section><section>
+
+<h3 id="iac-and-kubernetes-1">IaC and Kubernetes</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Kubernetes</td>
+</tr>
+
+<tr>
+<td>K8s, Cloud providers and operators</td>
+</tr>
+
+<tr>
+<td>Is there a future without YAML?</td>
+</tr>
+
+<tr>
+<td>Closure</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="k8s">k8s</h2>
+
+</section><section>
+
+<h2 id="objects-objects-and-objects">Objects, objects and objects&hellip;</h2>
+
+<p><img src="images/k8s.png" alt="" /></p>
+
+</section><section>
+
+<h2 id="describing-objects-with-yamls">Describing objects with YAMLs</h2>
+
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre>
+
+</section><section>
+
+<h2 id="helm">Helm</h2>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template &quot;alpine.fullname&quot; . }}
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template &quot;alpine.name&quot; . }}
+spec:
+  restartPolicy: {{ .Values.restartPolicy }}
+  containers:
+  - name: waiter
+    image: &quot;{{ .Values.image.repository }}:{{ .Values.image.tag }}&quot;
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command: [&quot;/bin/sleep&quot;, &quot;9000&quot;]
+</code></pre>
+
+</section><section>
+
+<h2 id="kustomize">kustomize</h2>
+
+<p><code>kustomization.yaml</code>:</p>
+
+<pre><code class="language-yaml">   commonLabels:
+    env: production
+   bases:
+   - ../../base
+   patches:
+   - replica_count.yaml
+</code></pre>
+
+<p><code>replica_count.yaml</code>:</p>
+
+<pre><code class="language-yaml">   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: the-deployment
+   spec:
+     replicas: 100
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="k8s-cloud-providers-and-operators">K8s, Cloud providers and operators</h2>
+
+</section><section>
+
+<p><img src="images/operators.png" alt="" /></p>
+
+</section><section>
+
+<p><img src="images/operatorHub.png" alt="" /></p>
+
+</section><section>
+
+<pre><code class="language-yaml">apiVersion: service-operator.aws/v1alpha1
+kind: DynamoDB
+metadata:
+  name: dynamo-table
+spec:
+  hashAttribute:
+    name: name
+    type: S
+  rangeAttribute:
+    name: created_at
+    type: S
+  readCapacityUnits: 5
+  writeCapacityUnits: 5
+</code></pre>
+
+</section><section>
+
+<p><img src="images/crossplaneArch.png" alt="" /></p>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="is-there-a-future-without-yaml">Is there a future without YAML?</h2>
+
+<p><img src="images/yaml.JPG" alt="" /></p>
+
+</section><section>
+
+<h2 id="where-are-we">Where are we?</h2>
+
+</section><section>
+
+<p>Build/deployment tools describing and pushing infrastructure changes</p>
+
+</section><section>
+
+<p>We can still consume SDKs/APIs!</p>
+
+</section><section>
+
+<p>And we are also able to generate config programmatically&hellip;</p>
+
+</section><section>
+
+<p><img src="https://media.giphy.com/media/QWRiuQHRYM3WLB1zBs/giphy-downsized.gif" alt="" /></p>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="closure">Closure</h2>
+
+</section><section>
+
+<h2 id="final-remarks">Final remarks</h2>
+
+<p><span class='fragment '
+  >
+  IaC plays an important role in Devops and cloud apps
+</span></p>
+
+<p><span class='fragment '
+  >
+  PaaS and k8s still require IaC
+</span></p>
+
+<p><span class='fragment '
+  >
+  There are plenty of IaC options
+</span></p>
+
+<p><span class='fragment '
+  >
+  More abstraction layers to interact with Cloud providers are still being added
+</span></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Thanks.png"></p>
+
+</section>
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
+</section>
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/slides/200428_KTH_IaC/reveal-hugo/object-assign.js></script>
+
+<a href="/slides/200428_KTH_IaC/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"solarized-custom.css","slide_number":true}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"subtitle":{"background":"#f7cbbf","class":"subtitle"},"title":{"background":"#4d163b","class":"title"}}}</script>
+
+<script src="/slides/200428_KTH_IaC/reveal-js/lib/js/head.min.js"></script>
+<script src="/slides/200428_KTH_IaC/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/lib/js/classList.js"></script>
+
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/plugin/markdown/marked.js"></script>
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/plugin/markdown/markdown.js"></script>
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/plugin/highlight/highlight.js"></script>
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/plugin/zoom-js/zoom.js"></script>
+
+
+<script type="text/javascript" src="/slides/200428_KTH_IaC/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+<script type="text/javascript">
+if (hljs)
+  hljs.initHighlightingOnLoad();
+</script>
+    
+    
+  </body>
+</html>
