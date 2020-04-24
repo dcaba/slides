@@ -9,7 +9,9 @@
 
 ---
 
-| Slot 1 |
+### IaC and Infrastructure
+
+|  |
 |---|
 | Welcome |
 | Apps and infrastructure |
@@ -17,7 +19,9 @@
 
 ---
 
-| Slot 2 |
+### IaC and Cloud
+
+|  |
 |---|
 | RAW IaC and SDKs |
 | Playing with stacks |
@@ -26,14 +30,20 @@
 
 ---
 
-| Slot 3 |
+### IaC and Kubernetes
+
+|  |
 |---|
 | Kubernetes |
 | K8s, Cloud providers and operators |
 | YAMLs... Where are we going? |
 | Closure |
 
+{{% /section %}}
+
 ---
+
+{{% section %}}
 
 ## Who are you?
 

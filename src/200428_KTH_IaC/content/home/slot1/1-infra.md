@@ -5,68 +5,72 @@
 
 {{< slide template="subtitle" >}}
 
-## Infra, cloud and applications
+## IaC and Infrastructure
 
 ---
 
-*Cloud is about others managing your infra, right? Why should we care?*
+## Distributed systems are here to stay
+
+![](images/Datacenter-Diagram_thumb.png)
 
 ---
 
-*And Kubernetes abstracts you from Infra, right?*
-
-<img src=images/allYouNeed.jpg style="width:40%;">
+**And we don't want to manage them "by hand"**
 
 ---
 
-## Positioning infra vs applications
+**Dynamic infrastructure** was possible in on-premises platforms thanks to:
 
-```
-                                                    +-----------+ +------------+
-                                                    |Configured | |Provisioned |
-  +-----+  +----------+   +-------+    +---------+  |  Queue    | |   Bucket   |
-  |My   |  |My        |   |       |    |         |  +-----------+ +------------+
-  |DNS  |  |configured|   |  APP  |    |   APP   |        +------------+        
-  |zones|  |LB        |   |       |    |         |        |    SQL     |        
-  +-----+  +----------+   +-------+    +---------+        |  Instance  |        
-                                                          +------------+        
-+---------+ +---------+ +-----------+ +-----------+ +--------------------------+
-|         | |         | |           | |           | |        ||       ||       |
-|         | |         | |    K8s    | |           | |        ||       ||       |
-|         | |         | |  clusters | |  My VMs   | |Managed ||Managed||       |
-| Managed | | Managed | |           | | clusters  | |Queues  ||  DBs  ||Object |
-|   DNS   | |   LBs   | +-----------+ |           | |  and   || (SQL  ||Storage|
-|         | |         | |  Managed  | +-----------+ |Streams || noSQL)||       |
-|         | |         | |    K8s    | |    VM     | |        ||       ||       |
-|         | |         | |    API    | | templates | |        ||       ||       |
-+---------+ +---------+ +-----------+ +-----------+ +--------------------------+
-+---------------------+ +-------------------------+ +--------------------------+
-|                     | |                         | |                          |
-|   Network offering  | |    Compute offering     | |     Storage offering     |
-|                     | |                         | |                          |
-+---------------------+ +-------------------------+ +--------------------------+
-+------------------------------------------------------------------------------+
-|                                                                              |
-|                    Your cloud (infrastructure) provider                      |
-|                                                                              |
-+------------------------------------------------------------------------------+
-```
+* Configuration management systems
+* Vendors CLIs and APIs
+* Tons of scripting
 
 ---
 
-## So...
+**IaC is not a new concept**
 
-{{% fragment %}} **Your app is not very useful in isolation...** {{% /fragment %}}
-
-{{% fragment %}} **So your app depends on a specific infra configuration...** {{% /fragment %}}
-{{% fragment %}} *including kubernetes* {{% /fragment %}}
-
-{{% fragment %}} **And you probably want to use IaC** {{% /fragment %}}
+> We previously called that infra automation/orchestration
 
 ---
 
-![](https://media.giphy.com/media/aZ3LDBs1ExsE8/giphy.gif)
+{{< slide background-image="images/Clouds-with-Ladder-Photo-Datrium-Solutions.jpg" >}}
 
-*Fuck, Infra is everywhere*
+> **But Cloud is about others managing your infra, right? Why should we care?**
+
+---
+
+![](images/multi-region-web-app-diagram.png)
+
+---
+
+> Cloud brings big services' portfolios you can compose to build your Internet-scale platform
+
+![](images/puzzle.jpg)
+
+---
+
+**And a plus: consistency across components**
+
+* Authentication / permissions management (IAM)
+* APIs
+* SDKs / libs to interact with them
+
+---
+
+But **apps still require a specific infrastructure configuration**
+
+> Also applies to PaaS
+
+---
+
+## And why IaC? Why is it a Devops pillar?
+
+---
+
+{{% fragment %}} Allows appling the same patterns than apps code {{% /fragment %}}
+
+{{% fragment %}} Enhances collaboration and tracking {{% /fragment %}}
+
+{{% fragment %}} Makes infra reproducible {{% /fragment %}}
 
 {{% /section %}}
