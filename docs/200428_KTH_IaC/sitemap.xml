@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/intro/0-intro/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot1/1-infra/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot2/2_iac/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/3-k8s/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-closure/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/home/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/200428_KTH_IaC/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on </title>
+    <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/</link>
+    <description>Recent content in Homes on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://dcaba.github.io/slides/200428_KTH_IaC/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/intro/0-intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/intro/0-intro/</guid>
+      <description>Agenda IaC and Infrastructure         Welcome   Apps and infrastructure   Dynamic infra and Cloud providers    IaC and Cloud         RAW IaC and SDKs   Playing with stacks   Multi-Cloud   Stacks management with code    IaC and Kubernetes         Kubernetes   K8s, Cloud providers and operators   YAMLs&amp;hellip; Where are we going?</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot1/1-infra/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot1/1-infra/</guid>
+      <description>IaC and Infrastructure Distributed systems are here to stay And we don&amp;rsquo;t want to manage them &amp;ldquo;by hand&amp;rdquo;
+Dynamic infrastructure was possible in on-premises platforms thanks to:
+ Configuration management systems Vendors CLIs and APIs Tons of scripting  IaC is not a new concept
+ We previously called that infra automation/orchestration
+  But Cloud is about others managing your infra, right? Why should we care?
+  Cloud brings big services&amp;rsquo; portfolios you can compose to build your Internet-scale platform</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot2/2_iac/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot2/2_iac/</guid>
+      <description>IaC and Cloud IaC and Cloud         RAW IaC and SDKs   Playing with stacks   Stacks management with code   Multi-Cloud     RAW IaC and SDKs CLIs and scripting #!/bin/bash aws elb create-load-balancer --load-balancer-name MyLoadBalancer \ --listeners &amp;quot;Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80&amp;quot; \ --availability-zones us-east-1a for i in `seq 1 2`; do EC2_RUN_RESULT=$(ec2-run-instances --instance-type t2.micro --group default --region us-east-1 --key $EC2_INSTANCE_KEY --user-data-file instance_installs.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/3-k8s/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/3-k8s/</guid>
+      <description>IaC and Kubernetes IaC and Kubernetes         Kubernetes   K8s, Cloud providers and operators   Is there a future without YAML?   Closure     k8s Objects, objects and objects&amp;hellip; Describing objects with YAMLs apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment labels: app: nginx spec: replicas: 3 selector: matchLabels: app: nginx template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-closure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-closure/</guid>
+      <description>Closure Final remarks IaC plays an important role in Devops and cloud apps 
+PaaS and k8s still require IaC 
+There are plenty of IaC options 
+More abstraction layers to interact with Cloud providers are still being added 
+ </description>
+    </item>
+    
+  </channel>
+</rss>
