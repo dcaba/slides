@@ -7,13 +7,17 @@ Basic pandoc wrapper to generate slides using markdown, as well as slides the au
 [HIGH VOLUME WEB SERVICES, MAXCONNECTIONS AND TCPGOON](http://dcaba.github.io/slides/171218_tcpgoonAtBcnNetworkMeetup/)
 * [Yet Another Image Transformation Service At High Scale Using Golang](https://dcaba.github.io/slides/180612_transformingImagesAtScaleWithGo/)
 at [Barcelona Golang Meetup](https://www.meetup.com/es-ES/Golang-Barcelona/events/252114527/)
-* [Schibsted YAMS or how to build and maintain a thousands req/s service with minimal dedication](https://dcaba.github.io/slides/181119_yamsServiceAndOps) 
+* [Schibsted YAMS or how to build and maintain a thousands req/s service with minimal dedication](https://dcaba.github.io/slides/181119_yamsServiceAndOps)
 at [DevOpsDays Warsaw](https://devopsdays.pl/)
-* [CHROOTED MEDIA SERVER MADE EASY](https://dcaba.github.io/slides/190326_dockerBirthday) for 
+* [CHROOTED MEDIA SERVER MADE EASY](https://dcaba.github.io/slides/190326_dockerBirthday) for
 [Docker Bday #6](https://events.docker.com/events/details/docker-barcelona-presents-docker-bday-6-how-do-you-docker/)
 * [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190605_doxelona_IaC) at [Devops Exchange Barcelona meetup](https://www.meetup.com/es-ES/devops-exchange-barcelona/events/261831097)
+* [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190620_devopsExchange_IaC) at [Devops Exchange London](https://www.youtube.com/watch?v=Yp9YdscJ2eg)
+* [Cloud Providers and the IaC hell](https://dcaba.github.io/slides/200428_KTH_IaC/) at KTH Royal Institute of Technology in Stockholm
 
 ## How can I use it?
+
+*This information is quite outdated: 2019/2020 presentations are being rendered by hugo*
 
 * fork()TM
 * create a folder under src/ for your slides
@@ -25,6 +29,8 @@ at [DevOpsDays Warsaw](https://devopsdays.pl/)
 	* If no parameter is provided, will iterate over all subdirs
 
 ## How does it work?
+
+*This information is quite outdated: 2019/2020 presentations are being rendered by hugo*
 
 * uses pandoc to convert from markup to html5 slides
 * reveal.js is used and included in the repo
