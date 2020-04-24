@@ -208,6 +208,7 @@
 <ul>
 <li>Configuration management systems</li>
 <li>Vendors CLIs and APIs</li>
+<li>Virtualization</li>
 <li>Tons of scripting</li>
 </ul>
 
@@ -264,10 +265,7 @@
 
 </section><section>
 
-<p><span class='fragment '
-  >
-  Allows appling the same patterns than apps code
-</span></p>
+<p>Allows applying the same patterns than apps code</p>
 
 <p><span class='fragment '
   >
@@ -579,7 +577,7 @@ func main() {
 
 </section><section>
 
-<h2 id="describing-objects-with-yamls">Describing objects with YAMLs</h2>
+<h2 id="describing-objects-with-yaml">Describing objects with YAML</h2>
 
 <pre><code class="language-yaml">apiVersion: apps/v1
 kind: Deployment
@@ -668,6 +666,14 @@ spec:
 
 </section><section>
 
+<h2 id="use-case-k8s-management-with-gitops">Use case: k8s management with GitOps</h2>
+
+<p><img src="images/flux-cd-diagram.png" alt="" /></p>
+
+</section><section>
+
+<h2 id="use-case-managing-external-resources">Use case: managing external resources</h2>
+
 <pre><code class="language-yaml">apiVersion: service-operator.aws/v1alpha1
 kind: DynamoDB
 metadata:
@@ -688,21 +694,46 @@ spec:
 <p><img src="images/crossplaneArch.png" alt="" /></p>
 
 </section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="is-there-a-future-without-yaml">Is there a future without YAML?</h2>
 
 </section><section>
-
-<section data-shortcode-section>
-<h2 id="is-there-a-future-without-yaml">Is there a future without YAML?</h2>
 
 <p><img src="images/yaml.JPG" alt="" /></p>
 
 </section><section>
 
-<h2 id="where-are-we">Where are we?</h2>
+<p>There are build/deployment tools describing and pushing infrastructure changes</p>
 
 </section><section>
 
-<p>Build/deployment tools describing and pushing infrastructure changes</p>
+<pre><code class="language-yaml"># serverless.yml
+
+service: usersCrud
+provider: aws
+functions:
+
+resources: # CloudFormation template syntax
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+</code></pre>
 
 </section><section>
 
@@ -710,7 +741,79 @@ spec:
 
 </section><section>
 
+<pre><code class="language-go">deployment := &amp;appsv1.Deployment{
+        ObjectMeta: metav1.ObjectMeta{
+            Name: &quot;demo-deployment&quot;,
+        },
+        Spec: appsv1.DeploymentSpec{
+            Replicas: int32Ptr(2),
+            Selector: &amp;metav1.LabelSelector{
+                MatchLabels: map[string]string{
+                    &quot;app&quot;: &quot;demo&quot;,
+                },
+            },
+            Template: apiv1.PodTemplateSpec{
+                ObjectMeta: metav1.ObjectMeta{
+                    Labels: map[string]string{
+                        &quot;app&quot;: &quot;demo&quot;,
+                    },
+                },
+                Spec: apiv1.PodSpec{
+                    Containers: []apiv1.Container{
+                        {
+                            Name:  &quot;web&quot;,
+                            Image: &quot;nginx:1.12&quot;,
+                            Ports: []apiv1.ContainerPort{
+                                {
+                                    Name:          &quot;http&quot;,
+                                    Protocol:      apiv1.ProtocolTCP,
+                                    ContainerPort: 80,
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    }
+
+</code></pre>
+
+</section><section>
+
 <p>And we are also able to generate config programmatically&hellip;</p>
+
+</section><section>
+
+<p>Terrascript:</p>
+
+<pre><code class="language-python">from terrascript import Terrascript, provider
+from terrascript.aws.r import aws_instance
+
+ts = Terrascript()
+
+# Add a provider (+= syntax)
+ts += provider('aws', access_key='ACCESS_KEY_HERE',
+               secret_key='SECRET_KEY_HERE', region='us-east-1')
+
+# Add an AWS EC2 instance (add() syntax).
+inst = ts.add(aws_instance('example', ami='ami-2757f631', instance_type='t2.micro'))
+
+# Print the JSON-style configuration to stdout.
+print(ts.dump())
+</code></pre>
+
+</section><section>
+
+<p>While we may see Hashicorp reacting to actual &ldquo;code&rdquo;</p>
+
+<blockquote>
+<p><strong>AWS CDK</strong> and <strong>Pulumi</strong></p>
+</blockquote>
+
+</section><section>
+
+<p><img src="images/infraLayers.png" style="width:68%;"></p>
 
 </section><section>
 
@@ -746,7 +849,7 @@ spec:
 
 <p><span class='fragment '
   >
-  More abstraction layers to interact with Cloud providers are still being added
+  More abstraction layers to interact with Infra/Compute platforms are still being added
 </span></p>
 
 </section>

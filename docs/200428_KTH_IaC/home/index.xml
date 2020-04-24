@@ -27,7 +27,7 @@
       <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot1/1-infra/</guid>
       <description>IaC and Infrastructure Distributed systems are here to stay And we don&amp;rsquo;t want to manage them &amp;ldquo;by hand&amp;rdquo;
 Dynamic infrastructure was possible in on-premises platforms thanks to:
- Configuration management systems Vendors CLIs and APIs Tons of scripting  IaC is not a new concept
+ Configuration management systems Vendors CLIs and APIs Virtualization Tons of scripting  IaC is not a new concept
  We previously called that infra automation/orchestration
   But Cloud is about others managing your infra, right? Why should we care?
   Cloud brings big services&amp;rsquo; portfolios you can compose to build your Internet-scale platform</description>
@@ -48,19 +48,30 @@ Dynamic infrastructure was possible in on-premises platforms thanks to:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/3-k8s/</guid>
-      <description>IaC and Kubernetes IaC and Kubernetes         Kubernetes   K8s, Cloud providers and operators   Is there a future without YAML?   Closure     k8s Objects, objects and objects&amp;hellip; Describing objects with YAMLs apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment labels: app: nginx spec: replicas: 3 selector: matchLabels: app: nginx template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.</description>
+      <description>IaC and Kubernetes IaC and Kubernetes         Kubernetes   K8s, Cloud providers and operators   Is there a future without YAML?   Closure     k8s Objects, objects and objects&amp;hellip; Describing objects with YAML apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment labels: app: nginx spec: replicas: 3 selector: matchLabels: app: nginx template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-closure/</link>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-future/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-closure/</guid>
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/4-future/</guid>
+      <description>Is there a future without YAML? There are build/deployment tools describing and pushing infrastructure changes
+# serverless.yml service: usersCrud provider: aws functions: resources: # CloudFormation template syntax Resources: usersTable: Type: AWS::DynamoDB::Table Properties: TableName: usersTable AttributeDefinitions: - AttributeName: email AttributeType: S KeySchema: - AttributeName: email KeyType: HASH ProvisionedThroughput: ReadCapacityUnits: 1 WriteCapacityUnits: 1  We can still consume SDKs/APIs!
+deployment := &amp;amp;appsv1.Deployment{ ObjectMeta: metav1.ObjectMeta{ Name: &amp;quot;demo-deployment&amp;quot;, }, Spec: appsv1.DeploymentSpec{ Replicas: int32Ptr(2), Selector: &amp;amp;metav1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/5-closure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/200428_KTH_IaC/home/slot3/5-closure/</guid>
       <description>Closure Final remarks IaC plays an important role in Devops and cloud apps 
 PaaS and k8s still require IaC 
 There are plenty of IaC options 
-More abstraction layers to interact with Cloud providers are still being added 
+More abstraction layers to interact with Infra/Compute platforms are still being added 
  </description>
     </item>
     
