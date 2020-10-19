@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/intro/0-welcome/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/intro/1-intro/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/slot1/2_iac/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/slot2/3-k8s/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/slot2/4-paas/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/slot3/5-comp/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/z_closure/6-closure/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/home/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://dcaba.github.io/slides/201020_OSAD/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
