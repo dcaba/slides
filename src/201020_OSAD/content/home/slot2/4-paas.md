@@ -5,7 +5,7 @@
 
 {{< slide template="subtitle" >}}
 
-## PaaS?
+## IaC and PaaS
 
 ---
 

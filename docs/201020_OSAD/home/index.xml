@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dcaba.github.io/slides/201020_OSAD/home/intro/0-welcome/</guid>
-      <description>Welcome Agenda         Introduction   IaC and Cloud   IaC and k8s   PaaS?   Config vs Code   Closure    Daniel Caballero Rodríguez
+      <description>Welcome Agenda         Introduction   IaC and Cloud   IaC and k8s   IaC and PaaS   Config vs Code   Closure    Daniel Caballero Rodríguez
  Principal SRE Engineer @ Fastly Previously part time (Devops) lecturer @ La Salle University, Devops @ Schibsted (now Adevinta - behind Shpock and Willhaben), NTT, Oracle&amp;hellip; Eventual OSS contributions (see tcpgoon)   </description>
     </item>
     
@@ -62,7 +62,7 @@ Composition of cloud services may be challenging</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot2/4-paas/</guid>
-      <description>PaaS? They normally come with build/deployment tools describing and pushing infrastructure changes
+      <description>IaC and PaaS They normally come with build/deployment tools describing and pushing infrastructure changes
 # serverless.yml service: usersCrud provider: aws functions: resources: # CloudFormation template syntax Resources: usersTable: Type: AWS::DynamoDB::Table Properties: TableName: usersTable AttributeDefinitions: - AttributeName: email AttributeType: S KeySchema: - AttributeName: email KeyType: HASH ProvisionedThroughput: ReadCapacityUnits: 1 WriteCapacityUnits: 1   </description>
     </item>
     
@@ -87,7 +87,7 @@ Bucket creation example resource &amp;quot;google_storage_bucket&amp;quot; &amp;
       <description>Closure Final remarks IaC plays an important role in Devops and cloud apps 
 PaaS and k8s still require IaC 
 There are plenty of IaC options 
-Actual code avoids reinventing the wheel 
+Actual code let&amp;rsquo;s you avoid reinventing the wheel 
 Attributions  Crab nebula in Multiple Wavelenghts:  By Based on File:Crab Nebula in multiwavelength.png by Torres997 Radio: NRAO/AUI and M. Bietenholz; NRAO/AUI and J.M. Uson, T.J. Cornwell Infrared: NASA/JPL-Caltech/R. Gehrz (University of Minnesota)Visible: NASA, ESA, J.</description>
     </item>
     

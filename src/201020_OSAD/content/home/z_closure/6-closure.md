@@ -17,7 +17,7 @@
 
 {{% fragment %}}There are plenty of IaC options{{% /fragment %}}
 
-{{% fragment %}}Actual code avoids reinventing the wheel{{% /fragment %}}
+{{% fragment %}}Actual code let's you avoid reinventing the wheel{{% /fragment %}}
 
 ---
 

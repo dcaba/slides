@@ -16,7 +16,7 @@
 | Introduction |
 | IaC and Cloud |
 | IaC and k8s |
-| PaaS? |
+| IaC and PaaS |
 | Config vs Code |
 | Closure |
 
