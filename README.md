@@ -13,7 +13,8 @@ at [DevOpsDays Warsaw](https://devopsdays.pl/)
 [Docker Bday #6](https://events.docker.com/events/details/docker-barcelona-presents-docker-bday-6-how-do-you-docker/)
 * [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190605_doxelona_IaC) at [Devops Exchange Barcelona meetup](https://www.meetup.com/es-ES/devops-exchange-barcelona/events/261831097)
 * [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190620_devopsExchange_IaC) at [Devops Exchange London](https://www.youtube.com/watch?v=Yp9YdscJ2eg)
-* [Cloud Providers and the IaC hell](https://dcaba.github.io/slides/200428_KTH_IaC/) at KTH Royal Institute of Technology in Stockholm
+* [Cloud Providers and the IaC hell](https://dcaba.github.io/slides/200428_KTH_IaC/) at [KTH Royal Institute of Technology in Stockholm](https://github.com/KTH/devops-course)
+* [Configuration templating vs configuration as code, 12th round](https://dcaba.github.io/slides/201020_OSAD/) at [OSAD 2020](https://osad-munich.org/en/)
 
 ## How can I use it?
 
