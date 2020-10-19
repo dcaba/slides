@@ -73,7 +73,7 @@ Composition of cloud services may be challenging</description>
       
       <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot3/5-comp/</guid>
       <description>Config vs Code How IaC looks like with&amp;hellip;
-Terraform 0.12 vs Pulumi 2 
+Terraform vs Pulumi 
 
 Bucket creation example resource &amp;quot;google_storage_bucket&amp;quot; &amp;quot;terraform-bucket&amp;quot; { name = &amp;quot;terraform-bucket-${random_id.suffix.dec}&amp;quot; location = &amp;quot;EU&amp;quot; website { main_page_suffix = &amp;quot;index.html&amp;quot; not_found_page = &amp;quot;404.html&amp;quot; } }  bucket, err := storage.NewBucket(ctx, &amp;quot;pulumi-bucket&amp;quot;, &amp;amp;storage.BucketArgs{ Location: &amp;quot;EU&amp;quot;, Websites: []map[string]string{ map[string]string{ &amp;quot;main_page_suffix&amp;quot;: &amp;quot;index.html&amp;quot;, &amp;quot;not_found_page&amp;quot;: &amp;quot;404.html&amp;quot;, }, }, })  TF &amp;amp; provider specific config&amp;hellip; resource &amp;quot;google_container_cluster&amp;quot; &amp;quot;stackstorm-cluster&amp;quot; { name = &amp;quot;stackstorm-${var.environment}&amp;quot; zone = &amp;quot;us-central1-a&amp;quot; min_master_version = &amp;quot;${data.</description>
     </item>

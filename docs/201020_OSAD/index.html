@@ -821,7 +821,7 @@ resources: # CloudFormation template syntax
 
 <p><span class='fragment '
   >
-  <strong>Terraform 0.12 vs Pulumi 2</strong>
+  <strong>Terraform vs Pulumi</strong>
 </span></p>
 
 <p><span class='fragment '
@@ -1005,6 +1005,37 @@ resource &quot;aws_launch_configuration&quot; &quot;example&quot; {
 
 </section><section>
 
+<h3 id="and-fresh-news">And, fresh news!</h3>
+
+<p>pulumi <a href="https://www.pulumi.com/blog/automation-api/">automation-api</a> lets you push stack changes also from code:</p>
+
+<pre><code class="language-go">func NewAddCmd() *cobra.Command {
+    return &amp;cobra.Command{
+        Use:   &quot;add&quot;,
+        Short: &quot;add deploys an additional vm stack&quot;,
+        Run: func(cmd *cobra.Command, args []string) {
+                stackName := fmt.Sprintf(&quot;vmgr%d&quot;, rangeIn(10000000, 99999999))
+                s, err := auto.NewStackInlineSource(ctx, stackName, projectName, nil /* Program */)
+                fmt.Println(&quot;ensuring network is configured...&quot;)
+                subnetID, rgName, err := EnsureNetwork(ctx, projectName)
+                stack.SetProgram(GetDeployVMFunc(subnetID, rgName))
+                fmt.Println(&quot;deploying vm...&quot;)
+                stdoutStreamer := optup.ProgressStreams(os.Stdout)
+
+                res, err := s.Up(ctx, stdoutStreamer)
+                if err != nil {
+                    fmt.Printf(&quot;Failed to deploy vm stack: %v\n&quot;, err)
+                    os.Exit(1)
+                }
+                fmt.Printf(&quot;deployed server running at public IP %s\n&quot;, res.Outputs[&quot;ip&quot;].Value)
+            },
+        }
+    }
+}
+</code></pre>
+
+</section><section>
+
 <h3 id="some-advantages-of-using-code">Some advantages of using Code!</h3>
 
 <ul>
@@ -1019,7 +1050,7 @@ resource &quot;aws_launch_configuration&quot; &quot;example&quot; {
 <ul>
 <li><a href="https://www.pulumi.com/docs/guides/testing/"><em>Pulumi testing guide</em></a></li>
 </ul></li>
-<li>Config pre-checks</li>
+<li>Capacity to create complex workflows, including config pre-checks</li>
 <li>Applying clean code practices</li>
 <li>Easier to engage developers?</li>
 </ul>
@@ -1031,7 +1062,7 @@ resource &quot;aws_launch_configuration&quot; &quot;example&quot; {
 </section><section>
 
 <blockquote>
-<p>why reinventing the wheel on top of configuration languages?</p>
+<p>why reinventing software-mgmt patterns on top of configuration languages?</p>
 </blockquote>
 
 </section>

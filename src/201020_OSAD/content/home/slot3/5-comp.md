@@ -11,7 +11,7 @@
 
 How IaC looks like with...
 
-{{% fragment %}}**Terraform 0.12 vs Pulumi 2** {{% /fragment %}}
+{{% fragment %}}**Terraform vs Pulumi** {{% /fragment %}}
 
 {{% fragment %}}![](https://media.giphy.com/media/u4th4weIsJfuE/200w_d.gif){{% /fragment %}}
 
@@ -195,6 +195,38 @@ class RedirectLB:
 
 ---
 
+### And, fresh news!
+
+pulumi [automation-api](https://www.pulumi.com/blog/automation-api/) lets you push stack changes also from code:
+
+```go
+func NewAddCmd() *cobra.Command {
+    return &cobra.Command{
+        Use:   "add",
+        Short: "add deploys an additional vm stack",
+        Run: func(cmd *cobra.Command, args []string) {
+                stackName := fmt.Sprintf("vmgr%d", rangeIn(10000000, 99999999))
+                s, err := auto.NewStackInlineSource(ctx, stackName, projectName, nil /* Program */)
+                fmt.Println("ensuring network is configured...")
+                subnetID, rgName, err := EnsureNetwork(ctx, projectName)
+                stack.SetProgram(GetDeployVMFunc(subnetID, rgName))
+                fmt.Println("deploying vm...")
+                stdoutStreamer := optup.ProgressStreams(os.Stdout)
+
+                res, err := s.Up(ctx, stdoutStreamer)
+                if err != nil {
+                    fmt.Printf("Failed to deploy vm stack: %v\n", err)
+                    os.Exit(1)
+                }
+                fmt.Printf("deployed server running at public IP %s\n", res.Outputs["ip"].Value)
+            },
+        }
+    }
+}
+```
+
+---
+
 ### Some advantages of using Code!
 
 * Abstraction, re-usability and extensibility via standard programming languages capabilities
@@ -202,7 +234,7 @@ class RedirectLB:
   * *Modules, packages, dep management...*
 * Testing
   * [*Pulumi testing guide*](https://www.pulumi.com/docs/guides/testing/)
-* Config pre-checks
+* Capacity to create complex workflows, including config pre-checks
 * Applying clean code practices
 * Easier to engage developers?
 
@@ -212,6 +244,6 @@ So...
 
 ---
 
-> why reinventing the wheel on top of configuration languages?
+> why reinventing software-mgmt patterns on top of configuration languages?
 
 {{% /section %}}
