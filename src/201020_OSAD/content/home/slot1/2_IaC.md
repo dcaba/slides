@@ -258,5 +258,22 @@ func main() {
     })
 }
 ```
+{{% /section %}}
+
+---
+
+{{% section %}}
+
+**Summarizing (some) IaC options**
+
+| Tool           | Provider   | Declarative? | Deployment tool? | Config-driven | Programmatic | Language       |
+|----------------|:----------:|:------------:|:----------------:|:-------------:|:------------:|:--------------:|
+| AWS API        | AWS-only   |      N       |         N        |       N       |      Y       |    N/A         |
+| Cloudformation | AWS-only   |      Y       | More or less     |       Y       |      N       | JSON/YAML      |
+| Troposphere    | AWS-only   |      Y       |         N        |       N       |      Y       |    Python      |
+| CDK            | AWS-only   |      Y       |         Y        |       N       |      Y       |    Multiple    |
+| Terraform      | Multiple   |      Y       |         Y        |       Y       |      N       | HCL, JSON(v12) |
+| Terrascript    | Multiple   |      Y       |         N        |       N       |      Y       |    Python      |
+| Pulumi         | Multiple   |      Y       |         Y        |       N       |      Y       |    Multiple    |
 
 {{% /section %}}
