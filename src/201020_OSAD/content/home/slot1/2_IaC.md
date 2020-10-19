@@ -80,7 +80,7 @@ s3.upload_file(filename, bucket_name, filename)
 
 ---
 
-## Cloudformation
+### Cloudformation
 
 ```json
 {
@@ -114,7 +114,7 @@ s3.upload_file(filename, bucket_name, filename)
 
 ---
 
-## Google deployment manager
+### Google deployment manager
 
 ```yaml
 resources:
@@ -135,7 +135,11 @@ resources:
 
 ---
 
-## Troposphere
+*Note: it is code, but it is not imperative*
+
+---
+
+### Troposphere
 
 ```python
 from troposphere
@@ -161,7 +165,7 @@ print(t.to_json())
 
 ---
 
-## AWS CDK
+### AWS CDK
 
 Amazon Cloud Development Kit
 
@@ -189,7 +193,7 @@ bucket = s3.Bucket(self,
 
 ---
 
-## Terraform
+### Terraform
 
 ```hcl
 provider "aws" {
@@ -211,7 +215,26 @@ resource "aws_s3_bucket" "example" {
 
 ---
 
-## Pulumi
+### Terrascript
+
+```python
+import terrascript
+import terrascript.provider as provider
+import terrascript.resource as resource
+
+config = terrascript.Terrascript()
+
+config += provider.aws(version='~> 2.0', region='us-east-1')
+config += resource.aws_vpc('example', cidr_block='10.0.0.0/16')
+
+with open('config.tf.json', 'wt') as fp:
+    fp.write(str(config))
+
+```
+
+---
+
+### Pulumi
 
 ```go
 package main

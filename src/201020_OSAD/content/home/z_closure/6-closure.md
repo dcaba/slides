@@ -17,7 +17,7 @@
 
 {{% fragment %}}There are plenty of IaC options{{% /fragment %}}
 
-{{% fragment %}}More abstraction layers to interact with Infra/Compute platforms are still being added{{% /fragment %}}
+{{% fragment %}}Actual code avoids reinventing the wheel{{% /fragment %}}
 
 ---
 
@@ -33,13 +33,17 @@ Ultraviolet: NASA/Swift/E. Hoversten,
 PSUX-ray: NASA/CXC/SAO/F.Seward et al.
 Gamma: NASA/DOE/Fermi LAT/R. Buehler
 ```
+
 ---
 
-* RCW 86: X-ray: NASA/CXC/SAO & ESA; Infared: NASA/JPL-Caltech/B. Williams (NCSU)
+* RCW 86:
+  * *X-ray: NASA/CXC/SAO & ESA*
+  * *Infared: NASA/JPL-Caltech/B. Williams (NCSU)*
 
-* yaml logo: IYIKON from the Noun Project
+* yaml logo: *IYIKON from the Noun Project*
 
-* code logo: Andrejs Kirma from the Noun Project
+* code logo: *Andrejs Kirma from the Noun Project*
+
 ---
 
 {{< slide background-image="images/Thanks.png" >}}

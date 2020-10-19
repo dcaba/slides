@@ -5,46 +5,22 @@
 
 {{< slide template="subtitle" >}}
 
-## Agenda
+## Welcome
 
 ---
 
-### Introduction
+### Agenda
 
 |  |
 |---|
-| Welcome |
-| About me |
-| Context |
-| Objectives |
-
----
-
-### IaC and Cloud
-
-|  |
-|---|
-| RAW IaC and SDKs |
-| Playing with stacks |
-| Multi-Cloud |
-| Stacks management with code |
-
----
-
-### IaC and Kubernetes
-
-|  |
-|---|
-| Kubernetes |
-| K8s, Cloud providers and operators |
-| YAMLs... Where are we going? |
+| Introduction |
+| IaC and Cloud |
+| IaC and k8s |
+| PaaS? |
+| Config vs Code |
 | Closure |
 
-{{% /section %}}
-
 ---
-
-{{% section %}}
 
 <img src="images/about-me.jpg" style="border:0; box-shadow:none; ">
 
@@ -53,7 +29,7 @@
 [Daniel Caballero Rodríguez](https://www.linkedin.com/in/danicaba/)
 
 * Principal SRE Engineer @ **Fastly**
-* Previously part time (Devops) lecturer @ **La Salle University**, Devops @ **Schibsted (now Adevinta - behind Shpock and Willhaben)**,
+* Previously part time (Devops) lecturer @ **La Salle University**, Devops @ **Schibsted** (now Adevinta - behind **Shpock** and **Willhaben**),
 **NTT**, **Oracle**...
 * *Eventual OSS contributions* (see [tcpgoon](https://github.com/dachad/tcpgoon))
 

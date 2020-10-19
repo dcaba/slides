@@ -13,7 +13,7 @@
 
 ---
 
-**IaC is now a huge umbrella**
+**IaC as a huge umbrella**
 
 ---
 
@@ -41,9 +41,13 @@ Apps require a specific infrastructure/platform configuration
 
 {{% fragment %}} Advantages of "as code" approaches are now well known {{% /fragment %}}
 
+{{% /section %}}
+
 ---
 
-## Talk objectives
+{{% section %}}
+
+## Session objectives
 
 ---
 
@@ -55,7 +59,7 @@ Last year talk:
 
 * Configuration management (Puppet, Chef, Ansible...)
 
-* Immutable patterns with packer and terraform
+* Immutable infrastructure with packer and terraform
 
 ---
 
