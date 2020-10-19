@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on </title>
+    <link>https://dcaba.github.io/slides/201020_OSAD/home/</link>
+    <description>Recent content in Homes on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://dcaba.github.io/slides/201020_OSAD/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/intro/0-welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/intro/0-welcome/</guid>
+      <description>Welcome Agenda         Introduction   IaC and Cloud   IaC and k8s   PaaS?   Config vs Code   Closure    Daniel Caballero Rodríguez
+ Principal SRE Engineer @ Fastly Previously part time (Devops) lecturer @ La Salle University, Devops @ Schibsted (now Adevinta - behind Shpock and Willhaben), NTT, Oracle&amp;hellip; Eventual OSS contributions (see tcpgoon)   </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/intro/1-intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/intro/1-intro/</guid>
+      <description>IaC is not a new concept
+ We previously called that infra automation/orchestration
+ IaC as a huge umbrella
+&amp;hellip; and its limits are not so clear
+Plus there are still news in this area
+ The expanding shock waves of supernovae can trigger the formation of new stars
+ And its here to stay, as&amp;hellip;
+Apps require a specific infrastructure/platform configuration
+Infrastructure configuration is not a one-off 
+Composition of cloud services may be challenging</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/slot1/2_iac/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot1/2_iac/</guid>
+      <description>IaC and Cloud IaC and Cloud         RAW IaC and SDKs   Playing with stacks   Stacks management with code   Multi-Cloud     RAW IaC and SDKs CLIs and scripting #!/bin/bash aws elb create-load-balancer --load-balancer-name MyLoadBalancer \ --listeners &amp;quot;Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80&amp;quot; \ --availability-zones us-east-1a for i in `seq 1 2`; do EC2_RUN_RESULT=$(ec2-run-instances --instance-type t2.micro --group default --region us-east-1 --key $EC2_INSTANCE_KEY --user-data-file instance_installs.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/slot2/3-k8s/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot2/3-k8s/</guid>
+      <description>IaC and k8s IaC and k8s         k8s   k8s, Cloud providers and operators   But&amp;hellip; where is the code?     k8s Objects, objects and objects&amp;hellip; Describing objects with YAML apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment labels: app: nginx spec: replicas: 3 selector: matchLabels: app: nginx template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/slot2/4-paas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot2/4-paas/</guid>
+      <description>PaaS? They normally come with build/deployment tools describing and pushing infrastructure changes
+# serverless.yml service: usersCrud provider: aws functions: resources: # CloudFormation template syntax Resources: usersTable: Type: AWS::DynamoDB::Table Properties: TableName: usersTable AttributeDefinitions: - AttributeName: email AttributeType: S KeySchema: - AttributeName: email KeyType: HASH ProvisionedThroughput: ReadCapacityUnits: 1 WriteCapacityUnits: 1   </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/slot3/5-comp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/slot3/5-comp/</guid>
+      <description>Config vs Code How IaC looks like with&amp;hellip;
+Terraform vs Pulumi 
+
+Bucket creation example resource &amp;quot;google_storage_bucket&amp;quot; &amp;quot;terraform-bucket&amp;quot; { name = &amp;quot;terraform-bucket-${random_id.suffix.dec}&amp;quot; location = &amp;quot;EU&amp;quot; website { main_page_suffix = &amp;quot;index.html&amp;quot; not_found_page = &amp;quot;404.html&amp;quot; } }  bucket, err := storage.NewBucket(ctx, &amp;quot;pulumi-bucket&amp;quot;, &amp;amp;storage.BucketArgs{ Location: &amp;quot;EU&amp;quot;, Websites: []map[string]string{ map[string]string{ &amp;quot;main_page_suffix&amp;quot;: &amp;quot;index.html&amp;quot;, &amp;quot;not_found_page&amp;quot;: &amp;quot;404.html&amp;quot;, }, }, })  TF &amp;amp; provider specific config&amp;hellip; resource &amp;quot;google_container_cluster&amp;quot; &amp;quot;stackstorm-cluster&amp;quot; { name = &amp;quot;stackstorm-${var.environment}&amp;quot; zone = &amp;quot;us-central1-a&amp;quot; min_master_version = &amp;quot;${data.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dcaba.github.io/slides/201020_OSAD/home/z_closure/6-closure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dcaba.github.io/slides/201020_OSAD/home/z_closure/6-closure/</guid>
+      <description>Closure Final remarks IaC plays an important role in Devops and cloud apps 
+PaaS and k8s still require IaC 
+There are plenty of IaC options 
+Actual code avoids reinventing the wheel 
+Attributions  Crab nebula in Multiple Wavelenghts:  By Based on File:Crab Nebula in multiwavelength.png by Torres997 Radio: NRAO/AUI and M. Bietenholz; NRAO/AUI and J.M. Uson, T.J. Cornwell Infrared: NASA/JPL-Caltech/R. Gehrz (University of Minnesota)Visible: NASA, ESA, J.</description>
+    </item>
+    
+  </channel>
+</rss>

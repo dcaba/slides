@@ -1,0 +1,13 @@
+baseURL = "https://dcaba.github.io/slides/201020_OSAD"
+languageCode = "en-us"
+theme = "reveal-hugo"
+publishDir = "../../docs/201020_OSAD/"
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
+
+[params.reveal_hugo]
+custom_theme = "solarized-custom.css"
+slide_number = true

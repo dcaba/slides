@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.55.6" />
+    <meta charset="utf-8">
+<title>Configuration templating vs configuration as code, 12th round</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/slides/201020_OSAD/reveal-js/css/reveal.css"><link rel="stylesheet" href="/slides/201020_OSAD/solarized-custom.css" id="theme"><link rel="stylesheet" href="/slides/201020_OSAD/highlight-js/default.min.css">
+    <style>
+  .reveal section.side-by-side h1 {
+    position: absolute;
+  }
+  .reveal section.side-by-side h1:first-of-type {
+    left: 25%;
+  }
+  .reveal section.side-by-side h1:nth-of-type(2) {
+    right: 25%;
+  }
+
+  body:after {
+    content: url(images/Fastly_logo_2019_mini.png);
+    position: fixed;
+    bottom: 1em;
+    left: 1em;
+  }
+  </style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+    data-background="#4d163b"
+    class="title"
+    data-template="title"
+      data-background-image="images/Title.png">
+  
+
+<h1 id="configuration-templating-vs-configuration-as-code-12th-round">Configuration templating vs configuration as code, 12th round</h1>
+</section>
+
+  
+<section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="welcome">Welcome</h2>
+
+</section><section>
+
+<h3 id="agenda">Agenda</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Introduction</td>
+</tr>
+
+<tr>
+<td>IaC and Cloud</td>
+</tr>
+
+<tr>
+<td>IaC and k8s</td>
+</tr>
+
+<tr>
+<td>PaaS?</td>
+</tr>
+
+<tr>
+<td>Config vs Code</td>
+</tr>
+
+<tr>
+<td>Closure</td>
+</tr>
+</tbody>
+</table>
+
+</section><section>
+
+<p><img src="images/about-me.jpg" style="border:0; box-shadow:none; "></p>
+
+</section><section>
+
+<p><a href="https://www.linkedin.com/in/danicaba/">Daniel Caballero Rodríguez</a></p>
+
+<ul>
+<li>Principal SRE Engineer @ <strong>Fastly</strong></li>
+<li>Previously part time (Devops) lecturer @ <strong>La Salle University</strong>, Devops @ <strong>Schibsted</strong> (now Adevinta - behind <strong>Shpock</strong> and <strong>Willhaben</strong>),
+<strong>NTT</strong>, <strong>Oracle</strong>&hellip;</li>
+<li><em>Eventual OSS contributions</em> (see <a href="https://github.com/dachad/tcpgoon">tcpgoon</a>)</li>
+</ul>
+
+<p><img src="images/publicProfileSmall.jpg" style="width:27%;"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png"></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Map.png"></p>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/crab-nebula-supernova-remnant-supernova-pulsar-wind-fog.jpg"></p>
+
+</section><section>
+
+<p><strong>IaC is not a new concept</strong></p>
+
+<blockquote>
+<p>We previously called that infra automation/orchestration</p>
+</blockquote>
+
+</section><section>
+
+<p><strong>IaC as a huge umbrella</strong></p>
+
+</section><section>
+
+<p><strong>&hellip; and its limits are not so clear</strong></p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Crab_Nebula_in_Multiple_Wavelengths.png/1920px-Crab_Nebula_in_Multiple_Wavelengths.png" alt="" /></p>
+
+</section><section>
+
+<p><strong>Plus there are still news in this area</strong></p>
+
+<blockquote>
+<p>The expanding shock waves of supernovae can trigger the formation of new stars</p>
+</blockquote>
+
+</section><section>
+
+<p>And <strong>its here to stay</strong>, as&hellip;</p>
+
+</section><section>
+
+<p>Apps require a specific infrastructure/platform configuration</p>
+
+<p><span class='fragment '
+  >
+  Infrastructure configuration is not a one-off
+</span></p>
+
+<p><span class='fragment '
+  >
+  Composition of cloud services may be challenging
+</span></p>
+
+<p><span class='fragment '
+  >
+  Advantages of &ldquo;as code&rdquo; approaches are now well known
+</span></p>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="session-objectives">Session objectives</h2>
+
+</section><section>
+
+<p>Last year talk:</p>
+
+<p><img src="images/lastYearIaC.png" alt="" /></p>
+
+</section><section>
+
+<ul>
+<li><p>Configuration management (Puppet, Chef, Ansible&hellip;)</p></li>
+
+<li><p>Immutable infrastructure with packer and terraform</p></li>
+</ul>
+
+</section><section>
+
+<p><img src="images/options-396266_960_720.jpg" style="border:0; box-shadow:none; "></p>
+
+</section><section>
+
+<p><em>Apply what is applicable</em></p>
+
+</section><section>
+
+<p><strong>Terraform may not be the end of the journey</strong></p>
+
+<p><img src="images/RCW 86.jpg" style="width:60%"></p>
+
+<p>RCW 86 - Oldest recorded supernova</p>
+
+</section><section>
+
+<p><strong>Configuration vs code&hellip; lets start!</strong></p>
+
+<p><img src="images/512px-Boxing_Ring_(137363)_-_The_Noun_Project.svg.png" style="width:40%; border:0; box-shadow:none; "></p>
+
+</section>
+</section><section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="iac-and-cloud">IaC and Cloud</h2>
+
+</section><section>
+
+<h3 id="iac-and-cloud-1">IaC and Cloud</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>RAW IaC and SDKs</td>
+</tr>
+
+<tr>
+<td>Playing with stacks</td>
+</tr>
+
+<tr>
+<td>Stacks management with code</td>
+</tr>
+
+<tr>
+<td>Multi-Cloud</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="raw-iac-and-sdks">RAW IaC and SDKs</h2>
+
+</section><section>
+
+<h2 id="clis-and-scripting">CLIs and scripting</h2>
+
+<pre><code class="language-bash">#!/bin/bash
+
+aws elb create-load-balancer --load-balancer-name MyLoadBalancer \
+  --listeners &quot;Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80&quot; \
+  --availability-zones us-east-1a
+
+for i in `seq 1 2`; do
+  EC2_RUN_RESULT=$(ec2-run-instances --instance-type t2.micro --group default --region us-east-1 --key $EC2_INSTANCE_KEY --user-data-file instance_installs.sh ami-5244a300)
+  INSTANCE_NAME=$(echo ${EC2_RUN_RESULT} | sed 's/RESERVATION.*INSTANCE //' | sed 's/ .*//')$i
+  times=0
+  echo
+  while [ 5 -gt $times ] &amp;&amp; ! ec2-describe-instances $INSTANCE_NAME | grep -q &quot;running&quot;
+  do
+    times=$(( $times + 1 ))
+    echo Attempt $times at verifying $INSTANCE_NAME is running...
+  done
+  if [ 5 -eq $times ]; then
+    echo Instance $INSTANCE_NAME is not running. Exiting...
+    exit
+  fi
+
+  aws elb register-instances-with-load-balancer --load-balancer-name MyLoadBalancer --instances $INSTANCE_NAME
+done
+</code></pre>
+
+</section><section>
+
+<h2 id="api-calls">API calls</h2>
+
+<pre><code class="language-python">import boto3
+
+s3 = boto3.client('s3')
+bucket_name = 'my-bucket'
+s3.create_bucket(bucket_name)
+filename = 'file.txt'
+s3.upload_file(filename, bucket_name, filename)
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="playing-with-stacks">Playing with stacks</h2>
+
+</section><section>
+
+<h3 id="cloudformation">Cloudformation</h3>
+
+<pre><code class="language-json">{
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: {
+        &quot;S3Bucket&quot;: {
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+        },
+    },
+    &quot;Outputs&quot;: {
+        &quot;S3BucketSecureURL&quot;: {
+            &quot;Value&quot;: {
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;https://&quot;,
+                        {
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;S3Bucket&quot;,
+                                &quot;DomainName&quot;
+                            ]
+                        }
+                    ]
+                ]
+            },
+            &quot;Description&quot;: &quot;Name of S3 bucket&quot;
+        }
+    }
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="google-deployment-manager">Google deployment manager</h3>
+
+<pre><code class="language-yaml">resources:
+- type: storage.v1.bucket
+  name: test-bucket
+  properties:
+    project: my-project
+    name: test-bucket-name
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="stacks-management-with-code">Stacks management with code</h2>
+
+</section><section>
+
+<p><em>Note: it is code, but it is not imperative</em></p>
+
+</section><section>
+
+<h3 id="troposphere">Troposphere</h3>
+
+<pre><code class="language-python">from troposphere
+import Output, Ref, Template
+from troposphere.s3
+import Bucket, PublicRead
+
+t = Template()
+
+t.add_description(
+  &quot;AWS CloudFormation Sample Template”
+
+s3bucket = t.add_resource(Bucket(&quot;S3Bucket&quot;, AccessControl = PublicRead, ))
+
+t.add_output(Output(
+  &quot;BucketName&quot;,
+  Value = Ref(s3bucket),
+  Description = &quot;Name of S3 bucket to hold website content&quot;
+))
+
+print(t.to_json())
+</code></pre>
+
+</section><section>
+
+<h3 id="aws-cdk">AWS CDK</h3>
+
+<p>Amazon Cloud Development Kit</p>
+
+<pre><code class="language-python">from aws_cdk import (
+    aws_s3 as s3,
+    cdk
+)
+
+bucket = s3.Bucket(self,
+    &quot;MyFirstBucket&quot;,
+    versioned=True,
+    encryption=s3.BucketEncryption.KmsManaged,)
+</code></pre>
+
+<p><span class='fragment '
+  >
+  <em>troposphere, but multi-language plus &ldquo;building blocks&rdquo;</em>
+</span></p>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="multi-cloud">Multi-Cloud</h2>
+
+</section><section>
+
+<h3 id="terraform">Terraform</h3>
+
+<pre><code class="language-hcl">provider &quot;aws&quot; {
+  region = &quot;us-west-2&quot;
+}
+
+resource &quot;aws_s3_bucket&quot; &quot;example&quot; {
+  bucket = &quot;my-test-s3-terraform-bucket&quot;
+  acl = &quot;private&quot;
+  versioning {
+    enabled = true
+  }
+
+  tags {
+    Name = &quot;my-test-s3-terraform-bucket&quot;
+  }
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="terrascript">Terrascript</h3>
+
+<pre><code class="language-python">import terrascript
+import terrascript.provider as provider
+import terrascript.resource as resource
+
+config = terrascript.Terrascript()
+
+config += provider.aws(version='~&gt; 2.0', region='us-east-1')
+config += resource.aws_vpc('example', cidr_block='10.0.0.0/16')
+
+with open('config.tf.json', 'wt') as fp:
+    fp.write(str(config))
+
+</code></pre>
+
+</section><section>
+
+<h3 id="pulumi">Pulumi</h3>
+
+<pre><code class="language-go">package main
+import (
+    &quot;github.com/pulumi/pulumi-gcp/sdk/go/gcp/storage&quot;
+    &quot;github.com/pulumi/pulumi/sdk/go/pulumi&quot;
+)
+
+func main() {
+    pulumi.Run(func(ctx *pulumi.Context) error {
+        // NewBucket already adds a random suffix
+        bucket, err := storage.NewBucket(ctx, &quot;pulumi-bucket&quot;, &amp;storage.BucketArgs{
+            Location: &quot;EU&quot;,
+            })
+        if err != nil {
+            return err
+        }
+        ctx.Export(&quot;bucketName&quot;, bucket.ID())
+        ctx.Export(&quot;websiteUrl&quot;, bucket.Url())
+        return nil
+    })
+}
+</code></pre>
+
+</section>
+</section><section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="iac-and-k8s">IaC and k8s</h2>
+
+</section><section>
+
+<h3 id="iac-and-k8s-1">IaC and k8s</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>k8s</td>
+</tr>
+
+<tr>
+<td>k8s, Cloud providers and operators</td>
+</tr>
+
+<tr>
+<td>But&hellip; where is the code?</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="k8s">k8s</h2>
+
+</section><section>
+
+<h3 id="objects-objects-and-objects">Objects, objects and objects&hellip;</h3>
+
+<p><img src="images/k8s.png" alt="" /></p>
+
+</section><section>
+
+<h3 id="describing-objects-with-yaml">Describing objects with YAML</h3>
+
+<pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre>
+
+</section><section>
+
+<p><img src="images/yaml.JPG" alt="" /></p>
+
+</section><section>
+
+<h3 id="helm">Helm</h3>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template &quot;alpine.fullname&quot; . }}
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ template &quot;alpine.name&quot; . }}
+spec:
+  restartPolicy: {{ .Values.restartPolicy }}
+  containers:
+  - name: waiter
+    image: &quot;{{ .Values.image.repository }}:{{ .Values.image.tag }}&quot;
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
+    command: [&quot;/bin/sleep&quot;, &quot;9000&quot;]
+</code></pre>
+
+</section><section>
+
+<h3 id="kustomize">kustomize</h3>
+
+<p><code>kustomization.yaml</code>:</p>
+
+<pre><code class="language-yaml">   commonLabels:
+    env: production
+   bases:
+   - ../../base
+   patches:
+   - replica_count.yaml
+</code></pre>
+
+<p><code>replica_count.yaml</code>:</p>
+
+<pre><code class="language-yaml">   apiVersion: apps/v1
+   kind: Deployment
+   metadata:
+     name: the-deployment
+   spec:
+     replicas: 100
+</code></pre>
+
+</section>
+
+</section><section>
+
+<section data-shortcode-section>
+<h2 id="k8s-cloud-providers-and-operators">K8s, Cloud providers and operators</h2>
+
+</section><section>
+
+<p><img src="images/operators.png" alt="" /></p>
+
+</section><section>
+
+<p><img src="images/operatorHub.png" alt="" /></p>
+
+</section><section>
+
+<h3 id="use-case-k8s-management-with-gitops">Use case: k8s management with GitOps</h3>
+
+<p><img src="images/flux-cd-diagram.png" alt="" /></p>
+
+</section><section>
+
+<h3 id="use-case-managing-external-resources">Use case: managing external resources</h3>
+
+<pre><code class="language-yaml">apiVersion: service-operator.aws/v1alpha1
+kind: DynamoDB
+metadata:
+  name: dynamo-table
+spec:
+  hashAttribute:
+    name: name
+    type: S
+  rangeAttribute:
+    name: created_at
+    type: S
+  readCapacityUnits: 5
+  writeCapacityUnits: 5
+</code></pre>
+
+</section><section>
+
+<p><img src="images/crossplaneArch.png" alt="" /></p>
+
+</section><section>
+
+<h2 id="but-where-is-the-code">But&hellip; where is the code?</h2>
+
+</section><section>
+
+<h3 id="pulumi-and-k8s">Pulumi and k8s</h3>
+
+<pre><code class="language-python">labels = { 'app': 'canary-{0}-{1}'.format(get_project(), get_stack()) }
+canary = Deployment('canary',
+    spec={
+        'selector': { 'matchLabels': labels },
+        'replicas': 1,
+        'template': {
+            'metadata': { 'labels': labels },
+            'spec': { 'containers': [{ 'name': 'nginx', 'image': 'nginx' }] },
+        },
+    }, __opts__=ResourceOptions(provider=k8s_provider)
+)
+
+ingress = Service('ingress',
+    spec={
+        'type': 'LoadBalancer',
+        'selector': labels,
+        'ports': [{'port': 80}],
+    }, __opts__=ResourceOptions(provider=k8s_provider)
+)
+</code></pre>
+
+</section><section>
+
+<p>And we can still consume SDKs/APIs!</p>
+
+</section><section>
+
+<p><a href="https://github.com/kubernetes/client-go/tree/master/examples/create-update-delete-deployment">Golang and the k8s API client:</a></p>
+
+<pre><code class="language-go">deployment := &amp;appsv1.Deployment{
+    ObjectMeta: metav1.ObjectMeta{
+        Name: &quot;demo-deployment&quot;,
+    },
+    Spec: appsv1.DeploymentSpec{
+        Replicas: int32Ptr(2),
+        Template: apiv1.PodTemplateSpec{
+            Spec: apiv1.PodSpec{
+                Containers: []apiv1.Container{
+                    {
+                        Name:  &quot;web&quot;,
+                        Image: &quot;nginx:1.12&quot;,
+                        Ports: []apiv1.ContainerPort{
+                            {
+                                Name:          &quot;http&quot;,
+                                Protocol:      apiv1.ProtocolTCP,
+                                ContainerPort: 80,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
+
+</code></pre>
+
+</section><section>
+
+<p>And we are also able to generate config programmatically&hellip;</p>
+
+</section><section>
+
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+
+    &quot;gopkg.in/yaml.v2&quot;
+)
+
+func main() {
+    bucketsMap := map[string]map[string]interface{}{
+        &quot;bucketGroup&quot;: map[string]interface{}{
+            &quot;bucket1&quot;: &quot;test1&quot;,
+            &quot;bucket2&quot;: &quot;test2&quot;,
+        },
+    }
+
+    bytes, err := yaml.Marshal(bucketsMap)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf(&quot;%s&quot;, bytes)
+}
+</code></pre>
+
+</section><section>
+
+<pre><code class="language-bash"> $ go run test.go
+bucketGroup:
+  bucket1: test1
+  bucket2: test2
+</code></pre>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="paas">PaaS?</h2>
+
+</section><section>
+
+<p>They normally come with build/deployment tools describing and pushing infrastructure changes</p>
+
+</section><section>
+
+<pre><code class="language-yaml"># serverless.yml
+
+service: usersCrud
+provider: aws
+functions:
+
+resources: # CloudFormation template syntax
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+</code></pre>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="config-vs-code">Config vs Code</h2>
+
+</section><section>
+
+<p>How IaC looks like with&hellip;</p>
+
+<p><span class='fragment '
+  >
+  <strong>Terraform vs Pulumi</strong>
+</span></p>
+
+<p><span class='fragment '
+  >
+  <img src="https://media.giphy.com/media/u4th4weIsJfuE/200w_d.gif" alt="" />
+</span></p>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      class="code-side-by-side"></p>
+
+<h3 id="bucket-creation-example">Bucket creation example</h3>
+
+<pre><code class="language-hcl">resource &quot;google_storage_bucket&quot; &quot;terraform-bucket&quot; {
+ name     = &quot;terraform-bucket-${random_id.suffix.dec}&quot;
+ location = &quot;EU&quot;
+
+ website {
+   main_page_suffix = &quot;index.html&quot;
+   not_found_page   = &quot;404.html&quot;
+ }
+}
+</code></pre>
+
+<pre><code class="language-go">bucket, err := storage.NewBucket(ctx, &quot;pulumi-bucket&quot;, &amp;storage.BucketArgs{
+    Location: &quot;EU&quot;,
+    Websites: []map[string]string{
+        map[string]string{
+            &quot;main_page_suffix&quot;: &quot;index.html&quot;,
+            &quot;not_found_page&quot;:   &quot;404.html&quot;,
+        },
+    },
+})
+</code></pre>
+
+</section><section>
+
+<h3 id="tf-provider-specific-config">TF &amp; provider specific config&hellip;</h3>
+
+<pre><code class="language-hcl">resource &quot;google_container_cluster&quot; &quot;stackstorm-cluster&quot; {
+ name               = &quot;stackstorm-${var.environment}&quot;
+ zone               = &quot;us-central1-a&quot;
+ min_master_version = &quot;${data.google_container_engine_versions.central1a.latest_node_version}&quot;
+ node_version       = &quot;${data.google_container_engine_versions.central1a.latest_node_version}&quot;
+ lifecycle {
+   ignore_changes = [&quot;node_pool&quot;]
+ }
+ node_pool {
+   name = &quot;default-pool&quot;
+ }
+
+ additional_zones = [
+  &quot;us-central1-b&quot;,
+  &quot;us-central1-c&quot;,
+  &quot;us-central1-f&quot;,
+ ]
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="pulumi-code-can-use-helpers">Pulumi: Code can use helpers!</h3>
+
+<pre><code class="language-go">func getClusterCfg(baseZone string) (*container.ClusterArgs, error) {
+    allZonesInSameRegion, err := getAllZonesInSameRegionThan(baseZone)
+    if err != nil {
+        return nil, err
+    }
+
+    return &amp;container.ClusterArgs{
+        AdditionalZones:       removeZone(allZonesInSameRegion, baseZone),
+        InitialNodeCount:      initialNodeCountPerZone,
+        RemoveDefaultNodePool: true,
+    }, nil
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="tf-control-statements">TF: Control statements</h3>
+
+<pre><code class="language-hcl">resource &quot;aws_autoscaling_group&quot; &quot;example&quot; {
+  launch_configuration = aws_launch_configuration.example.id
+  availability_zones   = data.aws_availability_zones.all.names
+
+  min_size = 2
+  max_size = 2
+
+  # Use for_each to loop over var.custom_tags
+  dynamic &quot;tag&quot; {
+    for_each = var.custom_tags
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+}
+
+resource &quot;aws_launch_configuration&quot; &quot;example&quot; {
+  image_id        = &quot;ami-07ebfd5b3428b6f4d&quot;
+  instance_type   = &quot;t2.nano&quot;
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="while-with-pulumi">While, with Pulumi&hellip;</h3>
+
+<p><span class='fragment '
+  >
+  <img src=https://i.kym-cdn.com/photos/images/newsfeed/000/343/462/79a.gif style="width:30%;"> <br><em>Control statements like a sir</em>
+</span></p>
+
+</section><section>
+
+<pre><code class="language-go">pulumi.Run(func(ctx *pulumi.Context) error {
+    zones, err := getAllZonesInSameRegionThan(&quot;us-central1&quot;)
+    if err != nil {
+        return err
+    }
+    for i, zone := range zones {
+        if zone == &quot;us-central1-f&quot; {
+            continue
+        }
+        if _, err := compute.NewInstance(ctx, &quot;pulumi-demo-instance-&quot;+zone, getMyInstanceArgs(zone));
+        err != nil {
+            return err
+        }
+        if _, err = serviceAccount.NewAccount(ctx, &quot;pulumiinstance-sc-&quot;+zone, getMySCArgs(i));
+        err != nil {
+            return err
+        }
+    }
+    return nil
+})
+</code></pre>
+
+</section><section>
+
+<h3 id="encapsulation-using-pulumi">Encapsulation using Pulumi</h3>
+
+<pre><code class="language-python">class RedirectLB:
+    def __init__(self, dest_host, dest_path, resource_prefix=&quot;redirectLb&quot;):
+        self.resource_prefix = resource_prefix
+        self.dest_host = dest_host
+        self.dest_path = dest_path
+
+    def provision(self):
+        self.ip_address = compute.GlobalAddress(
+            resource_name=&quot;{}-ip&quot;.format(self.resource_prefix)
+        )
+        url_map = compute.URLMap(
+            resource_name=self.resource_prefix,
+            default_url_redirect=compute.URLMapDefaultUrlRedirectArgs(
+                host_redirect=self.dest_host,
+                https_redirect=True,
+                path_redirect=self.dest_path,
+                redirect_response_code=&quot;MOVED_PERMANENTLY_DEFAULT&quot;,
+                strip_query=True,
+            ),
+        )
+        http_target = compute.TargetHttpProxy(
+            resource_name=&quot;{}-http&quot;.format(self.resource_prefix), url_map=url_map
+        )
+        compute.GlobalForwardingRule(
+            resource_name=&quot;{}-http&quot;.format(self.resource_prefix),
+            target=http_target.self_link,
+            port_range=&quot;80-80&quot;,
+            ip_address=self.ip_address.address,
+        )
+
+    def outputs(self):
+        pulumi.export(&quot;LB IP address&quot;, self.ip_address.address)
+</code></pre>
+
+</section><section>
+
+<h3 id="and-fresh-news">And, fresh news!</h3>
+
+<p>pulumi <a href="https://www.pulumi.com/blog/automation-api/">automation-api</a> lets you push stack changes also from code:</p>
+
+<pre><code class="language-go">func NewAddCmd() *cobra.Command {
+    return &amp;cobra.Command{
+        Use:   &quot;add&quot;,
+        Short: &quot;add deploys an additional vm stack&quot;,
+        Run: func(cmd *cobra.Command, args []string) {
+                stackName := fmt.Sprintf(&quot;vmgr%d&quot;, rangeIn(10000000, 99999999))
+                s, err := auto.NewStackInlineSource(ctx, stackName, projectName, nil /* Program */)
+                fmt.Println(&quot;ensuring network is configured...&quot;)
+                subnetID, rgName, err := EnsureNetwork(ctx, projectName)
+                stack.SetProgram(GetDeployVMFunc(subnetID, rgName))
+                fmt.Println(&quot;deploying vm...&quot;)
+                stdoutStreamer := optup.ProgressStreams(os.Stdout)
+
+                res, err := s.Up(ctx, stdoutStreamer)
+                if err != nil {
+                    fmt.Printf(&quot;Failed to deploy vm stack: %v\n&quot;, err)
+                    os.Exit(1)
+                }
+                fmt.Printf(&quot;deployed server running at public IP %s\n&quot;, res.Outputs[&quot;ip&quot;].Value)
+            },
+        }
+    }
+}
+</code></pre>
+
+</section><section>
+
+<h3 id="some-advantages-of-using-code">Some advantages of using Code!</h3>
+
+<ul>
+<li>Abstraction, re-usability and extensibility via standard programming languages capabilities
+
+<ul>
+<li><em>Inheritance-mixins, interfaces, closures&hellip;</em></li>
+<li><em>Modules, packages, dep management&hellip;</em></li>
+</ul></li>
+<li>Testing
+
+<ul>
+<li><a href="https://www.pulumi.com/docs/guides/testing/"><em>Pulumi testing guide</em></a></li>
+</ul></li>
+<li>Capacity to create complex workflows, including config pre-checks</li>
+<li>Applying clean code practices</li>
+<li>Easier to engage developers?</li>
+</ul>
+
+</section><section>
+
+<p>So&hellip;</p>
+
+</section><section>
+
+<blockquote>
+<p>why reinventing software-mgmt patterns on top of configuration languages?</p>
+</blockquote>
+
+</section>
+</section><section data-shortcode-section>
+<p><section data-noprocess data-shortcode-slide
+    data-background="#f7cbbf"
+    class="subtitle"
+    data-template="subtitle"></p>
+
+<h2 id="closure">Closure</h2>
+
+</section><section>
+
+<h2 id="final-remarks">Final remarks</h2>
+
+<p><span class='fragment '
+  >
+  IaC plays an important role in Devops and cloud apps
+</span></p>
+
+<p><span class='fragment '
+  >
+  PaaS and k8s still require IaC
+</span></p>
+
+<p><span class='fragment '
+  >
+  There are plenty of IaC options
+</span></p>
+
+<p><span class='fragment '
+  >
+  Actual code avoids reinventing the wheel
+</span></p>
+
+</section><section>
+
+<h2 id="attributions">Attributions</h2>
+
+<ul>
+<li>Crab nebula in Multiple Wavelenghts:</li>
+</ul>
+
+<pre><code class="language-text">By Based on File:Crab Nebula in multiwavelength.png by Torres997
+Radio: NRAO/AUI and M. Bietenholz; NRAO/AUI and J.M. Uson, T.J. Cornwell
+Infrared: NASA/JPL-Caltech/R. Gehrz (University of Minnesota)Visible: NASA, ESA, J. Hester and A. Loll (Arizona State University)
+Ultraviolet: NASA/Swift/E. Hoversten,
+PSUX-ray: NASA/CXC/SAO/F.Seward et al.
+Gamma: NASA/DOE/Fermi LAT/R. Buehler
+</code></pre>
+
+</section><section>
+
+<ul>
+<li><p>RCW 86:</p>
+
+<ul>
+<li><em>X-ray: NASA/CXC/SAO &amp; ESA</em></li>
+<li><em>Infared: NASA/JPL-Caltech/B. Williams (NCSU)</em></li>
+</ul></li>
+
+<li><p>yaml logo: <em>IYIKON from the Noun Project</em></p></li>
+
+<li><p>code logo: <em>Andrejs Kirma from the Noun Project</em></p></li>
+</ul>
+
+</section>
+
+<p><section data-noprocess data-shortcode-slide
+      data-background-image="images/Thanks.png"></p>
+
+</section>
+
+</section>
+
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="images/Fastly.png">
+  
+</section>
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/slides/201020_OSAD/reveal-hugo/object-assign.js></script>
+
+<a href="/slides/201020_OSAD/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"solarized-custom.css","slide_number":true}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"subtitle":{"background":"#f7cbbf","class":"subtitle"},"title":{"background":"#4d163b","class":"title"}}}</script>
+
+<script src="/slides/201020_OSAD/reveal-js/lib/js/head.min.js"></script>
+<script src="/slides/201020_OSAD/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/lib/js/classList.js"></script>
+
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/plugin/markdown/marked.js"></script>
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/plugin/markdown/markdown.js"></script>
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/plugin/highlight/highlight.js"></script>
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/plugin/zoom-js/zoom.js"></script>
+
+
+<script type="text/javascript" src="/slides/201020_OSAD/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+<script type="text/javascript">
+if (hljs)
+  hljs.initHighlightingOnLoad();
+</script>
+    
+    
+  </body>
+</html>
