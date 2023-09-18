@@ -14,6 +14,8 @@ at [DevOpsDays Warsaw](https://devopsdays.pl/)
 * [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190605_doxelona_IaC) at [Devops Exchange Barcelona meetup](https://www.meetup.com/es-ES/devops-exchange-barcelona/events/261831097)
 * [INFRASTRUCTURE AS CODE OR INFRASTRUCTURE AS CONFIGURATION?](https://dcaba.github.io/slides/190620_devopsExchange_IaC) at [Devops Exchange London](https://www.youtube.com/watch?v=Yp9YdscJ2eg)
 * [Cloud Providers and the IaC hell](https://dcaba.github.io/slides/200428_KTH_IaC/) at [KTH Royal Institute of Technology in Stockholm](https://github.com/KTH/devops-course)
+
+Moved to [hugo + reveal](https://github.com/dzello/reveal-hugo):
 * [Configuration templating vs configuration as code, 12th round](https://dcaba.github.io/slides/201020_OSAD/) ([video](https://www.youtube.com/watch?v=qOg6iI13JV8)) at [OSAD 2020](https://osad-munich.org/en/)
 * [Observing Fastly’s Network at Scale Thanks to K8s and the Strimzi Operator](https://static.sched.com/hosted_files/kccnceu2022/06/Observing%20Fastly%E2%80%99s%20network%20at%20scale%20thanks%20to%20K8s%20and%20the%20Strimzi%20operator.pdf) ([video](https://www.youtube.com/watch?v=eYZO7n_o0OQ)) at [Kubecon EU 2022](https://sched.co/ytrM)
 * [Routing-state observation + modification in AWS/ECS with pulumi-managed API](https://osad-munich.org/wp-content/uploads/2022/10/15.00-Rodriguez.pdf) ([video](https://www.youtube.com/watch?v=P-0v1haFktc)) at OSAD 2022
