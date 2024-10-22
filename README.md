@@ -20,6 +20,9 @@ Moved to [hugo + reveal](https://github.com/dzello/reveal-hugo):
 * [Observing Fastly’s Network at Scale Thanks to K8s and the Strimzi Operator](https://static.sched.com/hosted_files/kccnceu2022/06/Observing%20Fastly%E2%80%99s%20network%20at%20scale%20thanks%20to%20K8s%20and%20the%20Strimzi%20operator.pdf) ([video](https://www.youtube.com/watch?v=eYZO7n_o0OQ)) at [Kubecon EU 2022](https://sched.co/ytrM)
 * [Routing-state observation + modification in AWS/ECS with pulumi-managed API](https://osad-munich.org/wp-content/uploads/2022/10/15.00-Rodriguez.pdf) ([video](https://www.youtube.com/watch?v=P-0v1haFktc)) at OSAD 2022
 
+Just a personal reference, presentations that did not use this:
+* [Frequent software deployments in Edge Cloud Platform infrastructure](https://www.youtube.com/watch?v=wFmoMgrz8K0)
+
 ## How can I use it?
 
 *This information is quite outdated: 2019/2020 presentations are being rendered by hugo*
